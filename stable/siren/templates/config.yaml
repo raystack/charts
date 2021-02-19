@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "siren.fullname" . }}-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- if .Values.labels }}
+{{ toYaml .Values.labels | trim | indent 4 }}
+    {{- end }}
+data: {{ .Values.configArgs | toJson }}
