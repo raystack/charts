@@ -4,7 +4,8 @@ metadata:
   name: {{ template "siren.fullname" . }}-config
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- if .Values.labels }}
-{{ toYaml .Values.labels | trim | indent 4 }}
-    {{- end }}
-data: {{ .Values.configArgs | toJson }}
+  {{- if .Values.labels }}
+    {{- toYaml .Values.labels | trim | nindent 4 }}
+  {{- end }}
+data:
+  {{- toYaml .Values.config | nindent 2 }}

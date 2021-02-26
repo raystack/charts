@@ -15,16 +15,16 @@ image:
   pullPolicy: IfNotPresent
 
 # -- Environement variables needed by siren
-configArgs:
-  RADAR_CORTEX_URL: "http://localhost:8080"
+config:
+  CORTEX_ALERTMANAGER_URL: "http://localhost:8080"
 
-database:
+secretConfig:
   # -- Postgres database connection details
-  host: localhost
-  port: 5432
-  name: db_name
-  username: ""
-  password: ""
+  DB_HOST: localhost
+  DB_NAME: siren
+  DB_USER: ""
+  DB_PASSWORD: ""
+  DB_PORT: 5432
 
 ingress:
   # -- Kubernetes ingress details

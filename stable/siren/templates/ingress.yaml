@@ -1,21 +1,21 @@
 {{- if .Values.ingress.enabled -}}
-{{- $serviceName := include "siren.fullname" . -}}
-{{- $servicePort := .Values.service.externalPort -}}
-{{- $ingressPath := .Values.ingress.path -}}
+  {{- $serviceName := include "siren.fullname" . -}}
+  {{- $servicePort := .Values.service.externalPort -}}
+  {{- $ingressPath := .Values.ingress.path -}}
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: {{ template "siren.fullname" . }}
   namespace: {{ .Release.Namespace }}
-  labels:
-    {{- range $key, $value := .Values.ingress.labels }}
-{{ $key }}: {{ $value | quote | indent 4}}      #TODO: merge root labels
-    {{- end }}
+  labels: 
+  {{- if .Values.ingress.labels }}
+    {{- toYaml .Values.ingress.labels | nindent 4 }}
+  {{- end}}
     run: {{ .Release.Name }}
+  {{- with .Values.ingress.annotations }}
   annotations:
-    {{- range $key, $value := .Values.ingress.annotations }}
-      {{ $key }}: {{ $value | quote }}
-    {{- end }}
+    {{- toYaml . | nindent 4 }}
+  {{- end}}
 spec:
   rules:
     {{- range $host := .Values.ingress.hosts }}

@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- if .Values.labels }}
-{{ toYaml .Values.labels | trim | indent 4 }}
+      {{- toYaml .Values.labels | trim | nindent 4 }}
     {{- end }}
     run: {{ .Release.Name }}
 spec:
@@ -18,11 +18,11 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
         {{- if .Values.podAnnotations }}
-{{ toYaml .Values.podAnnotations | trim | indent 8 }}
+          {{- toYaml .Values.podAnnotations | trim | nindent 8 }}
         {{- end }}
       labels:
         {{- if .Values.labels }}
-{{ toYaml .Values.labels | trim | indent 8 }}
+          {{- toYaml .Values.labels | trim | nindent 8 }}
         {{- end }}
         run: {{ .Release.Name }}
     spec:
@@ -54,16 +54,16 @@ spec:
             - secretRef:
                 name: {{ template "siren.fullname" . }}-secret
           resources:
-{{ toYaml .Values.resources | indent 12 }}
-    {{- with .Values.nodeSelector }}
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
       nodeSelector:
-{{ toYaml . | indent 8 }}
-    {{- end }}
-    {{- with .Values.affinity }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
       affinity:
-{{ toYaml . | indent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
       tolerations:
-{{ toYaml . | indent 8 }}
-    {{- end }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
