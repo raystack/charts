@@ -1,2 +1,2 @@
 # charts
-Helm charts registry
+Helm charts repository
