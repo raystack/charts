@@ -1,0 +1,17 @@
+apiVersion: v1
+entries:
+  siren:
+  - apiVersion: v1
+    appVersion: v0.0.1
+    created: "2021-03-01T06:52:01.835309086Z"
+    description: Siren Helm chart
+    digest: 6f4409af0ee387db2234a2686ccab22c685f7d91687f9678186b79aa9f90e989
+    home: https://github.com/odpf/siren
+    name: siren
+    sources:
+    - https://github.com/odpf/siren
+    - https://github.com/odpf/charts
+    urls:
+    - https://odpf.github.io/charts/siren-0.0.1.tgz
+    version: 0.0.1
+generated: "2021-03-01T06:52:01.834593385Z"
