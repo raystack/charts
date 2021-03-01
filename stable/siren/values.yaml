@@ -1,0 +1,99 @@
+replicaCount: 1
+podAnnotations: {}
+labels: {}
+## String to fully override siren.fullname template
+##
+# fullnameOverride:
+## String to fully override siren.name template
+##
+# nameOverride:
+
+image:
+  # -- Image to use for deploying siren
+  repository: odpf/siren
+  tag: v0.0.1
+  pullPolicy: IfNotPresent
+
+# -- Environement variables needed by siren
+config:
+  CORTEX_ALERTMANAGER_URL: "http://localhost:8080"
+
+secretConfig:
+  # -- Postgres database connection details
+  DB_HOST: localhost
+  DB_NAME: siren
+  DB_USER: ""
+  DB_PASSWORD: ""
+  DB_PORT: 5432
+
+ingress:
+  # -- Kubernetes ingress details
+  enabled: true
+  # -- Used to create Ingress record (should used with service.type: ClusterIP).
+  hosts:
+    - siren.example.com
+  # -- The ingress path. Useful to host siren on a subpath, such as `/v1`.
+  path: /
+  labels:
+    # -- Used to add custom labels to the Ingress
+    # Useful if for example you have multiple Ingress controllers and want your Ingress controllers to bind to specific Ingresses
+    # traffic: internal
+  annotations:
+    kubernetes.io/ingress.class: contour
+    # kubernetes.io/tls-acme: "true"
+
+service:
+  # -- Kubernetes service details
+  type: ClusterIP
+  # loadBalancerSourceRanges:
+  externalPort: 80
+  internalPort: 3000
+  # -- Used to fix NodePort when service.type: NodePort.
+  nodePort:
+  annotations:
+    {}
+    # Used to add custom annotations to the Service.
+    # service.beta.kubernetes.io/aws-load-balancer-internal: "0.0.0.0/0"
+
+livenessProbe:
+  # -- Kubernetes liveness probe configs
+  httpGetPath: /ping
+  initialDelaySeconds: 120
+  timeoutSeconds: 30
+  failureThreshold: 6
+
+readinessProbe:
+  # -- Kubernetes readiness probe configs
+  httpGetPath: /ping
+  initialDelaySeconds: 30
+  timeoutSeconds: 3
+  periodSeconds: 5
+
+resources:
+  # -- Kubernetes resource details
+  {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+## Node labels for pod assignment
+## ref: https://kubernetes.io/docs/user-guide/node-selection/
+#
+nodeSelector: {}
+
+## Tolerations for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
+tolerations: []
+
+## Affinity for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+##
+affinity: {}
