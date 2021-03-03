@@ -21,7 +21,7 @@ The purpose of this repository is to provide a place for maintaining and contrib
 
 Stable Charts meet the criteria in the technical requirements.
 
-## Uage
+## Usage
 
 Once you have installed the Helm client on your kubernetes cluster, you can deploy a ODPF Helm Chart into a Kubernetes cluster.
 
