@@ -1,0 +1,60 @@
+replicaCount: 1
+namespace: firehose-test
+
+nameOverride: ""
+fullnameOverride: ""
+
+labels: {"application":"firehose"}
+
+firehose:
+  image:
+    repository: odpf/firehose
+    pullPolicy: IfNotPresent
+    tag: release-1.0.2
+  config:
+    SOURCE_KAFKA_BROKERS: 127.0.0.1:6667
+    SOURCE_KAFKA_CONSUMER_GROUP_ID: kafka-consumer-group-id
+    SOURCE_KAFKA_TOPIC: sample-topic
+    SINK_TYPE: log
+    SOURCE_KAFKA_CONSUMER_CONFIG_AUTO_OFFSET_RESET: latest
+    PROTO_SCHEMA: com.github.firehose.sampleLogProto.SampleLogMessage
+    JAVA_TOOL_OPTIONS: "-javaagent:jolokia-jvm-agent.jar=port=8778,host=localhost"
+  args: ['java', '-cp', 'bin/*:/work-dir/*', 'com.gojek.esb.launch.Main', '-server', '-Dlogback.configurationFile=etc/firehose/logback.xml', '-Xloggc:/var/log/firehose']
+  resources:
+    limits:
+      cpu: 200m
+      memory: 512Mi
+    requests:
+      cpu: 200m
+      memory: 512Mi
+
+init-firehose:
+  enabled: false
+  image:
+    repository: busybox
+    pullPolicy: IfNotPresent
+    tag: latest
+  command: ['/bin/sh', '-c']
+  args: [wget -O /work-dir/protos.jar http://proto_jar_url.jar]
+
+telegraf:
+  enabled: false
+  image:
+    repository: telegraf
+    pullPolicy: IfNotPresent
+    tag: 1.7.4-alpine
+  config:
+    output:
+      influxdb:
+        enabled: false
+        urls:
+          - "http://localhost:8086"
+        database: "test-db"
+        retention_policy: "autogen"
+  resources:
+    limits:
+      cpu: 50m
+      memory: 64Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
