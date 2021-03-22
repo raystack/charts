@@ -3,7 +3,7 @@ entries:
   firehose:
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2021-03-22T08:28:18.80213152Z"
+    created: "2021-03-22T09:32:05.739497604Z"
     description: A Helm chart for deploying Firehose on Kubernetes
     digest: c65b21901254f90483b054da3b456f01d7035b5fcacc73a0eaaa37f0371a2062
     name: firehose
@@ -14,9 +14,9 @@ entries:
   siren:
   - apiVersion: v1
     appVersion: v0.0.1
-    created: "2021-03-22T08:28:18.802746751Z"
+    created: "2021-03-22T09:32:05.740099747Z"
     description: Siren Helm chart
-    digest: b14ce3ef4113130b0583f612b6448b0f246caabb355f564b8b0303edadd42152
+    digest: 38ae6b3302a00d795deed101dc50457362c1c52b0178eecd8b15658c82209d1f
     home: https://github.com/odpf/siren
     name: siren
     sources:
@@ -25,4 +25,4 @@ entries:
     urls:
     - https://odpf.github.io/charts/siren-0.0.1.tgz
     version: 0.0.1
-generated: "2021-03-22T08:28:18.801235075Z"
+generated: "2021-03-22T09:32:05.738653045Z"
