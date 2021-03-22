@@ -93,7 +93,7 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```bash
-$ helm install --name my-release -f values.yaml odpf/firehose
+$ helm install my-release -f values.yaml odpf/firehose
 ```
 
 > **Note**: jolokia input for telegraf will be enabled only if jolokia is mentioned in JAVA_TOOL_OPTIONS in firehose config
