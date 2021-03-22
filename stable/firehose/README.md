@@ -46,6 +46,14 @@ $ helm uninstall my-release
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
+## Usage notes
+
+* Use init-firehose container in order to download and load proto jar files for Filter functionality
+* Update flags for init-firehose and telegraf containers in order to use them, defaults are set to false
+* Jolokia input for telegraf will be enabled only if jolokia is mentioned in JAVA_TOOL_OPTIONS in firehose config
+* Sample Firehose configs are mentioned in values.yaml file, update them according to usecase, [read more](https://github.com/odpf/firehose/blob/main/docs/reference/configuration.md#configurations)
+* Set the resource limits of containers according to the usage
+
 ## Configuration
 
 The following table lists the configurable parameters of Firehose chart and their default values.
@@ -95,7 +103,5 @@ Alternatively, a YAML file that specifies the values for the parameters can be p
 ```bash
 $ helm install my-release -f values.yaml odpf/firehose
 ```
-
-> **Note**: jolokia input for telegraf will be enabled only if jolokia is mentioned in JAVA_TOOL_OPTIONS in firehose config
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
