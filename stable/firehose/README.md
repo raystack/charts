@@ -58,7 +58,7 @@ The following table lists the configurable parameters of Firehose chart and thei
 | firehose.config | object | `{"SOURCE_KAFKA_BROKERS": "127.0.0.1:6667", "SOURCE_KAFKA_CONSUMER_GROUP_ID": "kafka-consumer-group-id", "SOURCE_KAFKA_TOPIC": "sample-topic", "SINK_TYPE": "log", "SOURCE_KAFKA_CONSUMER_CONFIG_AUTO_OFFSET_RESET": "latest", "PROTO_SCHEMA": "com.github.firehose.sampleLogProto.SampleLogMessage", "JAVA_TOOL_OPTIONS": "-javaagent:jolokia-jvm-agent.jar=port=8778,host=localhost"}` | env variables required by firehose, [read more](https://github.com/odpf/firehose/blob/main/docs/reference/configuration.md#configurations) |
 | firehose.image.pullPolicy | string | `"IfNotPresent"` | the Kubernetes [imagePullPolicy](https://kubernetes.io/docs/concepts/containers/images/#updating-images) value for firehose container |
 | firehose.image.repository | string | `"odpf/firehose"` | docker repository to download firehose image |
-| firehose.image.tag | string | `"release-1.0.2"` | firehose docker image tag |
+| firehose.image.tag | string | `"1.1.0"` | firehose docker image tag |
 | firehose.resources.limits.cpu | string | `"200m"` | firehose container cpu limit |
 | firehose.resources.limits.memory | string | `"512Mi"` | firehose container memory limit |
 | firehose.resources.requests.cpu | string | `"200m"` | firehose container cpu requests |
