@@ -17,7 +17,7 @@ firehose:
     SOURCE_KAFKA_TOPIC: sample-topic
     SINK_TYPE: log
     SOURCE_KAFKA_CONSUMER_CONFIG_AUTO_OFFSET_RESET: latest
-    PROTO_SCHEMA: com.github.firehose.sampleLogProto.SampleLogMessage
+    INPUT_SCHEMA_PROTO_CLASS: com.github.firehose.sampleLogProto.SampleLogMessage
     JAVA_TOOL_OPTIONS: "-javaagent:jolokia-jvm-agent.jar=port=8778,host=localhost"
   args: ['java', '-cp', 'bin/*:/work-dir/*', 'com.gojek.esb.launch.Main', '-server', '-Dlogback.configurationFile=etc/firehose/logback.xml', '-Xloggc:/var/log/firehose']
   resources:
