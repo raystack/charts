@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "firehose.fullname" . }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels: {{- range $key, $value := .Values.labels }}
     {{ $key }}: {{ $value }}
     {{- end }}
@@ -35,12 +35,7 @@ spec:
           name: workdir
         {{- end }}
         resources:
-          limits:
-            cpu: {{ .Values.firehose.resources.limits.cpu }}
-            memory: {{ .Values.firehose.resources.limits.memory }}
-          requests:
-            cpu: {{ .Values.firehose.resources.requests.cpu }}
-            memory: {{ .Values.firehose.resources.requests.memory }}
+          {{- toYaml .Values.firehose.resources | nindent 12 }}
         envFrom:
           - configMapRef:
               name: {{ include "firehose.fullname" . }}-config
@@ -58,12 +53,7 @@ spec:
         image: "{{ .Values.telegraf.image.repository }}:{{ .Values.telegraf.image.tag }}"
         imagePullPolicy: {{ .Values.telegraf.image.pullPolicy }}
         resources:
-          limits:
-            cpu: {{ .Values.telegraf.resources.limits.cpu }}
-            memory: {{ .Values.telegraf.resources.limits.memory }}
-          requests:
-            cpu: {{ .Values.telegraf.resources.requests.cpu }}
-            memory: {{ .Values.telegraf.resources.requests.memory }}
+          {{- toYaml .Values.telegraf.resources | nindent 12 }}
         volumeMounts:
         - mountPath: /etc/telegraf
           name: telegraf-conf

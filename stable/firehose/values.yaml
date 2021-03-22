@@ -1,7 +1,8 @@
 replicaCount: 1
-namespace: firehose-test
 
+## Value to fully override firehose.name template
 nameOverride: ""
+## Value to fully override firehose.fullname template
 fullnameOverride: ""
 
 labels: {"application":"firehose"}

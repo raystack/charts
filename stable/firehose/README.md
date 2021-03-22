@@ -80,7 +80,6 @@ The following table lists the configurable parameters of Firehose chart and thei
 | init-firehose.image.tag | string | `"latest"` | init-firehose docker image tag |
 | labels | object | `{"application":"firehose"}` | labels for all resouces |
 | nameOverride | string | `""` | overrides the chart name when used in the naming of resources |
-| namespace | string | `"firehose-test"` | kubernetes namespace |
 | replicaCount | int | `1` | number of replicas of firehose pod |
 | telegraf.config.output.influxdb.database | string | `"test-db"` | db name for telegraf influxdb output |
 | telegraf.config.output.influxdb.enabled | bool | `false` | flag for enabling telegraf influxdb output |
