@@ -1,0 +1,21 @@
+## String to fully override consul.fullname template
+# fullnameOverride:
+
+## String to fully override consul.name template
+# nameOverride:
+
+replicaCount: 1
+podAnnotations: {}
+labels: {}
+image:
+  name: consul
+  tag: 1.7.1
+  pullPolicy: IfNotPresent
+service:
+  # -- Kubernetes service details
+  type: ClusterIP
+  annotations:
+    {}
+    # Used to add custom annotations to the Service.
+resources: {}
+env: []

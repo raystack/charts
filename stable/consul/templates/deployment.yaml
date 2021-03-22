@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "consul.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- if .Values.labels }}
+      {{- toYaml .Values.labels | trim | nindent 4 }}
+    {{- end }}
+    run: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      run: {{ .Release.Name }}
+  template:
+    metadata:
+      annotations:
+        {{- if .Values.podAnnotations }}
+          {{- toYaml .Values.podAnnotations | trim | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- if .Values.labels }}
+          {{- toYaml .Values.labels | trim | nindent 8 }}
+        {{- end }}
+        run: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: '{{ .Values.image.name}}:{{ .Values.image.tag }}'
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        args:
+        - agent
+        - -ui
+        - -server
+        - -client=0.0.0.0
+        - -bootstrap
+        env:
+        - name: CHECKPOINT_DISABLE
+          value: "1"
+        - name: CONSUL_LOCAL_CONFIG
+          value: '{"leave_on_terminate":true, "raft_snapshot_threshold":128, "raft_trailing_logs":10000}'
+        - name: GOMAXPROCS
+          valueFrom:
+            resourceFieldRef:
+              containerName: {{ .Chart.Name }}
+              resource: limits.cpu
+        {{- if .Values.env }}
+        {{- toYaml .Values.env | nindent 8 }}
+        {{- end }}
+        ports:
+        - name: http
+          containerPort: 8500
+        - name: rpc
+          containerPort: 8400
+        - name: serflan-tcp
+          containerPort: 8301
+        - name: serflan-udp
+          containerPort: 8301
+        - name: serfwan-tcp
+          containerPort: 8302
+        - name: serfwan-udp
+          containerPort: 8302
+        - name: server
+          containerPort: 8300
+        - name: consuldns-tcp
+          containerPort: 8600
+        - name: consuldns-udp
+          containerPort: 8600
+
+        volumeMounts:
+          - mountPath: /consul/data
+            name: data
+      volumes:
+      - name: data
+        emptyDir:
+          medium: Memory
+
