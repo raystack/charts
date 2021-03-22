@@ -54,7 +54,7 @@ The following table lists the configurable parameters of Firehose chart and thei
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| firehose.args | list | `['java', '-cp', 'bin/*:/work-dir/*', 'com.gojek.esb.launch.Main', '-server', '-Dlogback.configurationFile=etc/firehose/logback.xml', '-Xloggc:/var/log/firehose']` | args for firehose container |
+| firehose.args | list | `['java', '-cp', 'bin/*:/work-dir/*', 'io.odpf.firehose.launch.Main', '-server', '-Dlogback.configurationFile=etc/firehose/logback.xml', '-Xloggc:/var/log/firehose']` | args for firehose container |
 | firehose.config | object | `{"SOURCE_KAFKA_BROKERS": "127.0.0.1:6667", "SOURCE_KAFKA_CONSUMER_GROUP_ID": "kafka-consumer-group-id", "SOURCE_KAFKA_TOPIC": "sample-topic", "SINK_TYPE": "log", "SOURCE_KAFKA_CONSUMER_CONFIG_AUTO_OFFSET_RESET": "latest", "INPUT_SCHEMA_PROTO_CLASS": "com.github.firehose.sampleLogProto.SampleLogMessage", "JAVA_TOOL_OPTIONS": "-javaagent:jolokia-jvm-agent.jar=port=8778,host=localhost"}` | env variables required by firehose, [read more](https://github.com/odpf/firehose/blob/main/docs/reference/configuration.md#configurations) |
 | firehose.image.pullPolicy | string | `"IfNotPresent"` | the Kubernetes [imagePullPolicy](https://kubernetes.io/docs/concepts/containers/images/#updating-images) value for firehose container |
 | firehose.image.repository | string | `"odpf/firehose"` | docker repository to download firehose image |
