@@ -4,7 +4,7 @@ A [helm](https://helm.sh/) chart for [Firehose](https://github.com/odpf/firehose
 
 ## Introduction
 
-This chart can be used for deploying [Firehose](https://github.com/odpf/firehose) on kubenetes using helm
+This chart can be used for deploying [Firehose](https://github.com/odpf/firehose) on Kubernetes using helm
 
 ## Prerequisites
 
