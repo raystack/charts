@@ -11,7 +11,7 @@ labels: {}
 image:
   # -- Image to use for deploying siren
   repository: odpf/siren
-  tag: v0.1.1
+  tag: v0.2.0
   pullPolicy: IfNotPresent
 
 # -- Environement variables needed by siren
