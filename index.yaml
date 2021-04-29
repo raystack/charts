@@ -3,9 +3,9 @@ entries:
   consul:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-03-25T06:48:05.170124883Z"
+    created: "2021-04-29T05:02:40.852061178Z"
     description: Minimal Helm chart for deploying consul server on kubernetes.
-    digest: aa9718b1213867dac5f7d302718326d7c032d5f987feabe5a655384e68543691
+    digest: 263804c87d4cd546d0d281f7d2eb134d6f06c48fdf999fe76a6ddcf8037b9d20
     name: consul
     sources:
     - https://github.com/odpf/charts
@@ -15,20 +15,31 @@ entries:
   firehose:
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2021-03-25T06:48:05.170864007Z"
+    created: "2021-04-29T05:02:40.85255138Z"
     description: A Helm chart for deploying Firehose on Kubernetes
-    digest: a50a4eeae36f2516a2716fc133bbb7f137b1bd101a62ce297a17f31b4e65edad
+    digest: ba53eef0280bd3752e267733a506fcb470d98ea564c94c62fe8c26cf54e0f0c7
     name: firehose
     type: application
     urls:
     - https://odpf.github.io/charts/firehose-0.1.0.tgz
     version: 0.1.0
+  raccoon:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2021-04-29T05:02:40.852947382Z"
+    description: A Helm chart for deploying Raccoon on Kubernetes
+    digest: f7a96e501c8b36e64d5fd4ab3fbf75e924b468b1a5e54c2043d06838d00e0a50
+    name: raccoon
+    type: application
+    urls:
+    - https://odpf.github.io/charts/raccoon-0.1.0.tgz
+    version: 0.1.0
   siren:
   - apiVersion: v1
     appVersion: v0.0.1
-    created: "2021-03-25T06:48:05.17157763Z"
+    created: "2021-04-29T05:02:40.853920687Z"
     description: Siren Helm chart
-    digest: d4643c0de832fc6d87ab42ee03007105a388433953d74e435e023277bacba5a8
+    digest: fe961c70c5bd2ac3f141b782a263f9ea76e7b405b3d89881fe9fef71f735a27e
     home: https://github.com/odpf/siren
     name: siren
     sources:
@@ -37,4 +48,4 @@ entries:
     urls:
     - https://odpf.github.io/charts/siren-0.0.1.tgz
     version: 0.0.1
-generated: "2021-03-25T06:48:05.169526864Z"
+generated: "2021-04-29T05:02:40.851674075Z"
