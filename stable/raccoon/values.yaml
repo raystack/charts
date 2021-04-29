@@ -1,0 +1,48 @@
+replicaCount: 1
+
+## Value to fully override raccoon.name template
+nameOverride: ""
+## Value to fully override raccoon.fullname template
+fullnameOverride: ""
+
+labels: {"application":"raccoon"}
+
+raccoon:
+  image:
+    repository: odpf/raccoon
+    pullPolicy: IfNotPresent
+    tag: 0.1.0
+  config:
+    SERVER_WEBSOCKET_PORT: "8080"
+    SERVER_WEBSOCKET_CONN_UNIQ_ID_HEADER: x-user-id
+    PUBLISHER_KAFKA_CLIENT_BOOTSTRAP_SERVERS: host.docker.internal:9093
+    METRIC_STATSD_ADDRESS: host.docker.internal:8125
+  resources:
+    limits:
+      cpu: 200m
+      memory: 512Mi
+    requests:
+      cpu: 200m
+      memory: 512Mi
+
+telegraf:
+  enabled: false
+  image:
+    repository: telegraf
+    pullPolicy: IfNotPresent
+    tag: 1.7.4-alpine
+  config:
+    output:
+      influxdb:
+        enabled: false
+        urls:
+          - "http://localhost:8086"
+        database: "test-db"
+        retention_policy: "autogen"
+  resources:
+    limits:
+      cpu: 50m
+      memory: 64Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
