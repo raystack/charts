@@ -25,6 +25,11 @@ raccoon:
       cpu: 200m
       memory: 512Mi
 
+service:
+  type: LoadBalancer
+  annotations:
+    {}
+
 telegraf:
   enabled: false
   image:
@@ -46,3 +51,14 @@ telegraf:
     requests:
       cpu: 50m
       memory: 64Mi
+
+ingress:
+  enabled: false
+  path: /
+  labels:
+  annotations:
+  hosts:
+    - localhost
+  tls:
+    enabled: false
+    secretName: secret
