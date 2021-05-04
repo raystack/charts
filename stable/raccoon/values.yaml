@@ -55,8 +55,8 @@ telegraf:
 ingress:
   enabled: false
   path: /
-  labels:
   annotations:
+    {}
   hosts:
     - localhost
   tls:

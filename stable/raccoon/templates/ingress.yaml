@@ -7,9 +7,9 @@ metadata:
   name: {{ template "raccoon.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels: 
-  {{- if .Values.ingress.labels }}
-    {{- toYaml .Values.ingress.labels | nindent 4 }}
-  {{- end}}
+  {{- if .Values.labels }}
+      {{- toYaml .Values.labels | trim | nindent 4 }}
+    {{- end }}
     run: {{ .Release.Name }}
   {{- with .Values.ingress.annotations }}
   annotations:

@@ -10,6 +10,11 @@ Resource created:
   {{- end }}
   SERVICE:
     - {{ .Values.service.type }}
+  CONFIGMAP:
+    - Raccoon
+    {{- if index .Values.telegraf.enabled }}
+    - Telegraf
+    {{- end }}
   {{- if index .Values.ingress.enabled }}
   {{- range $host := .Values.ingress.hosts }}
   INGRESS:
