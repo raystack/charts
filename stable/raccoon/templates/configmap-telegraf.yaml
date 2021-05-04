@@ -1,0 +1,13 @@
+{{- if index .Values.telegraf.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "raccoon.fullname" . }}-telegraf-config
+  namespace: {{ .Release.Namespace }}
+  labels: {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
+data:
+  telegraf.conf: |+
+{{- include "raccoon.telegraf.conf" . | indent 4}}
+{{- end }}

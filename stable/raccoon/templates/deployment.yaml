@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "raccoon.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels: {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "raccoon.fullname" . }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap-raccoon.yaml") . | sha256sum }}
+      labels:
+        app: {{ include "raccoon.fullname" . }}
+        {{- range $key, $value := .Values.labels }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.raccoon.image.repository }}:{{ .Values.raccoon.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.raccoon.image.pullPolicy }}
+        resources:
+          {{- toYaml .Values.raccoon.resources | nindent 12 }}
+        envFrom:
+          - configMapRef:
+              name: {{ include "raccoon.fullname" . }}-config
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+      {{- if index .Values.telegraf.enabled }}
+      - name: telegrafd
+        image: "{{ .Values.telegraf.image.repository }}:{{ .Values.telegraf.image.tag }}"
+        imagePullPolicy: {{ .Values.telegraf.image.pullPolicy }}
+        resources:
+          {{- toYaml .Values.telegraf.resources | nindent 12 }}
+        volumeMounts:
+        - mountPath: /etc/telegraf
+          name: telegraf-conf
+      {{- end }}
+      volumes:
+      {{- if index .Values.telegraf.enabled }}
+      - configMap:
+          name: {{ include "raccoon.fullname" . }}-telegraf-config
+        name: telegraf-conf
+      {{- end }}

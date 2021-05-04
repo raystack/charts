@@ -1,0 +1,31 @@
+Thank you for installing {{ .Chart.Name }}.
+
+Your release is named {{ .Release.Name }}.
+
+Resource created:
+  DEPLOYMENT:
+    - Raccoon server
+  {{- if index .Values.telegraf.enabled }}
+    - Telegraf sidecar enabled
+  {{- end }}
+  SERVICE:
+    - {{ .Values.service.type }}
+  CONFIGMAP:
+    - Raccoon
+    {{- if index .Values.telegraf.enabled }}
+    - Telegraf
+    {{- end }}
+  {{- if index .Values.ingress.enabled }}
+  {{- range $host := .Values.ingress.hosts }}
+  INGRESS:
+    - With host: {{ $host }}
+  {{- end }}
+  {{- if index .Values.ingress.tls.enabled }}
+    - TLS enabled
+  {{- end }}
+  {{- end }}
+
+To learn more about the release, try:
+
+  $ helm status {{ .Release.Name }}
+  $ helm get all {{ .Release.Name }}
