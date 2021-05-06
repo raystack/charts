@@ -1,0 +1,91 @@
+# Default values for shield.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: odpf/shield
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v0.1.0"
+
+# nameOverride: ""
+# fullnameOverride: ""
+
+# -- Environement variables needed by shield
+config:
+  PORT: "80"
+  NODE_ENV: "production"
+  APP_NAME: "shield"
+  NEW_RELIC_KEY: ""
+  NEW_RELIC_ENABLED: ""
+
+secretConfig:
+  # -- Postgres database connection details
+  DB_URI: postgresql://shield_dev:123@localhost:5432/shield_dev
+
+podAnnotations: {}
+labels: {}
+
+ingress:
+  # -- Kubernetes ingress details
+  enabled: true
+  # -- Used to create Ingress record (should used with service.type: ClusterIP).
+  hosts:
+    - shield.example.com
+  # -- The ingress path. Useful to host shield on a subpath, such as `/v1`.
+  path: /
+  labels:
+    # -- Used to add custom labels to the Ingress
+    # Useful if for example you have multiple Ingress controllers and want your Ingress controllers to bind to specific Ingresses
+    # traffic: internal
+  annotations:
+    kubernetes.io/ingress.class: contour
+    # kubernetes.io/tls-acme: "true"
+
+service:
+  # -- Kubernetes service details
+  type: ClusterIP
+  # loadBalancerSourceRanges:
+  externalPort: 80
+  internalPort: 80
+  # -- Used to fix NodePort when service.type: NodePort.
+  nodePort:
+  annotations:
+    {}
+    # Used to add custom annotations to the Service.
+    # service.beta.kubernetes.io/aws-load-balancer-internal: "0.0.0.0/0"
+
+livenessProbe:
+  # -- Kubernetes liveness probe configs
+  httpGetPath: /ping
+  initialDelaySeconds: 120
+  timeoutSeconds: 30
+  failureThreshold: 6
+
+readinessProbe:
+  # -- Kubernetes readiness probe configs
+  httpGetPath: /ping
+  initialDelaySeconds: 30
+  timeoutSeconds: 3
+  periodSeconds: 5
+
+resources:
+  {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
