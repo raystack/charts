@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ include "meteor.name" . }}-{{ .Values.jobName }}"
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- if .Values.labels }}
+    {{ toYaml .Values.labels }}
+    {{- end }}
+    app: {{ include "meteor.name" . }}
+    chart: {{ include "meteor.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  backoffLimit: 4
+  template:
+    metadata:
+      labels:
+        {{- if .Values.labels }}
+        {{ toYaml .Values.labels }}
+        {{- end }}
+    spec:
+      containers:
+      - name: "{{ include "meteor.name" . }}-{{ .Values.jobName }}"
+        image: "{{ required `image.repository is required` .Values.image.repository }}:{{ .Values.image.tag }}"
+        command:
+          - ./meteor
+          - rundir
+          - /opt/recipes
+        volumeMounts:
+          - name: "{{ include "meteor.name" . }}-{{ .Values.jobName }}-volume"
+            mountPath: /opt/recipes
+      restartPolicy: Never
+      volumes:
+        - name: "{{ include "meteor.name" . }}-{{ .Values.jobName }}-volume"
+          configMap:
+            name: "{{ include "meteor.name" . }}-{{ .Values.jobName }}-configmap"
+            items:
+            {{- range .Values.recipes }}
+            - key: {{ .key }}
+              path: {{ .key }}
+            {{- end }}
+      restartPolicy: Never

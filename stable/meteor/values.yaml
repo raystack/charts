@@ -1,0 +1,11 @@
+jobName: meteor-job
+namespace: default
+image:
+  # [required] repository where meteor Docker image is available
+  repository: odpf/meteor
+  tag: latest
+  pullPolicy: IfNotPresent
+recipes:
+  - key: file-name.yaml
+    localPath: ./dir-name/file-name.yaml
+labels: {}
