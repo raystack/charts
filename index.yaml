@@ -3,9 +3,9 @@ entries:
   consul:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-08-05T08:19:58.87069549Z"
+    created: "2021-08-09T09:21:04.254504796Z"
     description: Minimal Helm chart for deploying consul server on kubernetes.
-    digest: 10a4d671089615f25c5c38ed9608b7b6fb7d713204e7d5b35f4b2f39dd7ea104
+    digest: 1af80b57ba0b8cfd78d5c81b76f5bd990b61d18a28cfae9c4d160e69235c609c
     name: consul
     sources:
     - https://github.com/odpf/charts
@@ -15,9 +15,9 @@ entries:
   firehose:
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2021-08-05T08:19:58.871390418Z"
+    created: "2021-08-09T09:21:04.255144797Z"
     description: A Helm chart for deploying Firehose on Kubernetes
-    digest: b4576c5acfb3ad177ae722e2f01c568c8dc2d71f598e14718ea08d3faee57701
+    digest: ed3e2cde333c1e60d1d7e5f23f1f8acdf4375dfa04f0344f93d3c18aa4ff9540
     name: firehose
     type: application
     urls:
@@ -26,19 +26,28 @@ entries:
   meteor:
   - apiVersion: v1
     appVersion: v0.1.0
-    created: "2021-08-05T08:19:58.87171413Z"
+    created: "2021-08-09T09:21:04.255651298Z"
     description: A Helm chart for Kubernetes
     digest: 5d1878dc5defeabaecd2321126bf41b1b3aa73161ff9931ed703a84264bf0a8c
     name: meteor
     urls:
     - https://odpf.github.io/charts/meteor-0.1.16.tgz
     version: 0.1.16
+  - apiVersion: v1
+    appVersion: v0.1.0
+    created: "2021-08-09T09:21:04.255406197Z"
+    description: A Helm chart for Kubernetes
+    digest: 4a26fa0a91c07c40a8e4dc5cc8359dbc39de30af36a49747ee1c54be4a48387c
+    name: meteor
+    urls:
+    - https://odpf.github.io/charts/meteor-0.1.0.tgz
+    version: 0.1.0
   raccoon:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-08-05T08:19:58.872427659Z"
+    created: "2021-08-09T09:21:04.256245798Z"
     description: A Helm chart for deploying Raccoon on Kubernetes
-    digest: ab47af16d8bf599f3d9424b8545101d885e6fbc3bfa57a57028bdbbc0dc23f96
+    digest: 2d6b1a29cb493051d58d2ebe03da75938de8c703fc3ac960765875df80750aec
     name: raccoon
     type: application
     urls:
@@ -47,7 +56,7 @@ entries:
   shield:
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2021-08-05T08:19:58.873861115Z"
+    created: "2021-08-09T09:21:04.258136601Z"
     description: A Helm chart for deploying Shield on Kubernetes
     digest: 144534157104bf2a750c77effe54db8c5d0cd0d8f283aa7e3dc3cd3859a12b4f
     home: https://github.com/odpf/shield
@@ -61,7 +70,7 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: v0.0.1
-    created: "2021-08-05T08:19:58.873176488Z"
+    created: "2021-08-09T09:21:04.2573967Z"
     description: A Helm chart for deploying Shield on Kubernetes
     digest: a123fad4111981d41905fd94f5ad388c4c9135d5c989fa040021a5439546ea5e
     home: https://github.com/odpf/shield
@@ -76,9 +85,9 @@ entries:
   siren:
   - apiVersion: v1
     appVersion: v0.0.1
-    created: "2021-08-05T08:19:58.874519841Z"
+    created: "2021-08-09T09:21:04.258943202Z"
     description: Siren Helm chart
-    digest: dcc49f0d8c9f09e47a3b9e0bddcb013d626cdf537a1368bf7463b232f9af99f1
+    digest: daec71f8bbff33266ee013d3ac11bff3d4c301a9c605f432020434345ed26325
     home: https://github.com/odpf/siren
     name: siren
     sources:
@@ -87,4 +96,4 @@ entries:
     urls:
     - https://odpf.github.io/charts/siren-0.0.1.tgz
     version: 0.0.1
-generated: "2021-08-05T08:19:58.870144168Z"
+generated: "2021-08-09T09:21:04.254039296Z"
