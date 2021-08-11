@@ -21,7 +21,7 @@ spec:
         image: "{{ required `image.repository is required` .Values.image.repository }}:{{ .Values.image.tag }}"
         command:
           - ./meteor
-          - rundir
+          - run
           - /opt/recipes
         volumeMounts:
           - name: "{{ include "meteor.name" . }}-{{ .Values.jobName }}-volume"
