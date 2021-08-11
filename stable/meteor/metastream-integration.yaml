@@ -1,0 +1,7 @@
+name: metastream-integration
+source:
+  type: kafka
+  config:
+    broker: "10.83.28.39:6668"
+sinks:
+  - name: console

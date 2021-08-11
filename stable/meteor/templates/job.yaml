@@ -2,15 +2,11 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: "{{ include "meteor.name" . }}-{{ .Values.jobName }}"
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- if .Values.labels }}
     {{ toYaml .Values.labels }}
     {{- end }}
-    app: {{ include "meteor.name" . }}
-    chart: {{ include "meteor.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
 spec:
   backoffLimit: 4
   template:

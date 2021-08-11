@@ -44,7 +44,6 @@ The following table lists the configurable parameters of the Meteor chart and th
 | --- | ---- | ------- | ----------- |
 | recipes | [][Recipe](#recipe) | sample values  |  |
 | jobName | string | `main-kafka-production`  |  |
-| namespace | string | `meteor`  | k8s namespace |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"odpf/meteor"` | Image to use for deploying siren |
 | image.tag | string | `"0.1.0"` |  |
