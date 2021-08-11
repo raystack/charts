@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: "{{ include "meteor.name" . }}-{{ .Values.jobName }}"
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ include "meteor.namespace" . }}
   labels:
     {{- if .Values.labels }}
     {{ toYaml .Values.labels }}

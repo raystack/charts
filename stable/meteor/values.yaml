@@ -1,4 +1,5 @@
 jobName: meteor-job
+namespace: default
 image:
   # [required] repository where meteor Docker image is available
   repository: odpf/meteor
