@@ -26,15 +26,6 @@ entries:
   meteor:
   - apiVersion: v1
     appVersion: v0.1.0
-    created: "2021-08-12T10:30:07.227249775Z"
-    description: A Helm chart for Kubernetes
-    digest: 5d1878dc5defeabaecd2321126bf41b1b3aa73161ff9931ed703a84264bf0a8c
-    name: meteor
-    urls:
-    - https://odpf.github.io/charts/meteor-0.1.16.tgz
-    version: 0.1.16
-  - apiVersion: v1
-    appVersion: v0.1.0
     created: "2021-08-12T10:30:07.227012171Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: 4f7fb3267f8d0d28de213bb7561813c5a6aced416870aba3df6f1ed7c220978a
