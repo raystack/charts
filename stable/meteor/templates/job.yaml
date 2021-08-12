@@ -4,17 +4,17 @@ metadata:
   name: "{{ include "meteor.name" . }}-{{ .Values.jobName }}"
   namespace: {{ include "meteor.namespace" . }}
   labels:
-    {{- if .Values.labels }}
-    {{ toYaml .Values.labels }}
-    {{- end }}
+{{- if .Values.labels }}
+{{ toYaml .Values.labels | indent 4 }}
+{{- end }}
 spec:
   backoffLimit: 4
   template:
     metadata:
       labels:
-        {{- if .Values.labels }}
-        {{ toYaml .Values.labels }}
-        {{- end }}
+{{- if .Values.labels }}
+{{ toYaml .Values.labels | indent 8 }}
+{{- end }}
     spec:
       containers:
       - name: "{{ include "meteor.name" . }}-{{ .Values.jobName }}"
