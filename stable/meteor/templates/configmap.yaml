@@ -5,7 +5,7 @@ metadata:
   namespace: {{ include "meteor.namespace" . }}
 data:
 {{- $files := .Files }}
-{{- range .Values.recipes }}
-{{ .key | indent 2 }}: |-
-{{ $files.Get .localPath | indent 4}}
+{{- range $k, $v := .Values.recipes }}
+{{ $k | indent 2 }}: |-
+{{ $v | indent 4}}
 {{- end }}

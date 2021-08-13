@@ -32,7 +32,7 @@ spec:
           configMap:
             name: "{{ include "meteor.name" . }}-{{ .Values.jobName }}-configmap"
             items:
-            {{- range .Values.recipes }}
-            - key: {{ .key }}
-              path: {{ .key }}
+            {{- range $k, $v := .Values.recipes }}
+            - key: {{ $k }}
+              path: {{ $k }}
             {{- end }}
