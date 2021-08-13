@@ -42,19 +42,23 @@ The following table lists the configurable parameters of the Meteor chart and th
 
 | Key | Type | Default | Description |
 | --- | ---- | ------- | ----------- |
-| recipes | [][Recipe](#recipe) | sample values  |  |
-| jobName | string | `main-kafka-production`  |  |
+| recipes | object {\[filename\]: \[content\]} | [example](#sample-recipes-usage)  |  |
 | namespace | string | `-` | k8s namespace |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"odpf/meteor"` | Image to use for deploying siren |
 | image.tag | string | `"0.1.0"` |  |
 | labels | object | `{}` |  |
 
-### Recipe
-| Field | Sample Value |
-| :---- | :---- |
-| `key` | `recipe-name.yaml` |
-| `localPath` | `/path-to-recipe/recipe-name.yaml` |
+### Sample recipes usage
+```
+recipes:
+  recipe-filename.yaml: |-
+    source:
+      type: kafka
+      config: {}
+    sinks:
+      name: console
+```
 
 ---
 

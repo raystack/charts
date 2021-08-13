@@ -1,4 +1,3 @@
-jobName: meteor-job
 image:
   # [required] repository where meteor Docker image is available
   repository: odpf/meteor

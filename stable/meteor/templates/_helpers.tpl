@@ -3,7 +3,8 @@
 Expand the name of the chart.
 */}}
 {{- define "meteor.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- $name := default .Release.Name .Values.nameOverride -}}
+{{- printf "%s-%s" .Chart.Name $name | trunc 63 | trimSuffix "-" }}
 {{- end -}}
 
 {{/*
