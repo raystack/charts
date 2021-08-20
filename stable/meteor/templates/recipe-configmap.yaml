@@ -6,5 +6,5 @@ metadata:
 data:
 {{- range $k, $v := .Values.recipes }}
 {{ $k | indent 2 }}: |-
-{{ $v | indent 4}}
+{{ $v | indent 4 }}
 {{- end }}

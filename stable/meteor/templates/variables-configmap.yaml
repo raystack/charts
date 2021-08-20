@@ -5,5 +5,5 @@ metadata:
   namespace: {{ include "meteor.namespace" . }}
 data:
 {{- range $k, $v := .Values.config }}
-{{ $k | indent 2 }}: {{ $v }}
+{{ $k | indent 2 }}: {{ $v | quote }}
 {{- end }}
