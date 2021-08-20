@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ include "meteor.name" . }}-variables-configmap"
+  namespace: {{ include "meteor.namespace" . }}
+data:
+{{- range $k, $v := .Values.config }}
+{{ $k | indent 2 }}: {{ $v }}
+{{- end }}
