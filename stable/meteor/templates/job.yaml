@@ -20,7 +20,7 @@ spec:
       - name: "{{ include "meteor.name" . }}"
         image: "{{ required `image.repository is required` .Values.image.repository }}:{{ .Values.image.tag }}"
         command:
-          - ./meteor
+          - meteor
           - run
           - /opt/recipes
         volumeMounts:
