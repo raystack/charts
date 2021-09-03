@@ -46,7 +46,6 @@
   delete_sets = true
   delete_timings = true
   metric_separator = "."
-  parse_data_dog_tags = false
   datadog_extensions = true
   percentile_limit = 1000
   percentiles = [
