@@ -42,6 +42,7 @@ The following table lists the configurable parameters of the Meteor chart and th
 
 | Key | Type | Default | Description |
 | --- | ---- | ------- | ----------- |
+| schedule | string | `"0 1 * * *"`  | cronjob schedule |
 | recipes | object {\[filename\]: \[content\]} | [example](#sample-recipes-usage)  |  |
 | namespace | string | `-` | to override release namespace |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
