@@ -1,15 +1,18 @@
+schedule: "0 1 * * *"
 image:
   # [required] repository where meteor Docker image is available
   repository: odpf/meteor
   tag: latest
   pullPolicy: IfNotPresent
-recipes:
-  sample-recipe.yaml: |-
-    name: sample-recipe
-    source:
-      type: sample
-      config:
-        foo: "bar"
-    sinks:
-      - name: console
 labels: {"application":"meteor"}
+
+# sample recipe usage
+# recipes:
+#   sample-recipe.yaml: |-
+#     name: sample-recipe
+#     source:
+#       type: sample
+#       config:
+#         foo: "bar"
+#     sinks:
+#       - name: console

@@ -42,14 +42,15 @@ The following table lists the configurable parameters of the Meteor chart and th
 
 | Key | Type | Default | Description |
 | --- | ---- | ------- | ----------- |
+| schedule | string | `"0 1 * * *"`  | cronjob schedule |
 | recipes | object {\[filename\]: \[content\]} | [example](#sample-recipes-usage)  |  |
-| namespace | string | `-` | k8s namespace |
+| namespace | string | `-` | to override release namespace |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"odpf/meteor"` | Image to use for deploying siren |
 | image.tag | string | `"0.1.0"` |  |
 | labels | object | `{}` |  |
 
-### Sample recipes usage
+### Using recipes values
 ```
 recipes:
   recipe-filename.yaml: |-
