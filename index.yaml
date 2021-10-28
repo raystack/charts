@@ -3,9 +3,9 @@ entries:
   consul:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-09-06T09:12:36.74576954Z"
+    created: "2021-10-28T06:35:54.188134969Z"
     description: Minimal Helm chart for deploying consul server on kubernetes.
-    digest: 66e26da06ce43a82120dccd1306254c69f2375157674437e3d934bbd56cb8f76
+    digest: 284340188f1b07600429c4e0d801f7c3c1162b29bf7e8641abee54570ffc2b51
     name: consul
     sources:
     - https://github.com/odpf/charts
@@ -15,9 +15,9 @@ entries:
   firehose:
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2021-09-06T09:12:36.747221756Z"
+    created: "2021-10-28T06:35:54.189731113Z"
     description: A Helm chart for deploying Firehose on Kubernetes
-    digest: c720f06a9c1c1d1eb1ce4cb547f0e3813970e93192a374ff7a46a483154082f7
+    digest: 027268e60d88fcade68ff03ab6b47b826f4af99ccd0e3a0f95cac1b8243febc0
     name: firehose
     type: application
     urls:
@@ -25,7 +25,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2021-09-06T09:12:36.746444948Z"
+    created: "2021-10-28T06:35:54.188775487Z"
     description: A Helm chart for deploying Firehose on Kubernetes
     digest: 588776982533168db163d6268c9ab2b2078be9c6ef05c75b94c4b0f386d197d7
     name: firehose
@@ -36,7 +36,16 @@ entries:
   meteor:
   - apiVersion: v1
     appVersion: v0.1.0
-    created: "2021-09-06T09:12:36.747854062Z"
+    created: "2021-10-28T06:35:54.191293455Z"
+    description: A Helm chart for Meteor (github.com/odpf/meteor)
+    digest: f407468bdfce9061edbba9774ab58a079ead220577a1c3ae7e048a2fc693e251
+    name: meteor
+    urls:
+    - https://odpf.github.io/charts/meteor-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v1
+    appVersion: v0.1.0
+    created: "2021-10-28T06:35:54.190829343Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: 6390c21502e004327ae4c88799c7c478bcd5f4bb4a8ee1197d336fc3f16b5e44
     name: meteor
@@ -45,7 +54,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: v0.1.0
-    created: "2021-09-06T09:12:36.747527159Z"
+    created: "2021-10-28T06:35:54.190474033Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: ef9bf8d17c63c4818f3238ff03fc2dedfba4d9a2ca1398708358f6ba84bee793
     name: meteor
@@ -55,9 +64,9 @@ entries:
   raccoon:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2021-09-06T09:12:36.74861987Z"
+    created: "2021-10-28T06:35:54.192071277Z"
     description: A Helm chart for deploying Raccoon on Kubernetes
-    digest: f25fc180aaebe18a03940a2fd47d27617adf6cee6bfcaedde551d7e6ed1bdee6
+    digest: a48eec7b13babfe1dc78b784e6e875ba138027e32aaa201de94021520b049a78
     name: raccoon
     type: application
     urls:
@@ -66,7 +75,7 @@ entries:
   shield:
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2021-09-06T09:12:36.750052286Z"
+    created: "2021-10-28T06:35:54.194962355Z"
     description: A Helm chart for deploying Shield on Kubernetes
     digest: 144534157104bf2a750c77effe54db8c5d0cd0d8f283aa7e3dc3cd3859a12b4f
     home: https://github.com/odpf/shield
@@ -80,7 +89,7 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: v0.0.1
-    created: "2021-09-06T09:12:36.749379578Z"
+    created: "2021-10-28T06:35:54.19405103Z"
     description: A Helm chart for deploying Shield on Kubernetes
     digest: a123fad4111981d41905fd94f5ad388c4c9135d5c989fa040021a5439546ea5e
     home: https://github.com/odpf/shield
@@ -95,9 +104,9 @@ entries:
   siren:
   - apiVersion: v1
     appVersion: v0.0.1
-    created: "2021-09-06T09:12:36.750734493Z"
+    created: "2021-10-28T06:35:54.195737276Z"
     description: Siren Helm chart
-    digest: 73d74bdc81d584d272ef400a6ef950e3136f4fe119439d7cb5c7c7a1e5d635bf
+    digest: 51c4b139d2cec3254da9283f01702ef0f5c68c7e42be9d134036fd23da6da9d2
     home: https://github.com/odpf/siren
     name: siren
     sources:
@@ -106,4 +115,4 @@ entries:
     urls:
     - https://odpf.github.io/charts/siren-0.0.1.tgz
     version: 0.0.1
-generated: "2021-09-06T09:12:36.745256135Z"
+generated: "2021-10-28T06:35:54.187540453Z"
