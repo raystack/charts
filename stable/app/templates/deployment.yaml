@@ -42,6 +42,8 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           command:
             {{- toYaml .Values.container.command | nindent 12 }}
+          args:
+            {{- toYaml .Values.container.entryPoint | nindent 12 }}
           envFrom:
             - configMapRef:
                 name: "{{ include "app.fullname" . }}"

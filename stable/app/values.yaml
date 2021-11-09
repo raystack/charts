@@ -71,6 +71,7 @@ affinity: {}
 
 container:
   command: []
+  entryPoint: []
   port:
     name: tcp
     containerPort: 8080
