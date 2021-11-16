@@ -1,0 +1,9 @@
+app:
+  image:
+    repository: odpf/guardian
+    pullPolicy: Always
+    tag: latest
+  container:
+    entryPoint:
+    - serve
+  config: {}
