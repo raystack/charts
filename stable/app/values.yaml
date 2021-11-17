@@ -86,3 +86,11 @@ container:
       port: tcp
 
 config: {}
+
+secretConfig: {}
+  # -- Example: database connection details can go under secret config
+  # DB_HOST: localhost
+  # DB_NAME: app
+  # DB_USER: ""
+  # DB_PASSWORD: ""
+  # DB_PORT: 5432
