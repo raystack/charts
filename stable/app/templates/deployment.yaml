@@ -47,6 +47,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: "{{ include "app.fullname" . }}"
+         {{- if .Values.secretConfig }}      
+            - secretRef:
+                name: "{{ template "app.fullname" . }}-secret"
+         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
