@@ -1,0 +1,43 @@
+app:
+  image:
+    repository: odpf/guardian
+    pullPolicy: Always
+    tag: latest
+  container:
+    entryPoint:
+    - serve
+    livenessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+    readinessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: contour
+    hosts:
+      - host: guardian.example.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+
+  config:
+    LOG_LEVEL: info
+    AUTHENTICATED_USER_HEADER_KEY: x-authenticated-user-email
+    NOTIFIER_PROVIDER: slack
+    JOBS_FETCH_RESOURCES_INTERVAL: '0 */2 * * *'
+    JOBS_REVOKE_EXPIRED_ACCESS_INTERVAL: '*/20 * * * *'
+    JOBS_EXPIRING_ACCESS_NOTIFICATION_INTERVAL: '0 9 * * *'
+
+  secretConfig:
+    ENCRYPTION_SECRET_KEY:
+    NOTIFIER_ACCESS_TOKEN:
+    DB_HOST: localhost
+    DB_PORT:
+    DB_NAME: guardian
+    DB_USER: guardian
+    DB_PASSWORD:
