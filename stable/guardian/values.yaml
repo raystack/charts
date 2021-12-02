@@ -6,6 +6,24 @@ app:
   container:
     entryPoint:
     - serve
+    livenessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+    readinessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: contour
+    hosts:
+      - host: guardian.example.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
 
   config:
     LOG_LEVEL: info
