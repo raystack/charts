@@ -15,6 +15,10 @@ app:
         path: /ping
         port: tcp
 
+  service:
+    annotations:
+      projectcontour.io/upstream-protocol.h2c: tcp
+
   ingress:
     enabled: true
     annotations:
