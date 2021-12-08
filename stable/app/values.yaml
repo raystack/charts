@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository:
+  repository: ~
   # -- Specify the docker image path/repository.
   pullPolicy: IfNotPresent
   # -- Overrides the image tag whose default is the chart appVersion.
@@ -27,6 +27,12 @@ securityContext: {}
   # -- readOnlyRootFilesystem: true
   # -- runAsNonRoot: true
   # -- runAsUser: 1000
+
+migration:
+  enabled: false
+  command: ~
+  args:
+    - migrate
 
 service:
   type: ClusterIP
