@@ -1,0 +1,62 @@
+app:
+  image:
+    repository: odpf/columbus
+    pullPolicy: Always
+    tag: latest
+  container:
+    command:
+      - /opt/columbus/bin/columbus
+    args:
+      - serve
+    livenessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+    readinessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+
+  migration:
+    enabled: true
+    command:
+      - /opt/columbus/bin/columbus
+    args:
+      - migrate
+
+  service:
+    annotations:
+      projectcontour.io/upstream-protocol.h2c: tcp
+
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: contour
+    hosts:
+      - host: columbus.example.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+
+  config:
+    SERVER_HOST: localhost
+    SERVER_PORT: 3000
+    STATSD_ENABLED: false
+    STATSD_PREFIX: columbus
+    SEARCH_WHITELIST: table,job,dashboard,user,topic
+    SEARCH_TYPES_CACHE_DURATION: 300
+    LINEAGE_REFRESH_INTERVAL: 30m
+    NEW_RELIC_ENABLED: false
+    NEW_RELIC_APP_NAME: columbus
+    LOG_LEVEL: info
+
+  secretConfig:
+    ELASTICSEARCH_BROKERS: ~
+    STATSD_ADDRESS: ~
+    NEW_RELIC_LICENSE_KEY: ~
+    DB_HOST: ~
+    DB_PORT: 5432
+    DB_NAME: ~
+    DB_USER: ~
+    DB_PASSWORD: ~
+    DB_SSL_MODE: disable
