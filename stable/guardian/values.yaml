@@ -4,7 +4,7 @@ app:
     pullPolicy: Always
     tag: latest
   container:
-    entryPoint:
+    args:
     - serve
     livenessProbe:
       httpGet:
