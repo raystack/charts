@@ -30,9 +30,8 @@ securityContext: {}
 
 migration:
   enabled: false
-  command: ~
-  args:
-    - migrate
+  command: []
+  args: []
 
 service:
   type: ClusterIP
@@ -79,7 +78,7 @@ affinity: {}
 
 container:
   command: []
-  entryPoint: []
+  args: []
   port:
     name: tcp
     containerPort: 8080
