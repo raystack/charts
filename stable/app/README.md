@@ -45,7 +45,7 @@ The following table lists the configurable parameters of the Siren chart and the
 | affinity                              | object | `{}`                                                                                          |                                                                      |
 | config                                | object | `{}`                                                                                          |                                                                      |
 | container.command                     | list   | `[]`                                                                                          |                                                                      |
-| container.entryPoint                  | list   | `[]`                                                                                          |                                                                      |
+| container.args                  | list   | `[]`                                                                                          |                                                                      |
 | container.livenessProbe.httpGet.path  | string | `"/"`                                                                                         |                                                                      |
 | container.livenessProbe.httpGet.port  | string | `"tcp"`                                                                                       |                                                                      |
 | container.port.containerPort          | int    | `8080`                                                                                        |                                                                      |
@@ -76,6 +76,10 @@ The following table lists the configurable parameters of the Siren chart and the
 | service.port.targetPort               | string | `"tcp"`                                                                                       |                                                                      |
 | service.type                          | string | `"ClusterIP"`                                                                                 |                                                                      |
 | tolerations                           | list   | `[]`                                                                                          |                                                                      |
+| migration.enabled                     | bool   | `false`                                                                                       |                                                                      |
+| migration.command                     | list   | `[]`                                                                                       |                                                                      |
+| migration.args                        | list   | `[]`                
+|                                                                      |
 
 ---
 

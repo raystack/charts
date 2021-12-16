@@ -1,14 +1,11 @@
-apiVersion: apps/v1
-kind: Deployment
+{{- if .Values.migration.enabled }}
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: {{ include "app.fullname" . }}
+  name: {{ include "app.fullname" . }}-migration-job
   labels:
     {{- include "app.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
-  selector:
-    matchLabels:
-      {{- include "app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,39 +15,24 @@ spec:
       labels:
         {{- include "app.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      restartPolicy: Never
       containers:
         - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: {{ .Values.container.port.name }}
-              containerPort: {{ .Values.container.port.containerPort }}
-              protocol: {{ .Values.container.port.protocol }}
-          livenessProbe:
-            {{- toYaml .Values.container.livenessProbe | nindent 12 }}
-          readinessProbe:
-            {{- toYaml .Values.container.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           command:
-            {{- toYaml .Values.container.command | nindent 12 }}
+            {{- toYaml .Values.migration.command | nindent 12 }}
           args:
-            {{- toYaml .Values.container.args | nindent 12 }}
+            {{- toYaml .Values.migration.args | nindent 12 }}
           envFrom:
             - configMapRef:
                 name: "{{ include "app.fullname" . }}"
-         {{- if .Values.secretConfig }}      
+          {{- if .Values.secretConfig }}      
             - secretRef:
                 name: "{{ template "app.fullname" . }}-secret"
-         {{- end }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -63,3 +45,5 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+
+{{- end }}
