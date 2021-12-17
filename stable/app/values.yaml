@@ -35,11 +35,11 @@ migration:
 
 service:
   type: ClusterIP
-  port:
-    port: 80
-    targetPort: tcp
-    protocol: TCP
-    name: tcp
+  ports:
+    - port: 80
+      targetPort: tcp
+      protocol: TCP
+      name: tcp
   annotations: {}
 
 ingress:
