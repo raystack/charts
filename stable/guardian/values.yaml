@@ -5,7 +5,7 @@ app:
     tag: latest
   container:
     args:
-    - serve
+      - serve
     livenessProbe:
       httpGet:
         path: /ping
@@ -14,6 +14,11 @@ app:
       httpGet:
         path: /ping
         port: tcp
+
+  migration:
+    enabled: true
+    args:
+      - migrate
 
   service:
     annotations:
@@ -33,9 +38,9 @@ app:
     LOG_LEVEL: info
     AUTHENTICATED_USER_HEADER_KEY: x-authenticated-user-email
     NOTIFIER_PROVIDER: slack
-    JOBS_FETCH_RESOURCES_INTERVAL: '0 */2 * * *'
-    JOBS_REVOKE_EXPIRED_ACCESS_INTERVAL: '*/20 * * * *'
-    JOBS_EXPIRING_ACCESS_NOTIFICATION_INTERVAL: '0 9 * * *'
+    JOBS_FETCH_RESOURCES_INTERVAL: "0 */2 * * *"
+    JOBS_REVOKE_EXPIRED_ACCESS_INTERVAL: "*/20 * * * *"
+    JOBS_EXPIRING_ACCESS_NOTIFICATION_INTERVAL: "0 9 * * *"
 
   secretConfig:
     ENCRYPTION_SECRET_KEY:
