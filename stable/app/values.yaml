@@ -79,10 +79,10 @@ affinity: {}
 container:
   command: []
   args: []
-  port:
-    name: tcp
-    containerPort: 8080
-    protocol: TCP
+  ports:
+    - name: tcp
+      containerPort: 8080
+      protocol: TCP
   livenessProbe:
     httpGet:
       path: /
