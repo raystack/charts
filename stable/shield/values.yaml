@@ -1,0 +1,74 @@
+shield-app:
+  image:
+    repository: odpf/shield
+    pullPolicy: Always
+    tag: latest
+  container:
+    args:
+    - serve
+    livenessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+    readinessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+
+  service:
+    annotations:
+      projectcontour.io/upstream-protocol.h2c: tcp
+
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: contour
+    hosts:
+      - host: shield.example.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+
+  config:
+    LOG_LEVEL: info
+
+  secretConfig:
+    DB_HOST: localhost
+    DB_PORT: 
+    DB_NAME: shield
+    DB_USER: shield
+    DB_PASSWORD:
+
+spicedb: 
+  nameOverride: shield-spicedb
+  replicaCount: 2
+  image:
+    repository: quay.io/authzed/spicedb
+    tag: v1.2.0
+  secretConfig: 
+    DB_PASS: 
+  config:
+    LOG_LEVEL: info
+  container:
+    ports:
+    - name: tcp
+      containerPort: 50051
+      protocol: TCP
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 8080
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 8080
+    command: ["spicedb", "serve"]
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: contour
+    hosts:
+      - host: spicedb.example.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
