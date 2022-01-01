@@ -1,8 +1,9 @@
 shield-app:
+  enabled: true
   image:
     repository: odpf/shield
     pullPolicy: Always
-    tag: latest
+    tag: 0.2.0-rc
   container:
     args:
     - serve
@@ -28,27 +29,27 @@ shield-app:
         paths:
           - path: /
             pathType: ImplementationSpecific
-
   config:
-    LOG_LEVEL: info
-
+    SHIELD_SPICEDB_HOST: spicedb.namespace.svc.local
+    SHIELD_SPICEDB_PORT: 50051
   secretConfig:
-    DB_HOST: localhost
-    DB_PORT: 
-    DB_NAME: shield
-    DB_USER: shield
-    DB_PASSWORD:
+    SHIELD_DB_URL: 
+    SHIELD_SPICEDB_PRE_SHARED_KEY: 
 
 spicedb: 
+  enabled: true
   nameOverride: shield-spicedb
   replicaCount: 2
   image:
     repository: quay.io/authzed/spicedb
     tag: v1.2.0
   secretConfig: 
-    DB_PASS: 
+    SPICEDB_GRPC_PRESHARED_KEY:
+    SPICEDB_DATASTORE_CONN_URI: 
   config:
-    LOG_LEVEL: info
+    SPICEDB_LOG_LEVEL: info
+    SPICEDB_DATASTORE_ENGINE:
+    SPICEDB_GRPC_SHUTDOWN_GRACE_PERIOD: "5s"
   container:
     ports:
     - name: tcp
