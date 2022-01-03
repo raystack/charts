@@ -2,10 +2,10 @@ app:
   image:
     repository: odpf/columbus
     pullPolicy: Always
-    tag: latest
+    tag: "0.1.8"
   container:
     command:
-      - /opt/columbus/bin/columbus
+      - columbus
     args:
       - serve
     livenessProbe:
@@ -20,7 +20,7 @@ app:
   migration:
     enabled: true
     command:
-      - /opt/columbus/bin/columbus
+      - columbus
     args:
       - migrate
 
