@@ -1,9 +1,11 @@
 app:
   image:
-    repository: odpf/guardian
+    repository: odpf/columbus
     pullPolicy: Always
-    tag: latest
+    tag: "0.1.8"
   container:
+    command:
+      - columbus
     args:
       - serve
     livenessProbe:
@@ -17,6 +19,8 @@ app:
 
   migration:
     enabled: true
+    command:
+      - columbus
     args:
       - migrate
 
@@ -29,24 +33,28 @@ app:
     annotations:
       kubernetes.io/ingress.class: contour
     hosts:
-      - host: guardian.example.com
+      - host: columbus.example.com
         paths:
           - path: /
             pathType: ImplementationSpecific
 
   config:
+    SERVER_HOST: localhost
+    SERVER_PORT: 3000
+    STATSD_ENABLED: false
+    STATSD_PREFIX: columbus
+    LINEAGE_REFRESH_INTERVAL: 30m
+    NEW_RELIC_ENABLED: false
+    NEW_RELIC_APP_NAME: columbus
     LOG_LEVEL: info
-    AUTHENTICATED_USER_HEADER_KEY: x-authenticated-user-email
-    NOTIFIER_PROVIDER: slack
-    JOBS_FETCH_RESOURCES_INTERVAL: "0 */2 * * *"
-    JOBS_REVOKE_EXPIRED_ACCESS_INTERVAL: "*/20 * * * *"
-    JOBS_EXPIRING_ACCESS_NOTIFICATION_INTERVAL: "0 9 * * *"
 
   secretConfig:
-    ENCRYPTION_SECRET_KEY:
-    NOTIFIER_ACCESS_TOKEN:
-    DB_HOST: localhost
-    DB_PORT:
-    DB_NAME: guardian
-    DB_USER: guardian
-    DB_PASSWORD:
+    ELASTICSEARCH_BROKERS: ~
+    STATSD_ADDRESS: ~
+    NEW_RELIC_LICENSE_KEY: ~
+    DB_HOST: ~
+    DB_PORT: 5432
+    DB_NAME: ~
+    DB_USER: ~
+    DB_PASSWORD: ~
+    DB_SSL_MODE: disable
