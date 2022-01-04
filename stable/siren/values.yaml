@@ -51,7 +51,7 @@ service:
   # -- Used to fix NodePort when service.type: NodePort.
   nodePort:
   annotations:
-    {}
+    projectcontour.io/upstream-protocol.h2c: tcp
     # Used to add custom annotations to the Service.
     # service.beta.kubernetes.io/aws-load-balancer-internal: "0.0.0.0/0"
 
