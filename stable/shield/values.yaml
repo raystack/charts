@@ -1,0 +1,75 @@
+shield-app:
+  enabled: true
+  image:
+    repository: odpf/shield
+    pullPolicy: Always
+    tag: 0.2.0-rc
+  container:
+    args:
+    - serve
+    livenessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+    readinessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+
+  service:
+    annotations:
+      projectcontour.io/upstream-protocol.h2c: tcp
+
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: contour
+    hosts:
+      - host: shield.example.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+  config:
+    SHIELD_SPICEDB_HOST: spicedb.namespace.svc.local
+    SHIELD_SPICEDB_PORT: 50051
+  secretConfig:
+    SHIELD_DB_URL: 
+    SHIELD_SPICEDB_PRE_SHARED_KEY: 
+
+spicedb: 
+  enabled: true
+  nameOverride: shield-spicedb
+  replicaCount: 2
+  image:
+    repository: quay.io/authzed/spicedb
+    tag: v1.2.0
+  secretConfig: 
+    SPICEDB_GRPC_PRESHARED_KEY:
+    SPICEDB_DATASTORE_CONN_URI: 
+  config:
+    SPICEDB_LOG_LEVEL: info
+    SPICEDB_DATASTORE_ENGINE:
+    SPICEDB_GRPC_SHUTDOWN_GRACE_PERIOD: "5s"
+  container:
+    ports:
+    - name: tcp
+      containerPort: 50051
+      protocol: TCP
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 8080
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 8080
+    command: ["spicedb", "serve"]
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: contour
+    hosts:
+      - host: spicedb.example.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
