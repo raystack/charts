@@ -39,22 +39,22 @@ app:
             pathType: ImplementationSpecific
 
   config:
-    SERVER_HOST: localhost
-    SERVER_PORT: 3000
-    STATSD_ENABLED: false
-    STATSD_PREFIX: columbus
-    LINEAGE_REFRESH_INTERVAL: 30m
-    NEW_RELIC_ENABLED: false
-    NEW_RELIC_APP_NAME: columbus
-    LOG_LEVEL: info
+    SERVER_PORT: 8080
+    # SERVER_HOST: 0.0.0.0
+    # STATSD_ENABLED: false
+    # STATSD_PREFIX: columbus
+    # LINEAGE_REFRESH_INTERVAL: 30m
+    # NEW_RELIC_ENABLED: false
+    # NEW_RELIC_APP_NAME: columbus
+    # LOG_LEVEL: info
 
-  secretConfig:
-    ELASTICSEARCH_BROKERS: ~
-    STATSD_ADDRESS: ~
-    NEW_RELIC_LICENSE_KEY: ~
-    DB_HOST: ~
-    DB_PORT: 5432
-    DB_NAME: ~
-    DB_USER: ~
-    DB_PASSWORD: ~
-    DB_SSL_MODE: disable
+  secretConfig: {}
+    # ELASTICSEARCH_BROKERS: ~
+    # STATSD_ADDRESS: ~
+    # NEW_RELIC_LICENSE_KEY: ~
+    # DB_HOST: ~
+    # DB_PORT: 5432
+    # DB_NAME: ~
+    # DB_USER: ~
+    # DB_PASSWORD: ~
+    # DB_SSL_MODE: disable
