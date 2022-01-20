@@ -33,6 +33,8 @@ spec:
             envFrom:
               - configMapRef:
                   name: "{{ include "meteor.name" . }}-variables-configmap"
+              - secretRef:
+                  name: "{{ include "meteor.name" . }}-secret"
           restartPolicy: Never
           volumes:
             - name: "{{ include "meteor.name" . }}-volume"
