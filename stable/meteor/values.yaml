@@ -6,6 +6,9 @@ image:
   pullPolicy: IfNotPresent
 labels: {"application":"meteor"}
 
+config: {}
+secretConfig: {}
+
 # sample recipe usage
 # recipes:
 #   sample-recipe.yaml: |-
