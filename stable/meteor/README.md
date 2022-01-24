@@ -49,6 +49,8 @@ The following table lists the configurable parameters of the Meteor chart and th
 | image.repository | string | `"odpf/meteor"` | Image to use for deploying siren |
 | image.tag | string | `"0.1.0"` |  |
 | labels | object | `{}` |  |
+| config | object | `{}` |  |
+| secretConfig | object | `{}` | secrets |
 
 ### Using recipes values
 ```
