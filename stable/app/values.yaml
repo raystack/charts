@@ -91,6 +91,18 @@ container:
     httpGet:
       path: /
       port: tcp
+  # volumeMounts:
+  #   - mountPath: /data/config.yaml
+  #       name: config
+  #       subPath: config.yaml
+# volumes:
+# - name: app-service-account
+#   secret:
+#     defaultMode: 420
+#     items:
+#     - key: token
+#       path: auth.json
+#     secretName: app-service-account
 
 config: {}
 

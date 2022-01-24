@@ -46,6 +46,8 @@ spec:
             {{- toYaml .Values.container.command | nindent 12 }}
           args:
             {{- toYaml .Values.container.args | nindent 12 }}
+          volumeMounts:
+            {{- toYaml .Values.container.volumeMounts | nindent 12 }}
           envFrom:
             - configMapRef:
                 name: "{{ include "app.fullname" . }}"
@@ -53,6 +55,10 @@ spec:
             - secretRef:
                 name: "{{ template "app.fullname" . }}-secret"
          {{- end }}
+      volumes:
+        {{- range $volume := .Values.volumes }}
+        - {{- toYaml $volume | nindent 12 }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
