@@ -11,9 +11,11 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port.port }}
-      targetPort: {{ .Values.service.port.targetPort }}
-      protocol: {{ .Values.service.port.protocol }}
-      name: {{ .Values.service.port.name }}
+    {{- range $port := .Values.service.ports }}
+    - port: {{ $port.port }}
+      targetPort: {{ $port.targetPort }}
+      protocol: {{ $port.protocol }}
+      name: {{ $port.name }}
+    {{- end }}
   selector:
     {{- include "app.selectorLabels" . | nindent 4 }}
