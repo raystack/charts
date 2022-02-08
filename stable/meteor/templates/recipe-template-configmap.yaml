@@ -1,0 +1,12 @@
+{{ if .Values.recipe_template.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ include "meteor.name" . }}-recipe-template-configmap"
+  namespace: {{ include "meteor.namespace" . }}
+data:
+  template.yaml: |-
+{{ .Values.recipe_template.template | indent 4 }}
+  template_data.yaml: |-
+{{ .Values.recipe_template.data | indent 4 }}
+{{- end }}

@@ -63,6 +63,38 @@ recipes:
       name: console
 ```
 
+### Using recipe_template values
+```
+recipe_template:
+  enabled: false
+  template: |-
+    name: {{ .FileName }}
+    source:
+      type: bigquery
+      config:
+        project_id: {{ .FileName }}
+        service_account_json: |-
+          {"some": "service-account"}
+    processors:
+      - name: enrich
+        config:
+          company: {{ .Data.company }}
+    sinks:
+      - name: columbus
+        config:
+          host: "http://columbus.example.com"
+          type: {{ .columbus_type }}
+  data: |-
+    - FileName: my-project-A
+      Data:
+        company: odpf
+        columbus_type: table
+    - FileName: my-project-B
+      Data:
+        company: johndoe
+        columbus_type: dashboard
+```
+
 ---
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.

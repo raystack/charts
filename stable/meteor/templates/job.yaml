@@ -35,6 +35,21 @@ spec:
                   name: "{{ include "meteor.name" . }}-variables-configmap"
               - secretRef:
                   name: "{{ include "meteor.name" . }}-secret"
+          {{- if .Values.recipe_template.enabled }}
+          - name: "{{ include "meteor.name" . }}-template"
+            image: "{{ required `image.repository is required` .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            command: ["/bin/sh","-c"]
+            args: ["meteor gen /opt/template/template.yaml -d /opt/template/template_data.yaml -o /opt/template/output; meteor run /opt/template/output"]
+            volumeMounts:
+              - name: "{{ include "meteor.name" . }}-template-volume"
+                mountPath: /opt/template
+            envFrom:
+              - configMapRef:
+                  name: "{{ include "meteor.name" . }}-variables-configmap"
+              - secretRef:
+                  name: "{{ include "meteor.name" . }}-secret"
+          {{- end }}
           restartPolicy: Never
           volumes:
             - name: "{{ include "meteor.name" . }}-volume"
@@ -45,3 +60,13 @@ spec:
                 - key: {{ $k }}
                   path: {{ $k }}
                 {{- end }}
+            {{- if .Values.recipe_template.enabled }}
+            - name: "{{ include "meteor.name" . }}-template-volume"
+              configMap:
+                name: "{{ include "meteor.name" . }}-recipe-template-configmap"
+                items:
+                  - key: template.yaml
+                    path: template.yaml
+                  - key: template_data.yaml
+                    path: template_data.yaml
+            {{- end }}
