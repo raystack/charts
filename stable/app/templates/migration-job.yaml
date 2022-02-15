@@ -38,6 +38,8 @@ spec:
             - secretRef:
                 name: "{{ template "app.fullname" . }}-secret"
           {{- end }}
+          volumeMounts:
+            {{- toYaml .Values.container.volumeMounts | nindent 12 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -50,5 +52,8 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-
+      volumes:
+        {{- range $volume := .Values.volumes }}
+        - {{- toYaml $volume | nindent 12 }}
+        {{- end }}
 {{- end }}
