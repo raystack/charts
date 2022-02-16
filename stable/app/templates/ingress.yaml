@@ -1,6 +1,5 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "app.fullname" . -}}
-{{- $svcPort := .Values.service.port.port -}}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
@@ -36,6 +35,7 @@ spec:
       secretName: {{ .secretName }}
     {{- end }}
   {{- end }}
+  
   rules:
     {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
@@ -49,13 +49,14 @@ spec:
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: {{ $fullName }}
+                name: {{ ternary  $fullName .backend.service.name (empty .backend.service.name) }}
                 port:
-                  number: {{ $svcPort }}
+                  number: {{ .backend.service.port.number }}
               {{- else }}
-              serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
+              serviceName: {{ ternary  $fullName .backend.service.name (empty .backend.service.name) }}
+              servicePort: {{ .backend.service.port.number }}
               {{- end }}
           {{- end }}
     {{- end }}
+    
 {{- end }}
