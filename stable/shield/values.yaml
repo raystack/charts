@@ -2,7 +2,7 @@ shield-app:
   enabled: true
   image:
     repository: odpf/shield
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
     tag: 0.2.0-rc
   container:
     args:
@@ -10,16 +10,30 @@ shield-app:
     livenessProbe:
       httpGet:
         path: /ping
-        port: tcp
+        port: 5556
     readinessProbe:
       httpGet:
         path: /ping
-        port: tcp
-
+        port: 5556
+    ports:
+    - name: tcp
+      containerPort: 8080
+      protocol: TCP
+    - name: proxy
+      containerPort: 5556
+      protocol: TCP
   service:
-    annotations:
-      projectcontour.io/upstream-protocol.h2c: tcp
-
+    type: ClusterIP
+    ports:
+      - port: 8080
+        targetPort: tcp
+        protocol: TCP
+        name: tcp
+      - port: 5556
+        targetPort: proxy
+        protocol: TCP
+        name: proxy
+    annotations: {}
   ingress:
     enabled: true
     annotations:
@@ -27,8 +41,18 @@ shield-app:
     hosts:
       - host: shield.example.com
         paths:
+          - path: /admin
+            pathType: Prefix
+            backend:
+              service:
+                port:
+                  number: 8080
           - path: /
             pathType: ImplementationSpecific
+            backend:
+              service:
+                port:
+                  number: 5556
   config:
     SHIELD_SPICEDB_HOST: spicedb.namespace.svc.local
     SHIELD_SPICEDB_PORT: 50051
@@ -73,3 +97,7 @@ spicedb:
         paths:
           - path: /
             pathType: ImplementationSpecific
+            backend:
+              service:
+                port:
+                  number: 80
