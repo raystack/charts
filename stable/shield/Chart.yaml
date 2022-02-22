@@ -19,12 +19,12 @@ version: 0.1.1
 
 dependencies:
 - name: app
-  version: "0.2.1"
+  version: "0.3.0"
   repository: "https://odpf.github.io/charts/"
   alias: shield-app
   condition: shield-app.enabled
 - name: app
-  version: "0.2.1"
+  version: "0.3.0"
   repository: "https://odpf.github.io/charts/"
   alias: spicedb
   condition: spicedb.enabled
