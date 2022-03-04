@@ -1,6 +1,6 @@
 dependencies:
 - name: app
   repository: https://odpf.github.io/charts/
-  version: 0.2.0
-digest: sha256:2ff34dae9ff485fa30837e5777b90251e033662775ca37dcd30943472f1ea840
-generated: "2021-12-21T11:43:38.393873+07:00"
+  version: 0.2.1
+digest: sha256:7c3f11f696cd963558e25c7c40153c5b895fb0ea892cba55c4902e9f8ad1cc0a
+generated: "2022-03-04T13:27:39.966755+05:30"
