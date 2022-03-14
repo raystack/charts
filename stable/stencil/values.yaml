@@ -40,4 +40,4 @@ app:
     LOG_LEVEL: info
 
   secretConfig:
-    DB_CONNECTIONSTRING:: postgres://postgres@localhost:5432/stencil?sslmode=disable
+    DB_CONNECTIONSTRING: "postgres://postgres@localhost:5432/stencil?sslmode=disable"
