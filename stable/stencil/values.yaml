@@ -1,0 +1,43 @@
+app:
+  image:
+    repository: odpf/stencil
+    pullPolicy: Always
+    tag: latest
+  container:
+    args:
+      - server
+      - start
+    livenessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+    readinessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+
+  migration:
+    enabled: true
+    args:
+      - server
+      - migrate
+
+  service:
+    annotations:
+      projectcontour.io/upstream-protocol.h2c: tcp
+
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: contour
+    hosts:
+      - host: stencil.example.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+
+  config:
+    LOG_LEVEL: info
+
+  secretConfig:
+    DB_CONNECTIONSTRING:: postgres://postgres@localhost:5432/stencil?sslmode=disable
