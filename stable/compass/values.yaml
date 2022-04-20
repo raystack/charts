@@ -1,0 +1,60 @@
+app:
+  image:
+    repository: odpf/compass
+    pullPolicy: Always
+    tag: "0.2.0"
+  container:
+    command:
+      - compass
+    args:
+      - serve
+    livenessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+    readinessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+
+  migration:
+    enabled: true
+    command:
+      - compass
+    args:
+      - migrate
+
+  service:
+    annotations:
+      {}
+
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: contour
+    hosts:
+      - host: compass.example.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+
+  config:
+    SERVER_PORT: 8080
+    # SERVER_HOST: 0.0.0.0
+    # STATSD_ENABLED: false
+    # STATSD_PREFIX: compass
+    # LINEAGE_REFRESH_INTERVAL: 30m
+    # NEW_RELIC_ENABLED: false
+    # NEW_RELIC_APP_NAME: compass
+    # LOG_LEVEL: info
+
+  secretConfig: {}
+    # ELASTICSEARCH_BROKERS: ~
+    # STATSD_ADDRESS: ~
+    # NEW_RELIC_LICENSE_KEY: ~
+    # DB_HOST: ~
+    # DB_PORT: 5432
+    # DB_NAME: ~
+    # DB_USER: ~
+    # DB_PASSWORD: ~
+    # DB_SSL_MODE: disable
