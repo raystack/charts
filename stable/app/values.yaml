@@ -118,3 +118,13 @@ secretConfig: {}
   # DB_USER: ""
   # DB_PASSWORD: ""
   # DB_PORT: 5432
+
+telegraf:
+  enabled: false
+  image: telegraf:1.19.3-alpine
+  config: ~ # telegraf config
+  containerPort: 8125
+  protocol: UDP
+  args:
+  command:
+    - telegraf

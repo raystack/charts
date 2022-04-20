@@ -80,6 +80,17 @@ The following table lists the configurable parameters of the Siren chart and the
 | migration.command                     | list   | `[]`                                                                                       |                                                                      |
 | migration.args                        | list   | `[]`                
 |                                                                      |
+| telegraf.enabled                      | bool   | `false`                
+|                                                                      |
+| telegraf.command                      | list   | `["telegraf"]`                
+|                                                                      |
+| telegraf.args                         | list   | `[]`                
+|                                                                      |
+| telegraf.containerPort                | int    | `8125`                
+|                                                                      |
+| telegraf.protocol                     | string | `UDP`                
+|                                                                      |
+| telegraf.config                       | string | `""`                | telegraf config file content |
 
 ---
 
