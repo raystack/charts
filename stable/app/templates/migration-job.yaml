@@ -15,7 +15,7 @@ spec:
       "helm.sh/hook": pre-install
       "helm.sh/hook-weight": "-5"
       "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
-      {{- toYaml . | nindent 8 }}
+      {{- toYaml . | nindent 6 }}
       {{- end }}
       labels:
         {{- include "app.selectorLabels" . | nindent 8 }}

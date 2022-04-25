@@ -11,11 +11,14 @@ spec:
       {{- include "app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}}
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+        checksum/config: {{ include (print .Template.BasePath "/configmap.yaml") . | sha256sum }}}
+        {{- if .Values.telegraf.enabled }}
+        checksum/telegraf-config: {{ include (print $.Template.BasePath "/telegraf-configmap.yaml") . | sha256sum }}}
+        {{- end }}
+{{- with .Values.podAnnotations }}
+{{- toYaml . | nindent 8 }}
+{{- end }}
       labels:
         {{- include "app.selectorLabels" . | nindent 8 }}
     spec:
