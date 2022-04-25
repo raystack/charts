@@ -8,13 +8,13 @@ metadata:
 spec:
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
       # This is what defines this resource as a hook. Without this line, the
       # job is considered part of the release.
       "helm.sh/hook": pre-install
       "helm.sh/hook-weight": "-5"
       "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
+      {{- with .Values.podAnnotations }}
       {{- toYaml . | nindent 6 }}
       {{- end }}
       labels:
