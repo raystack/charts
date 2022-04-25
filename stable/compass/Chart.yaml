@@ -6,5 +6,5 @@ version: 0.1.0
 appVersion: "0.2.0"
 dependencies:
 - name: app
-  version: "0.3.1"
+  version: "0.3.2"
   repository: "https://odpf.github.io/charts/"
