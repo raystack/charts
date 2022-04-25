@@ -1,0 +1,11 @@
+{{- if .Values.telegraf.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "app.fullname" . }}-telegraf
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+data:
+  telegraf.conf: |-
+{{ .Values.telegraf.config | indent 4 }}
+{{- end }}
