@@ -26,7 +26,7 @@ app:
 
   service:
     annotations:
-      - projectcontour.io/upstream-protocol.h2c: 80,http
+      projectcontour.io/upstream-protocol.h2c: 80,http
 
   ingress:
     enabled: true
