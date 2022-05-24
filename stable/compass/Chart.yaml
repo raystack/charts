@@ -3,8 +3,8 @@ name: compass
 description: A Helm chart for running Compass in Kubernetes
 type: application
 version: 0.1.0
-appVersion: "0.2.0"
+appVersion: "0.2.1"
 dependencies:
-- name: app
-  version: "0.3.2"
-  repository: "https://odpf.github.io/charts/"
+  - name: app
+    version: "0.3.2"
+    repository: "https://odpf.github.io/charts/"
