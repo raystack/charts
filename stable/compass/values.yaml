@@ -2,7 +2,7 @@ app:
   image:
     repository: odpf/compass
     pullPolicy: Always
-    tag: "0.2.0"
+    tag: "0.2.1"
   container:
     command:
       - compass
@@ -26,7 +26,7 @@ app:
 
   service:
     annotations:
-      {}
+      - projectcontour.io/upstream-protocol.h2c: 80,http
 
   ingress:
     enabled: true
@@ -44,22 +44,22 @@ app:
                   number: 80
 
   config:
-    SERVER_PORT: 8080
-    # SERVER_HOST: 0.0.0.0
-    # STATSD_ENABLED: false
-    # STATSD_PREFIX: compass
-    # LINEAGE_REFRESH_INTERVAL: 30m
-    # NEW_RELIC_ENABLED: false
-    # NEW_RELIC_APP_NAME: compass
-    # LOG_LEVEL: info
+    COMPASS_SERVICE_PORT: 8080
+    # COMPASS_SERVICE_HOST: 0.0.0.0
+    # COMPASS_STATSD_ENABLED: false
+    # COMPASS_STATSD_PREFIX: compass
+    # COMPASS_NEWRELIC_ENABLED: false
+    # COMPASS_NEWRELIC_APPNAME: compass
+    # COMPASS_LOG_LEVEL: info
 
-  secretConfig: {}
-    # ELASTICSEARCH_BROKERS: ~
-    # STATSD_ADDRESS: ~
-    # NEW_RELIC_LICENSE_KEY: ~
-    # DB_HOST: ~
-    # DB_PORT: 5432
-    # DB_NAME: ~
-    # DB_USER: ~
-    # DB_PASSWORD: ~
-    # DB_SSL_MODE: disable
+  secretConfig:
+    {}
+    # COMPASS_ELASTICSEARCH_BROKERS: ~
+    # COMPASS_STATSD_ADDRESS: ~
+    # COMPASS_NEWRELIC_LICENSEKEY: ~
+    # COMPASS_DB_HOST: ~
+    # COMPASS_DB_PORT: 5432
+    # COMPASS_DB_NAME: ~
+    # COMPASS_DB_USER: ~
+    # COMPASS_DB_PASSWORD: ~
+    # COMPASS_DB_SSLMODE: disable
