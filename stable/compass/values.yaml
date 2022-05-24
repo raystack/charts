@@ -25,8 +25,7 @@ app:
       - migrate
 
   service:
-    annotations:
-      projectcontour.io/upstream-protocol.h2c: 80,http
+    annotations: {}
 
   ingress:
     enabled: true
@@ -52,8 +51,7 @@ app:
     # COMPASS_NEWRELIC_APPNAME: compass
     # COMPASS_LOG_LEVEL: info
 
-  secretConfig:
-    {}
+  secretConfig: {}
     # COMPASS_ELASTICSEARCH_BROKERS: ~
     # COMPASS_STATSD_ADDRESS: ~
     # COMPASS_NEWRELIC_LICENSEKEY: ~
