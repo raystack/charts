@@ -12,7 +12,7 @@ metadata:
     "helm.sh/hook-weight": "-5"
     "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
     {{- with .Values.podAnnotations }}
-    {{- toYaml . | nindent 6 }}
+    {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
   template:
