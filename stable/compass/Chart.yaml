@@ -3,7 +3,7 @@ name: compass
 description: A Helm chart for running Compass in Kubernetes
 type: application
 version: 0.1.2
-appVersion: "0.2.1"
+appVersion: "0.2.2"
 dependencies:
   - name: app
     version: "0.3.4"
