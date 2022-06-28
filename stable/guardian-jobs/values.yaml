@@ -1,0 +1,16 @@
+namespace: guardian
+cron:
+  schedule: "0 9 * * *"
+  entryPoint:
+    - guardian
+    - job
+    - run
+image:
+  # [required] repository where guardian Docker image is available
+  repository: odpf/guardian
+  tag: latest
+  pullPolicy: IfNotPresent
+labels: { "application": "guardian" }
+
+config: { }
+secretConfig: { }
