@@ -81,6 +81,15 @@ tolerations: []
 
 affinity: {}
 
+cron:
+  enabled: false
+  jobs:
+    - name: cronJob1
+      schedule: "0 0 * * *"
+      entryPoint:
+        - app
+        - startJob
+
 container:
   command: []
   args: []

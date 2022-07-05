@@ -1,0 +1,36 @@
+{{- if .Values.cron.enabled }}
+{{- range $job := .Values.cron.jobs }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: "{{ include "app.fullname" . }}"
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+spec:
+  schedule: {{ $job.schedule | quote }}
+  jobTemplate:
+    spec:
+      backoffLimit: 4
+      template:
+        metadata:
+          labels:
+        {{- include "app.selectorLabels" . | nindent 8 }}
+        spec:
+          containers:
+            - name: {{ $job.name }}
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              command:
+              {{- range $job.entryPoint }}
+                - {{ . }}
+              {{- end }}
+              envFrom:
+                - configMapRef:
+                    name: "{{ include "app.fullname" . }}"
+                - secretRef:
+                    name: "{{ include "app.fullname" . }}-secret"
+          restartPolicy: Never
+
+{{- end -}}
+{{- end -}}

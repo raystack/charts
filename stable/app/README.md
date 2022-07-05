@@ -40,57 +40,61 @@ The command removes all the Kubernetes components associated with the chart and 
 The following table lists the configurable parameters of the Siren chart and their default values.
 
 
-| Key                                   | Type   | Default                                                                                       | Description                                                          |
-| ------------------------------------- | ------ | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| affinity                              | object | `{}`                                                                                          |                                                                      |
-| config                                | object | `{}`                                                                                          |                                                                      |
-| container.command                     | list   | `[]`                                                                                          |                                                                      |
-| container.args                  | list   | `[]`                                                                                          |                                                                      |
-| container.livenessProbe.httpGet.path  | string | `"/"`                                                                                         |                                                                      |
-| container.livenessProbe.httpGet.port  | string | `"tcp"`                                                                                       |                                                                      |
-| container.port.containerPort          | int    | `8080`                                                                                        |                                                                      |
-| container.port.name                   | string | `"tcp"`                                                                                       |                                                                      |
-| container.port.protocol               | string | `"TCP"`                                                                                       |                                                                      |
+| Key                    | Type   | Default                                                                                       | Description                                                          |
+|------------------------| ------ |-----------------------------------------------------------------------------------------------| -------------------------------------------------------------------- |
+| affinity               | object | `{}`                                                                                          |                                                                      |
+| config                 | object | `{}`                                                                                          |                                                                      |
+| container.command      | list   | `[]`                                                                                          |                                                                      |
+| container.args         | list   | `[]`                                                                                          |                                                                      |
+| container.livenessProbe.httpGet.path | string | `"/"`                                                                                         |                                                                      |
+| container.livenessProbe.httpGet.port | string | `"tcp"`                                                                                       |                                                                      |
+| container.port.containerPort | int    | `8080`                                                                                        |                                                                      |
+| container.port.name    | string | `"tcp"`                                                                                       |                                                                      |
+| container.port.protocol | string | `"TCP"`                                                                                       |                                                                      |
 | container.readinessProbe.httpGet.path | string | `"/"`                                                                                         |                                                                      |
 | container.readinessProbe.httpGet.port | string | `"tcp"`                                                                                       |                                                                      |
-| fullnameOverride                      | string | `""`                                                                                          |                                                                      |
-| image.pullPolicy                      | string | `"IfNotPresent"`                                                                              | Specify the docker image path/repository.                            |
-| image.repository                      | string | `nil`                                                                                         |                                                                      |
-| image.tag                             | string | `"latest"`                                                                                    | Overrides the image tag whose default is the chart appVersion.       |
-| imagePullSecrets                      | list   | `[]`                                                                                          |                                                                      |
-| ingress.annotations                   | object | `{}`                                                                                          |                                                                      |
-| ingress.className                     | string | `""`                                                                                          |                                                                      |
-| ingress.enabled                       | bool   | `false`                                                                                       |                                                                      |
-| ingress.hosts                         | list   | `[{"host":"chart-example.local","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}]` | kubernetes.io/ingress.class: nginx -- kubernetes.io/tls-acme: "true" |
-| ingress.tls                           | list   | `[]`                                                                                          |                                                                      |
-| nameOverride                          | string | `""`                                                                                          |                                                                      |
-| nodeSelector                          | object | `{}`                                                                                          |                                                                      |
-| podAnnotations                        | object | `{}`                                                                                          |                                                                      |
-| podSecurityContext                    | object | `{}`                                                                                          |                                                                      |
-| replicaCount                          | int    | `1`                                                                                           |                                                                      |
-| resources                             | object | `{}`                                                                                          |                                                                      |
-| securityContext                       | object | `{}`                                                                                          |                                                                      |
-| service.port.name                     | string | `"tcp"`                                                                                       |                                                                      |
-| service.port.port                     | int    | `80`                                                                                          |                                                                      |
-| service.port.protocol                 | string | `"TCP"`                                                                                       |                                                                      |
-| service.port.targetPort               | string | `"tcp"`                                                                                       |                                                                      |
-| service.type                          | string | `"ClusterIP"`                                                                                 |                                                                      |
-| tolerations                           | list   | `[]`                                                                                          |                                                                      |
-| migration.enabled                     | bool   | `false`                                                                                       |                                                                      |
-| migration.command                     | list   | `[]`                                                                                       |                                                                      |
-| migration.args                        | list   | `[]`                
-|                                                                      |
-| telegraf.enabled                      | bool   | `false`                
-|                                                                      |
-| telegraf.command                      | list   | `["telegraf"]`                
-|                                                                      |
-| telegraf.args                         | list   | `[]`                
-|                                                                      |
-| telegraf.containerPort                | int    | `8125`                
-|                                                                      |
-| telegraf.protocol                     | string | `UDP`                
-|                                                                      |
-| telegraf.config                       | string | `""`                | telegraf config file content |
+| cron.enabled           | bool | `false`                                                                                       |  |
+| cron.job.entryPoint    | string | `""`                                                                                          |  |
+| cron.job.name          | string | `""`                                                                                  |  |
+| cron.job.schedule      | string | `"0 0 * * *"`                                                                                 |  |
+| fullnameOverride       | string | `""`                                                                                          |                                                                      |
+| image.pullPolicy       | string | `"IfNotPresent"`                                                                              | Specify the docker image path/repository.                            |
+| image.repository       | string | `nil`                                                                                         |                                                                      |
+| image.tag              | string | `"latest"`                                                                                    | Overrides the image tag whose default is the chart appVersion.       |
+| imagePullSecrets       | list   | `[]`                                                                                          |                                                                      |
+| ingress.annotations    | object | `{}`                                                                                          |                                                                      |
+| ingress.className      | string | `""`                                                                                          |                                                                      |
+| ingress.enabled        | bool   | `false`                                                                                       |                                                                      |
+| ingress.hosts          | list   | `[{"host":"chart-example.local","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}]` | kubernetes.io/ingress.class: nginx -- kubernetes.io/tls-acme: "true" |
+| ingress.tls            | list   | `[]`                                                                                          |                                                                      |
+| nameOverride           | string | `""`                                                                                          |                                                                      |
+| nodeSelector           | object | `{}`                                                                                          |                                                                      |
+| podAnnotations         | object | `{}`                                                                                          |                                                                      |
+| podSecurityContext     | object | `{}`                                                                                          |                                                                      |
+| replicaCount           | int    | `1`                                                                                           |                                                                      |
+| resources              | object | `{}`                                                                                          |                                                                      |
+| securityContext        | object | `{}`                                                                                          |                                                                      |
+| service.port.name      | string | `"tcp"`                                                                                       |                                                                      |
+| service.port.port      | int    | `80`                                                                                          |                                                                      |
+| service.port.protocol  | string | `"TCP"`                                                                                       |                                                                      |
+| service.port.targetPort | string | `"tcp"`                                                                                       |                                                                      |
+| service.type           | string | `"ClusterIP"`                                                                                 |                                                                      |
+| tolerations            | list   | `[]`                                                                                          |                                                                      |
+| migration.enabled      | bool   | `false`                                                                                       |                                                                      |
+| migration.command      | list   | `[]`                                                                                          |                                                                      |
+| migration.args         | list   | `[]`                                                                                          
+|                        |
+| telegraf.enabled       | bool   | `false`                                                                                       
+|                        |
+| telegraf.command       | list   | `["telegraf"]`                                                                                
+|                        |
+| telegraf.args          | list   | `[]`                                                                                          
+|                        |
+| telegraf.containerPort | int    | `8125`                                                                                        
+|                        |
+| telegraf.protocol      | string | `UDP`                                                                                         
+|                        |
+| telegraf.config        | string | `""`                                                                                          | telegraf config file content |
 
 ---
 
