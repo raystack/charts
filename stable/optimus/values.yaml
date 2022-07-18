@@ -1,0 +1,94 @@
+
+app:
+  replicaCount: 3
+  labels:
+    component: service
+    application: optimus
+    environment: production
+  selectorLabels:
+    app: optimus
+  podSecurityContext:
+    runAsUser: 1000
+  image:
+    repository: odpf/optimus
+    tag: "0.2.5"
+    pullPolicy: Always
+  container:
+    ports:
+      - name: optimus
+        containerPort: 9100
+        protocol: TCP
+    command:
+      - optimus
+    args:
+      - serve
+    livenessProbe:
+      httpGet:
+        path: /ping
+        port: optimus
+      initialDelaySeconds: 60
+      timeoutSeconds: 1
+    readinessProbe:
+      httpGet:
+        path: /ping
+        port: optimus
+      initialDelaySeconds: 60
+      timeoutSeconds: 1
+
+  migration:
+    enabled: false
+
+  ingress:
+    enabled: false
+    hostName: optimus.example.com
+    annotations:
+      kubernetes.io/ingress.class: contour
+      projectcontour.io/response-timeout: infinity
+
+  config:
+    OPTIMUS_VERSION: "1"
+    OPTIMUS_HOST: 127.0.0.1:9100
+    OPTIMUS_SERVE_PORT: "9100"
+    OPTIMUS_SERVE_INGRESS_HOST: optimus-service.optimus.svc.cluster.local:9100 # Add dns entry to reach this instance
+    OPTIMUS_SERVE_APP_KEY: "Yjo4a0jn1NvYdq79SADC/KaVv9Wu0Ffc"
+    OPTIMUS_SERVE_DB_DSN: postgres://optimus:optimus@database-service.optimus/optimus?sslmode=disable
+    OPTIMUS_SERVE_DB_MAX_IDLE_CONNECTION: "5"
+    OPTIMUS_SERVE_DB_MAX_OPEN_CONNECTION: "10"
+    OPTIMUS_LOG_LEVEL: debug
+    OPTIMUS_TELEMETRY_JAEGER_ADDR: http://jaeger-collector.optimus:14268/api/traces
+    OPTIMUS_TELEMETRY_PROFILE_ADDR: :9110
+
+  secretConfig: {}
+
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 8Gi
+    requests:
+      cpu: 500m
+      memory: 6Gi
+
+  service:
+    type: ClusterIP
+    ports:
+      - port: 80
+        targetPort: optimus
+        protocol: TCP
+        name: http
+    annotations:
+      projectcontour.io/upstream-protocol.h2c: 80,http
+
+  telegraf:
+    enabled: false
+    image: telegraf:alpine
+    command: telegraf
+    args:
+      - --config
+      - /etc/telegraf/telegraf.production.conf
+    containerPort: 8125
+    protocol: UDP
+  # Resource section is not present on telegraf sidecar
+  #  resources:
+  #    limits:
+  #      cpu: 1000m
+  #      memory: 1Gi
