@@ -86,6 +86,7 @@ cron:
   jobs:
     - name: cronJob1
       schedule: "0 0 * * *"
+      restartPolicy: Never
       entryPoint:
         - app
         - startJob
