@@ -22,9 +22,9 @@ spec:
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               command:
-              {{- range $job.entryPoint }}
-                - {{ . }}
-              {{- end }}
+              {{- toYaml $job.command | nindent 12 }}
+              args:
+              {{- toYaml $job.args | nindent 12 }}
               envFrom:
                 - configMapRef:
                     name: "{{ include "app.fullname" . }}"
