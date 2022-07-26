@@ -41,11 +41,11 @@ The following table lists the configurable parameters of the Siren chart and the
 
 
 | Key                                   | Type   | Default                                                                                       | Description                                                          |
-| ------------------------------------- | ------ | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+|---------------------------------------|--------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
 | affinity                              | object | `{}`                                                                                          |                                                                      |
 | config                                | object | `{}`                                                                                          |                                                                      |
 | container.command                     | list   | `[]`                                                                                          |                                                                      |
-| container.args                  | list   | `[]`                                                                                          |                                                                      |
+| container.args                        | list   | `[]`                                                                                          |                                                                      |
 | container.livenessProbe.httpGet.path  | string | `"/"`                                                                                         |                                                                      |
 | container.livenessProbe.httpGet.port  | string | `"tcp"`                                                                                       |                                                                      |
 | container.port.containerPort          | int    | `8080`                                                                                        |                                                                      |
@@ -53,6 +53,12 @@ The following table lists the configurable parameters of the Siren chart and the
 | container.port.protocol               | string | `"TCP"`                                                                                       |                                                                      |
 | container.readinessProbe.httpGet.path | string | `"/"`                                                                                         |                                                                      |
 | container.readinessProbe.httpGet.port | string | `"tcp"`                                                                                       |                                                                      |
+| cron.enabled                          | bool   | `false`                                                                                       |                                                                      |
+| cron.jobs[0].name                     | string | `""`                                                                                          |                                                                      |
+| cron.jobs[0].command                  | string | `""`                                                                                          |                                                                      |
+| cron.jobs[0].args                     | string | `""`                                                                                          |                                                                      |
+| cron.jobs[0].schedule                 | string | `"0 0 * * *"`                                                                                 |                                                                      |
+| cron.jobs[0].restartPolicy            | string | `Never`                                                                                       |                                                                      |
 | fullnameOverride                      | string | `""`                                                                                          |                                                                      |
 | image.pullPolicy                      | string | `"IfNotPresent"`                                                                              | Specify the docker image path/repository.                            |
 | image.repository                      | string | `nil`                                                                                         |                                                                      |
@@ -77,20 +83,14 @@ The following table lists the configurable parameters of the Siren chart and the
 | service.type                          | string | `"ClusterIP"`                                                                                 |                                                                      |
 | tolerations                           | list   | `[]`                                                                                          |                                                                      |
 | migration.enabled                     | bool   | `false`                                                                                       |                                                                      |
-| migration.command                     | list   | `[]`                                                                                       |                                                                      |
-| migration.args                        | list   | `[]`                
-|                                                                      |
-| telegraf.enabled                      | bool   | `false`                
-|                                                                      |
-| telegraf.command                      | list   | `["telegraf"]`                
-|                                                                      |
-| telegraf.args                         | list   | `[]`                
-|                                                                      |
-| telegraf.containerPort                | int    | `8125`                
-|                                                                      |
-| telegraf.protocol                     | string | `UDP`                
-|                                                                      |
-| telegraf.config                       | string | `""`                | telegraf config file content |
+| migration.command                     | list   | `[]`                                                                                          |                                                                      |
+| migration.args                        | list   | `[]`                                                                                          |                                                                      |
+| telegraf.enabled                      | bool   | `false`                                                                                       |                                                                      |
+| telegraf.command                      | list   | `["telegraf"]`                                                                                |                                                                      |
+| telegraf.args                         | list   | `[]`                                                                                          |                                                                      |
+| telegraf.containerPort                | int    | `8125`                                                                                        |                                                                      |
+| telegraf.protocol                     | string | `UDP`                                                                                         |                                                                      |
+| telegraf.config                       | string | `""`                                                                                          | telegraf config file content                                         |
 
 ---
 
