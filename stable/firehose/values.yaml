@@ -5,7 +5,7 @@ nameOverride: ""
 ## Value to fully override firehose.fullname template
 fullnameOverride: ""
 
-labels: {"application":"firehose"}
+labels: { "application": "firehose" }
 
 firehose:
   image:
@@ -20,7 +20,16 @@ firehose:
     SOURCE_KAFKA_CONSUMER_CONFIG_AUTO_OFFSET_RESET: latest
     INPUT_SCHEMA_PROTO_CLASS: com.github.firehose.sampleLogProto.SampleLogMessage
     JAVA_TOOL_OPTIONS: "-javaagent:jolokia-jvm-agent.jar=port=8778,host=localhost"
-  args: ['java', '-cp', 'bin/*:/work-dir/*', 'io.odpf.firehose.launch.Main', '-server', '-Dlogback.configurationFile=etc/firehose/logback.xml', '-Xloggc:/var/log/firehose']
+  args:
+    [
+      "java",
+      "-cp",
+      "bin/*:/work-dir/*",
+      "io.odpf.firehose.launch.Main",
+      "-server",
+      "-Dlogback.configurationFile=etc/firehose/logback.xml",
+      "-Xloggc:/var/log/firehose",
+    ]
   resources:
     limits:
       cpu: 200m
@@ -35,7 +44,7 @@ init-firehose:
     repository: busybox
     pullPolicy: IfNotPresent
     tag: latest
-  command: ['/bin/sh', '-c']
+  command: ["/bin/sh", "-c"]
   args: [wget -O /work-dir/protos.jar http://proto_jar_url.jar]
 
 telegraf:
@@ -52,6 +61,11 @@ telegraf:
           - "http://localhost:8086"
         database: "test-db"
         retention_policy: "autogen"
+      prometheus_remote_write:
+        enabled: false
+        url: "http://localhost:8088"
+        version: "0.1.0"
+        # authorization: Bearer <token>
   resources:
     limits:
       cpu: 50m
