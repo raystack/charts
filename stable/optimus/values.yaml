@@ -1,94 +1,104 @@
 
 app:
-  replicaCount: 3
   labels:
     component: service
     application: optimus
     environment: production
   selectorLabels:
     app: optimus
-  podSecurityContext:
+
+deployment:
+  replica: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+image:
+  repository: odpf/optimus
+  tag: "0.2.5"
+  pullPolicy: Always
+
+container:
+  securityContext:
     runAsUser: 1000
-  image:
-    repository: odpf/optimus
-    tag: "0.2.5"
-    pullPolicy: Always
-  container:
-    ports:
-      - name: optimus
-        containerPort: 9100
-        protocol: TCP
-    command:
-      - optimus
-    args:
-      - serve
-    livenessProbe:
-      httpGet:
-        path: /ping
-        port: optimus
-      initialDelaySeconds: 60
-      timeoutSeconds: 1
-    readinessProbe:
-      httpGet:
-        path: /ping
-        port: optimus
-      initialDelaySeconds: 60
-      timeoutSeconds: 1
+  ports:
+    - name: optimus
+      containerPort: 9100
+      protocol: TCP
+  command:
+    - optimus
+  args:
+    - serve
+    - -c
+    - /etc/optimus/config.yaml
+  livenessProbe:
+    httpGet:
+      path: /ping
+      port: optimus
+    initialDelaySeconds: 60
+    timeoutSeconds: 1
+  readinessProbe:
+    httpGet:
+      path: /ping
+      port: optimus
+    initialDelaySeconds: 60
+    timeoutSeconds: 1
 
-  migration:
-    enabled: false
+configYaml: |-
+  version: 1
+  log:
+    level: DEBUG
+  serve:
+    port: 9100
+    ingress_host: optimus.optimus.svc.cluster.local
+    deployer:
+      num_workers: 2
+  scheduler:
+    name: airflow2
+  telemetry:
+    profile_addr: ":9110"
+    jaeger_addr: "http://jaeger-collector:14268/api/traces"
 
-  ingress:
-    enabled: false
-    hostName: optimus.example.com
-    annotations:
-      kubernetes.io/ingress.class: contour
-      projectcontour.io/response-timeout: infinity
+config:
+  OPTIMUS_TELEMETRY_JAEGER_ADDR: http://jaeger-collector.optimus:14268/api/traces
 
-  config:
-    OPTIMUS_VERSION: "1"
-    OPTIMUS_HOST: 127.0.0.1:9100
-    OPTIMUS_SERVE_PORT: "9100"
-    OPTIMUS_SERVE_INGRESS_HOST: optimus-service.optimus.svc.cluster.local:9100 # Add dns entry to reach this instance
-    OPTIMUS_SERVE_APP_KEY: "Yjo4a0jn1NvYdq79SADC/KaVv9Wu0Ffc"
-    OPTIMUS_SERVE_DB_DSN: postgres://optimus:optimus@database-service.optimus/optimus?sslmode=disable
-    OPTIMUS_SERVE_DB_MAX_IDLE_CONNECTION: "5"
-    OPTIMUS_SERVE_DB_MAX_OPEN_CONNECTION: "10"
-    OPTIMUS_LOG_LEVEL: debug
-    OPTIMUS_TELEMETRY_JAEGER_ADDR: http://jaeger-collector.optimus:14268/api/traces
-    OPTIMUS_TELEMETRY_PROFILE_ADDR: :9110
+secretConfig: {}
 
-  secretConfig: {}
+service:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: optimus
+      protocol: TCP
+      name: http
+  annotations:
+    projectcontour.io/upstream-protocol.h2c: 80,http
 
-  resources:
-    limits:
-      cpu: 2000m
-      memory: 8Gi
-    requests:
-      cpu: 500m
-      memory: 6Gi
+ingress:
+  enabled: false
+  hostName: optimus.example.com
+  annotations:
+    kubernetes.io/ingress.class: contour
+    projectcontour.io/response-timeout: infinity
 
-  service:
-    type: ClusterIP
-    ports:
-      - port: 80
-        targetPort: optimus
-        protocol: TCP
-        name: http
-    annotations:
-      projectcontour.io/upstream-protocol.h2c: 80,http
+telegraf:
+  enabled: false
+  image: telegraf:alpine
+  command: telegraf
+  args:
+    - --config
+    - /etc/telegraf/telegraf.production.conf
+  containerPort: 8125
+  protocol: UDP
 
-  telegraf:
-    enabled: false
-    image: telegraf:alpine
-    command: telegraf
-    args:
-      - --config
-      - /etc/telegraf/telegraf.production.conf
-    containerPort: 8125
-    protocol: UDP
-  # Resource section is not present on telegraf sidecar
-  #  resources:
-  #    limits:
-  #      cpu: 1000m
-  #      memory: 1Gi
+# The default empty values
+podSecurityContext: {}
+resources: {}
+podAnnotations: {}
+imagePullSecrets: []
+securityContext: {}
+nodeSelector: {}
+affinity: {}
+tolerations: []

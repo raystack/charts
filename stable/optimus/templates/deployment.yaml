@@ -1,0 +1,130 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "app.fullname" . }}
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.deployment.replica | default 1 }}
+  selector:
+    matchLabels:
+      {{- include "app.selectorLabels" . | nindent 6 }}
+  {{- with .Values.deployment.strategy }}
+  strategy:
+    {{- toYaml . | nindent 6 }}
+  {{- end }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print .Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- if .Values.telegraf.enabled }}
+        checksum/telegraf-config: {{ include (print $.Template.BasePath "/telegraf-configmap.yaml") . | sha256sum }}
+        {{- end }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "app.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.container.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            {{- toYaml .Values.container.command | nindent 12 }}
+          args:
+            {{- toYaml .Values.container.args | nindent 12 }}
+          ports:
+            {{- range $port := .Values.container.ports }}
+            - name: {{ $port.name }}
+              containerPort: {{ $port.containerPort }}
+              protocol: {{ $port.protocol }}
+            {{- end }}
+          livenessProbe:
+            {{- toYaml .Values.container.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.container.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /etc/optimus
+              name: configuration-volume
+              readOnly: true
+            {{- range $volumeMount := .Values.container.volumeMounts }}
+            - {{- toYaml $volumeMount | nindent 12 }}
+            {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ template "app.fullname" . }}
+            {{- if .Values.secretConfig }}
+            - secretRef:
+                name: "{{ template "app.fullname" . }}-secret"
+            {{- end }}
+        {{- if .Values.telegraf.enabled }}
+        - name: telegraf-sidecar
+          image: {{ .Values.telegraf.image }}
+          command:
+            {{- range .Values.telegraf.command }}
+            - {{ . }}
+            {{- end }}
+          args:
+            {{- range .Values.telegraf.args }}
+            - {{ . }}
+            {{- end }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: {{ .Values.telegraf.containerPort }}
+              name: http
+              protocol: {{ .Values.telegraf.protocol }}
+          resources:
+            {{- toYaml .Values.telegraf.resources | nindent 12 }}
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            {{- toYaml .Values.telegraf.env | nindent 12 }}
+          volumeMounts:
+            - name: telegraf-conf
+              mountPath: /etc/telegraf/
+        {{- end }}
+      volumes:
+        - name: configuration-volume
+          configMap:
+            name: {{ template "app.fullname" . }}-yaml
+        {{- range $volume := .Values.volumes }}
+        - {{- toYaml $volume | nindent 12 }}
+        {{- end }}
+        {{- if .Values.telegraf.enabled }}
+        - name: telegraf-conf
+          configMap:
+            name: {{ template "app.fullname" . }}-telegraf
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

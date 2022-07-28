@@ -16,8 +16,3 @@ version: 0.0.1
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "0.2.5"
-
-dependencies:
-  - name: app
-    version: "0.3.4"
-    repository: "https://odpf.github.io/charts/"
