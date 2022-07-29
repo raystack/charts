@@ -46,6 +46,7 @@ container:
     initialDelaySeconds: 60
     timeoutSeconds: 1
 
+# serve.host field in configYaml breaks the live-ness probe
 configYaml: |-
   version: 1
   log:
@@ -86,10 +87,11 @@ ingress:
 telegraf:
   enabled: false
   image: telegraf:alpine
-  command: telegraf
+  command:
+    - telegraf
   args:
     - --config
-    - /etc/telegraf/telegraf.production.conf
+    - /etc/telegraf/telegraf.conf
   containerPort: 8125
   protocol: UDP
 

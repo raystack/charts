@@ -99,7 +99,9 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-            {{- toYaml .Values.telegraf.env | nindent 12 }}
+            {{- range $env := .Values.telegraf.env }}
+            - {{- toYaml $env | nindent 12 }}
+            {{- end }}
           volumeMounts:
             - name: telegraf-conf
               mountPath: /etc/telegraf/
