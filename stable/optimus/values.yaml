@@ -1,0 +1,106 @@
+
+app:
+  labels:
+    component: service
+    application: optimus
+    environment: production
+  selectorLabels:
+    app: optimus
+
+deployment:
+  replica: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+image:
+  repository: odpf/optimus
+  tag: "0.2.5"
+  pullPolicy: Always
+
+container:
+  securityContext:
+    runAsUser: 1000
+  ports:
+    - name: optimus
+      containerPort: 9100
+      protocol: TCP
+  command:
+    - optimus
+  args:
+    - serve
+    - -c
+    - /etc/optimus/config.yaml
+  livenessProbe:
+    httpGet:
+      path: /ping
+      port: optimus
+    initialDelaySeconds: 60
+    timeoutSeconds: 1
+  readinessProbe:
+    httpGet:
+      path: /ping
+      port: optimus
+    initialDelaySeconds: 60
+    timeoutSeconds: 1
+
+# serve.host field in configYaml breaks the live-ness probe
+configYaml: |-
+  version: 1
+  log:
+    level: DEBUG
+  serve:
+    port: 9100
+    ingress_host: optimus.optimus.svc.cluster.local
+    deployer:
+      num_workers: 2
+  scheduler:
+    name: airflow2
+  telemetry:
+    profile_addr: ":9110"
+    jaeger_addr: "http://jaeger-collector:14268/api/traces"
+
+config:
+  OPTIMUS_TELEMETRY_JAEGER_ADDR: http://jaeger-collector.optimus:14268/api/traces
+
+secretConfig: {}
+
+service:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: optimus
+      protocol: TCP
+      name: http
+  annotations:
+    projectcontour.io/upstream-protocol.h2c: 80,http
+
+ingress:
+  enabled: false
+  hostName: optimus.example.com
+  annotations:
+    kubernetes.io/ingress.class: contour
+    projectcontour.io/response-timeout: infinity
+
+telegraf:
+  enabled: false
+  image: telegraf:alpine
+  command:
+    - telegraf
+  args:
+    - --config
+    - /etc/telegraf/telegraf.conf
+  containerPort: 8125
+  protocol: UDP
+
+# The default empty values
+podSecurityContext: {}
+resources: {}
+podAnnotations: {}
+imagePullSecrets: []
+securityContext: {}
+nodeSelector: {}
+affinity: {}
+tolerations: []
