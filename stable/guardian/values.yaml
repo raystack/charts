@@ -26,6 +26,28 @@ app:
     annotations:
       projectcontour.io/upstream-protocol.h2c: tcp
 
+  cron:
+    enabled: true
+    jobs:
+      - name: "fetch_resources"
+        schedule: "0 */2 * * *"
+        restartPolicy: Never
+        command:
+          - guardian
+        args:
+          - job
+          - run
+          - fetch_resources
+      - name: "appeal_expiration_revocation"
+        schedule: "0 9 * * *"
+        restartPolicy: Never
+        command:
+          - guardian
+        args:
+          - job
+          - run
+          - appeal_expiration_revocation
+
   ingress:
     enabled: true
     annotations:
@@ -40,9 +62,17 @@ app:
     LOG_LEVEL: info
     AUTHENTICATED_USER_HEADER_KEY: x-authenticated-user-email
     NOTIFIER_PROVIDER: slack
-    JOBS_FETCH_RESOURCES_INTERVAL: "0 */2 * * *"
-    JOBS_REVOKE_EXPIRED_ACCESS_INTERVAL: "*/20 * * * *"
-    JOBS_EXPIRING_ACCESS_NOTIFICATION_INTERVAL: "0 9 * * *"
+    JOBS:
+      FETCH_RESOURCES:
+        ENABLE: false
+        INTERVAL: "0 */2 * * *"
+      REVOKE_EXPIRED_ACCESS:
+        ENABLE: true
+        INTERVAL: "*/20 * * * *"
+      EXPIRING_ACCESS_NOTIFICATION:
+        ENABLE: false
+        INTERVAL: "0 9 * * *"
+
 
   secretConfig:
     ENCRYPTION_SECRET_KEY:
