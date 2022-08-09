@@ -66,6 +66,11 @@ app:
         paths:
           - path: /
             pathType: ImplementationSpecific
+            backend:
+              service:
+                # name: backend_01
+                port:
+                  number: 80
 
   config:
     LOG_LEVEL: info
