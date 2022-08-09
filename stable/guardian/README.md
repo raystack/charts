@@ -19,7 +19,7 @@ A Helm chart for Kubernetes
 | app.config.JOBS.EXPIRING_ACCESS_NOTIFICATION.INTERVAL | string | `"0 9 * * *"` |  |
 | app.config.JOBS.FETCH_RESOURCES.ENABLE | bool | `false` |  |
 | app.config.JOBS.FETCH_RESOURCES.INTERVAL | string | `"0 */2 * * *"` |  |
-| app.config.JOBS.REVOKE_EXPIRED_ACCESS.ENABLE | bool | `true` |  |
+| app.config.JOBS.REVOKE_EXPIRED_ACCESS.ENABLE | bool | `false` |  |
 | app.config.JOBS.REVOKE_EXPIRED_ACCESS.INTERVAL | string | `"*/20 * * * *"` |  |
 | app.config.LOG_LEVEL | string | `"info"` |  |
 | app.config.NOTIFIER_PROVIDER | string | `"slack"` |  |
@@ -39,17 +39,25 @@ A Helm chart for Kubernetes
 | app.cron.jobs[0].schedule | string | `"0 */2 * * *"` |  |
 | app.cron.jobs[1].args[0] | string | `"job"` |  |
 | app.cron.jobs[1].args[1] | string | `"run"` |  |
-| app.cron.jobs[1].args[2] | string | `"appeal_expiration_revocation"` |  |
+| app.cron.jobs[1].args[2] | string | `"appeal_expiration_reminder"` |  |
 | app.cron.jobs[1].command[0] | string | `"guardian"` |  |
-| app.cron.jobs[1].name | string | `"appeal_expiration_revocation"` |  |
+| app.cron.jobs[1].name | string | `"appeal_expiration_reminder"` |  |
 | app.cron.jobs[1].restartPolicy | string | `"Never"` |  |
 | app.cron.jobs[1].schedule | string | `"0 9 * * *"` |  |
+| app.cron.jobs[2].args[0] | string | `"job"` |  |
+| app.cron.jobs[2].args[1] | string | `"run"` |  |
+| app.cron.jobs[2].args[2] | string | `"appeal_expiration_revocation"` |  |
+| app.cron.jobs[2].command[0] | string | `"guardian"` |  |
+| app.cron.jobs[2].name | string | `"appeal_expiration_revocation"` |  |
+| app.cron.jobs[2].restartPolicy | string | `"Never"` |  |
+| app.cron.jobs[2].schedule | string | `"*/20 * * * *"` |  |
 | app.image.pullPolicy | string | `"Always"` |  |
 | app.image.repository | string | `"odpf/guardian"` |  |
 | app.image.tag | string | `"latest"` |  |
 | app.ingress.annotations."kubernetes.io/ingress.class" | string | `"contour"` |  |
 | app.ingress.enabled | bool | `true` |  |
 | app.ingress.hosts[0].host | string | `"guardian.example.com"` |  |
+| app.ingress.hosts[0].paths[0].backend.service.port.number | int | `80` |  |
 | app.ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | app.ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | app.migration.args[0] | string | `"server"` |  |
