@@ -3,7 +3,7 @@ shield-app:
   image:
     repository: odpf/shield
     pullPolicy: IfNotPresent
-    tag: 0.2.0-rc
+    tag: 0.2.10
   container:
     args:
     - serve
