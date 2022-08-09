@@ -79,10 +79,19 @@ service:
 
 ingress:
   enabled: false
-  hostName: optimus.example.com
   annotations:
     kubernetes.io/ingress.class: contour
     projectcontour.io/response-timeout: infinity
+  hosts:
+    - host: optimus.example.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: optimus
+              port:
+                number: 80
 
 telegraf:
   enabled: false
