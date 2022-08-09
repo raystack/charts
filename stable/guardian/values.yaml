@@ -38,8 +38,17 @@ app:
           - job
           - run
           - fetch_resources
-      - name: "appeal_expiration_revocation"
+      - name: "appeal_expiration_reminder"
         schedule: "0 9 * * *"
+        restartPolicy: Never
+        command:
+          - guardian
+        args:
+          - job
+          - run
+          - appeal_expiration_reminder
+      - name: "appeal_expiration_revocation"
+        schedule: "*/20 * * * *"
         restartPolicy: Never
         command:
           - guardian
@@ -67,7 +76,7 @@ app:
         ENABLE: false
         INTERVAL: "0 */2 * * *"
       REVOKE_EXPIRED_ACCESS:
-        ENABLE: true
+        ENABLE: false
         INTERVAL: "*/20 * * * *"
       EXPIRING_ACCESS_NOTIFICATION:
         ENABLE: false
