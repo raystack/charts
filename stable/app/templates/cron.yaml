@@ -1,7 +1,7 @@
 {{- if .Values.cron.enabled }}
 {{- $fullName := include "app.fullname" . -}}
 {{- $appLabels := include "app.labels" . -}}
-{{- $appSelectorLabels := include "app.selectorLabels" -}}
+{{- $appSelectorLabels := include "app.selectorLabels" . -}}
 {{- range $job := .Values.cron.jobs }}
 apiVersion: batch/v1
 kind: CronJob
