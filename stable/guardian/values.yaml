@@ -1,4 +1,8 @@
 app:
+  ## Value to fully override firehose.name template
+  nameOverride: ""
+  ## Value to fully override firehose.fullname template
+  fullnameOverride: ""
   image:
     repository: odpf/guardian
     pullPolicy: Always
