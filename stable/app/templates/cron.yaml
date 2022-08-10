@@ -1,9 +1,10 @@
 {{- if .Values.cron.enabled }}
+{{- $fullName := include "app.fullname" . -}}
 {{- range $job := .Values.cron.jobs }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "app.fullname" . }}-{{ $job.name }}
+  name: {{ $fullName }}-{{ $job.name }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "app.labels" . | nindent 4 }}
@@ -27,9 +28,9 @@ spec:
               {{- toYaml $job.args | nindent 12 }}
               envFrom:
                 - configMapRef:
-                    name: "{{ include "app.fullname" . }}"
+                    name: {{ $fullName }}
                 - secretRef:
-                    name: "{{ include "app.fullname" . }}-secret"
+                    name: {{ $fullName }}-secret
           restartPolicy: {{ $job.restartPolicy }}
 
 {{- end -}}
