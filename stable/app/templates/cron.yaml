@@ -9,7 +9,7 @@ metadata:
   name: {{ $fullName }}-{{ $job.name }}
   namespace: {{ $.Release.Namespace }}
   labels:
-    {{- $appLabels . | nindent 4 }}
+    {{- $appLabels | nindent 4 }}
 spec:
   schedule: {{ $job.schedule | quote }}
   jobTemplate:
@@ -18,7 +18,7 @@ spec:
       template:
         metadata:
           labels:
-        {{- $appSelectorLabels . | nindent 8 }}
+        {{- $appSelectorLabels | nindent 8 }}
         spec:
           containers:
             - name: {{ $job.name }}
