@@ -1,13 +1,15 @@
 {{- if .Values.cron.enabled }}
 {{- $fullName := include "app.fullname" . -}}
+{{- $appLabels := include "app.labels" . -}}
+{{- $appSelectorLabels := include "app.selectorLabels" -}}
 {{- range $job := .Values.cron.jobs }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ $fullName }}-{{ $job.name }}
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ $.Release.Namespace }}
   labels:
-    {{- include "app.labels" . | nindent 4 }}
+    {{- $appLabels . | nindent 4 }}
 spec:
   schedule: {{ $job.schedule | quote }}
   jobTemplate:
@@ -16,12 +18,12 @@ spec:
       template:
         metadata:
           labels:
-        {{- include "app.selectorLabels" . | nindent 8 }}
+        {{- $appSelectorLabels . | nindent 8 }}
         spec:
           containers:
             - name: {{ $job.name }}
-              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+              imagePullPolicy: {{ $.Values.image.pullPolicy }}
               command:
               {{- toYaml $job.command | nindent 12 }}
               args:
