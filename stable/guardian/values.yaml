@@ -1,10 +1,5 @@
 app:
 
-  ## Value to fully override guardian.name template
-  nameOverride: ""
-  ## Value to fully override guardian.fullname template
-  fullnameOverride: ""
-
   image:
     repository: odpf/guardian
     pullPolicy: Always
@@ -82,16 +77,12 @@ app:
     LOG_LEVEL: info
     AUTHENTICATED_USER_HEADER_KEY: x-authenticated-user-email
     NOTIFIER_PROVIDER: slack
-    JOBS:
-      FETCH_RESOURCES:
-        ENABLE: false
-        INTERVAL: "0 */2 * * *"
-      REVOKE_EXPIRED_ACCESS:
-        ENABLE: false
-        INTERVAL: "*/20 * * * *"
-      EXPIRING_ACCESS_NOTIFICATION:
-        ENABLE: false
-        INTERVAL: "0 9 * * *"
+    JOBS_FETCH_RESOURCES_ENABLE: false
+    JOBS_FETCH_RESOURCES_INTERVAL: "0 */2 * * *"
+    JOBS_REVOKE_EXPIRED_ACCESS_ENABLE: false
+    JOBS_REVOKE_EXPIRED_ACCESS_INTERVAL: "*/20 * * * *"
+    JOBS_EXPIRING_ACCESS_NOTIFICATION_ENABLE: false
+    JOBS_EXPIRING_ACCESS_NOTIFICATION_INTERVAL: "0 9 * * *"
 
 
   secretConfig:

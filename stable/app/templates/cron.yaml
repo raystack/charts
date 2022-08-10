@@ -18,16 +18,16 @@ spec:
       template:
         metadata:
           labels:
-        {{- $appSelectorLabels | nindent 8 }}
+        {{- $appSelectorLabels | nindent 14 }}
         spec:
           containers:
             - name: {{ $job.name }}
               image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
               imagePullPolicy: {{ $.Values.image.pullPolicy }}
               command:
-              {{- toYaml $job.command | nindent 12 }}
+              {{- toYaml $job.command | nindent 14 }}
               args:
-              {{- toYaml $job.args | nindent 12 }}
+              {{- toYaml $job.args | nindent 14 }}
               envFrom:
                 - configMapRef:
                     name: {{ $fullName }}
