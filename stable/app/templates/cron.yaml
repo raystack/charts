@@ -6,7 +6,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ printf "%s-%s" $.Chart.Name $job.name | trunc 63 | trimSuffix "-" }}
+  name: {{ printf "%s-%s" $.Release.Namespace $job.name | trunc 63 | trimSuffix "-" }}
   namespace: {{ $.Release.Namespace }}
   labels:
     {{- $appLabels | nindent 4 }}
@@ -18,16 +18,16 @@ spec:
       template:
         metadata:
           labels:
-        {{- $appSelectorLabels | nindent 14 }}
+        {{- $appSelectorLabels | nindent 12 }}
         spec:
           containers:
             - name: {{ $job.name }}
               image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
               imagePullPolicy: {{ $.Values.image.pullPolicy }}
               command:
-              {{- toYaml $job.command | nindent 14 }}
+              {{- toYaml $job.command | nindent 16 }}
               args:
-              {{- toYaml $job.args | nindent 14 }}
+              {{- toYaml $job.args | nindent 16 }}
               envFrom:
                 - configMapRef:
                     name: {{ $fullName }}

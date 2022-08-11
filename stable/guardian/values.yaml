@@ -38,8 +38,7 @@ app:
       - name: "fetch-resources"
         schedule: "0 */2 * * *"
         restartPolicy: Never
-        command:
-          - guardian
+        command: []
         args:
           - job
           - run
@@ -47,8 +46,7 @@ app:
       - name: "appeal-expiration-reminder"
         schedule: "0 9 * * *"
         restartPolicy: Never
-        command:
-          - guardian
+        command: []
         args:
           - job
           - run
@@ -56,8 +54,7 @@ app:
       - name: "appeal-expiration-revocation"
         schedule: "*/20 * * * *"
         restartPolicy: Never
-        command:
-          - guardian
+        command: []
         args:
           - job
           - run
