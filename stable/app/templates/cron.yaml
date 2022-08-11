@@ -6,7 +6,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ $fullName }}-{{ $job.name }}
+  name: {{ printf "%s-%s" $.Chart.Name $job.name | trunc 63 | trimSuffix "-" }}
   namespace: {{ $.Release.Namespace }}
   labels:
     {{- $appLabels | nindent 4 }}

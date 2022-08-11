@@ -1,5 +1,10 @@
 app:
 
+  ## Value to fully override guardian.name template
+  nameOverride: ""
+  ## Value to fully override guardian.fullname template
+  fullnameOverride: ""
+
   image:
     repository: odpf/guardian
     pullPolicy: Always
@@ -30,7 +35,7 @@ app:
   cron:
     enabled: true
     jobs:
-      - name: "fetch_resources"
+      - name: "fetch-resources"
         schedule: "0 */2 * * *"
         restartPolicy: Never
         command:
@@ -39,7 +44,7 @@ app:
           - job
           - run
           - fetch_resources
-      - name: "appeal_expiration_reminder"
+      - name: "appeal-expiration-reminder"
         schedule: "0 9 * * *"
         restartPolicy: Never
         command:
@@ -48,7 +53,7 @@ app:
           - job
           - run
           - appeal_expiration_reminder
-      - name: "appeal_expiration_revocation"
+      - name: "appeal-expiration-revocation"
         schedule: "*/20 * * * *"
         restartPolicy: Never
         command:
