@@ -43,7 +43,7 @@ The following table lists the configurable parameters of the Meteor chart and th
 | Key | Type | Default | Description |
 | --- | ---- | ------- | ----------- |
 | schedule | string | `"0 1 * * *"`  | https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/#schedule |
-| concurrencyPolicy | string | `"Allow"`  | https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/#concurrency-policy |
+| concurrencyPolicy | string | `"Forbid"`  | https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/#concurrency-policy |
 | recipes | object {\[filename\]: \[content\]} | [example](#sample-recipes-usage)  |  |
 | namespace | string | `-` | to override release namespace |
 | image.pullPolicy | string | `"IfNotPresent"` |  |

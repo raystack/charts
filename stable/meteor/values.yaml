@@ -1,5 +1,5 @@
 schedule: "0 1 * * *"
-concurrencyPolicy: "Allow"
+concurrencyPolicy: "Forbid"
 image:
   # [required] repository where meteor Docker image is available
   repository: odpf/meteor
