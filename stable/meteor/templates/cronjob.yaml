@@ -9,6 +9,7 @@ metadata:
 {{- end }}
 spec:
   schedule: {{ .Values.schedule | quote }}
+  concurrencyPolicy: {{ .Values.concurrencyPolicy }}
   jobTemplate:
     spec:
       backoffLimit: 4
