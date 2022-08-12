@@ -2,11 +2,11 @@
 {{- $fullName := include "app.fullname" . -}}
 {{- $appLabels := include "app.labels" . -}}
 {{- $appSelectorLabels := include "app.selectorLabels" . -}}
-{{- range $job := .Values.cron.jobs }}
+{{- range $i, $job := .Values.cron.jobs }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ printf "%s-%s" $.Release.Namespace $job.name | trunc 63 | trimSuffix "-" }}
+  name: {{ printf "%s-%d-%s" $.Release.Namespace $i $job.name | trunc 63 | trimSuffix "-" }}
   namespace: {{ $.Release.Namespace }}
   labels:
     {{- $appLabels | nindent 4 }}
