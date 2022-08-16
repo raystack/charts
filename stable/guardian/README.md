@@ -15,12 +15,12 @@ A Helm chart for Kubernetes
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | app.config.AUTHENTICATED_USER_HEADER_KEY | string | `"x-authenticated-user-email"` |  |
-| app.config.JOBS.EXPIRING_ACCESS_NOTIFICATION.ENABLE | bool | `false` |  |
-| app.config.JOBS.EXPIRING_ACCESS_NOTIFICATION.INTERVAL | string | `"0 9 * * *"` |  |
-| app.config.JOBS.FETCH_RESOURCES.ENABLE | bool | `false` |  |
-| app.config.JOBS.FETCH_RESOURCES.INTERVAL | string | `"0 */2 * * *"` |  |
-| app.config.JOBS.REVOKE_EXPIRED_ACCESS.ENABLE | bool | `false` |  |
-| app.config.JOBS.REVOKE_EXPIRED_ACCESS.INTERVAL | string | `"*/20 * * * *"` |  |
+| app.config.JOBS_EXPIRING_ACCESS_NOTIFICATION_ENABLED | bool | `false` |  |
+| app.config.JOBS_EXPIRING_ACCESS_NOTIFICATION_INTERVAL | string | `"0 9 * * *"` |  |
+| app.config.JOBS_FETCH_RESOURCES_ENABLED | bool | `false` |  |
+| app.config.JOBS_FETCH_RESOURCES_INTERVAL | string | `"0 */2 * * *"` |  |
+| app.config.JOBS_REVOKE_EXPIRED_ACCESS_ENABLED | bool | `false` |  |
+| app.config.JOBS_REVOKE_EXPIRED_ACCESS_INTERVAL | string | `"*/20 * * * *"` |  |
 | app.config.LOG_LEVEL | string | `"info"` |  |
 | app.config.NOTIFIER_PROVIDER | string | `"slack"` |  |
 | app.container.args[0] | string | `"server"` |  |
@@ -33,24 +33,25 @@ A Helm chart for Kubernetes
 | app.cron.jobs[0].args[0] | string | `"job"` |  |
 | app.cron.jobs[0].args[1] | string | `"run"` |  |
 | app.cron.jobs[0].args[2] | string | `"fetch_resources"` |  |
-| app.cron.jobs[0].command[0] | string | `"guardian"` |  |
-| app.cron.jobs[0].name | string | `"fetch_resources"` |  |
+| app.cron.jobs[0].command | list | `[]` |  |
+| app.cron.jobs[0].name | string | `"fetch-resources"` |  |
 | app.cron.jobs[0].restartPolicy | string | `"Never"` |  |
 | app.cron.jobs[0].schedule | string | `"0 */2 * * *"` |  |
 | app.cron.jobs[1].args[0] | string | `"job"` |  |
 | app.cron.jobs[1].args[1] | string | `"run"` |  |
 | app.cron.jobs[1].args[2] | string | `"appeal_expiration_reminder"` |  |
-| app.cron.jobs[1].command[0] | string | `"guardian"` |  |
-| app.cron.jobs[1].name | string | `"appeal_expiration_reminder"` |  |
+| app.cron.jobs[1].command | list | `[]` |  |
+| app.cron.jobs[1].name | string | `"appeal-expiration-reminder"` |  |
 | app.cron.jobs[1].restartPolicy | string | `"Never"` |  |
 | app.cron.jobs[1].schedule | string | `"0 9 * * *"` |  |
 | app.cron.jobs[2].args[0] | string | `"job"` |  |
 | app.cron.jobs[2].args[1] | string | `"run"` |  |
 | app.cron.jobs[2].args[2] | string | `"appeal_expiration_revocation"` |  |
-| app.cron.jobs[2].command[0] | string | `"guardian"` |  |
-| app.cron.jobs[2].name | string | `"appeal_expiration_revocation"` |  |
+| app.cron.jobs[2].command | list | `[]` |  |
+| app.cron.jobs[2].name | string | `"appeal-expiration-revocation"` |  |
 | app.cron.jobs[2].restartPolicy | string | `"Never"` |  |
 | app.cron.jobs[2].schedule | string | `"*/20 * * * *"` |  |
+| app.fullnameOverride | string | `""` |  |
 | app.image.pullPolicy | string | `"Always"` |  |
 | app.image.repository | string | `"odpf/guardian"` |  |
 | app.image.tag | string | `"latest"` |  |
@@ -63,6 +64,7 @@ A Helm chart for Kubernetes
 | app.migration.args[0] | string | `"server"` |  |
 | app.migration.args[1] | string | `"migrate"` |  |
 | app.migration.enabled | bool | `true` |  |
+| app.nameOverride | string | `""` |  |
 | app.secretConfig.DB_HOST | string | `"localhost"` |  |
 | app.secretConfig.DB_NAME | string | `"guardian"` |  |
 | app.secretConfig.DB_PASSWORD | string | `nil` |  |
