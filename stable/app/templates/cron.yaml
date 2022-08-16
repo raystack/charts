@@ -1,12 +1,15 @@
 {{- if .Values.cron.enabled }}
-{{- range $job := .Values.cron.jobs }}
+{{- $fullName := include "app.fullname" . -}}
+{{- $appLabels := include "app.labels" . -}}
+{{- $appSelectorLabels := include "app.selectorLabels" . -}}
+{{- range $i, $job := .Values.cron.jobs }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: "{{ include "app.fullname" . }}-{{ $job.name }}"
-  namespace: {{ .Release.Namespace }}
+  name: "{{ $fullName | trunc 29 }}-{{ $i }}-{{ $job.name | trunc 29}}"
+  namespace: {{ $.Release.Namespace }}
   labels:
-    {{- include "app.labels" . | nindent 4 }}
+    {{- $appLabels | nindent 4 }}
 spec:
   schedule: {{ $job.schedule | quote }}
   jobTemplate:
@@ -15,22 +18,22 @@ spec:
       template:
         metadata:
           labels:
-        {{- include "app.selectorLabels" . | nindent 8 }}
+        {{- $appSelectorLabels | nindent 12 }}
         spec:
           containers:
             - name: {{ $job.name }}
-              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+              imagePullPolicy: {{ $.Values.image.pullPolicy }}
               command:
-              {{- toYaml $job.command | nindent 12 }}
+              {{- toYaml $job.command | nindent 16 }}
               args:
-              {{- toYaml $job.args | nindent 12 }}
+              {{- toYaml $job.args | nindent 16 }}
               envFrom:
                 - configMapRef:
-                    name: "{{ include "app.fullname" . }}"
+                    name: {{ $fullName }}
                 - secretRef:
-                    name: "{{ include "app.fullname" . }}-secret"
+                    name: {{ $fullName }}-secret
           restartPolicy: {{ $job.restartPolicy }}
-
+---
 {{- end -}}
 {{- end -}}
