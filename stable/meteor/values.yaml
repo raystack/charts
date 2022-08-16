@@ -1,8 +1,9 @@
 schedule: "0 1 * * *"
+concurrencyPolicy: "Forbid"
 image:
   # [required] repository where meteor Docker image is available
   repository: odpf/meteor
-  tag: latest
+  tag: "0.5.1"
   pullPolicy: IfNotPresent
 labels: {"application":"meteor"}
 
