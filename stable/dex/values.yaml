@@ -1,0 +1,46 @@
+app:
+  image:
+    repository: odpf/dex
+    pullPolicy: Always
+    tag: "latest"
+  container:
+    command:
+      - dex
+    args:
+      - serve
+    livenessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+    readinessProbe:
+      httpGet:
+        path: /ping
+        port: tcp
+
+  migration:
+    enabled: false
+
+  service:
+    annotations: {}
+
+  ingress:
+    enabled: true
+    annotations:
+    hosts:
+      - host: dex.example.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                port:
+                  number: 80
+
+  config:
+    SERVER_PORT: 8080
+    # SERVICE_HOST: 0.0.0.0
+    # LOG_LEVEL: info
+    # NEW_RELIC_ENABLED: false
+    # NEW_RELIC_APP_NAME: dex
+
+  secretConfig: {}
