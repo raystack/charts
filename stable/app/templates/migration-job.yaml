@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "app.fullname" . }}-migration-job
+  name: {{ include "app.fullname" . }}-migration-job-{{ .Release.Revision }}
   labels:
     {{- include "app.labels" . | nindent 4 }}
   annotations:
