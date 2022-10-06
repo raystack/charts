@@ -59,7 +59,7 @@ spec:
               name: configuration-volume
               readOnly: true
             {{- range $volumeMount := .Values.container.volumeMounts }}
-            - {{- toYaml $volumeMount | nindent 12 }}
+            - {{- toYaml $volumeMount | nindent 16 }}
             {{- end }}
           envFrom:
             - configMapRef:

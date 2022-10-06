@@ -21,6 +21,7 @@ image:
   pullPolicy: Always
 
 container:
+  volumeMounts: []
   securityContext:
     runAsUser: 1000
   ports:
