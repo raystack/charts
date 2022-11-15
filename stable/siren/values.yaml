@@ -1,4 +1,4 @@
-siren-app:
+app:
   image:
     repository: odpf/siren
     pullPolicy: Always
@@ -51,7 +51,7 @@ siren-app:
     DB_URL: postgres://postgres:@localhost:5432/siren?sslmode=disable
     SERVICE_ENCRYPTION_KEY: ____STRING_OF_32_CHARACTERS_____
 
-siren-notification-worker:
+notification-worker:
   image:
     repository: odpf/siren
     pullPolicy: Always
@@ -86,7 +86,7 @@ siren-notification-worker:
     DB_URL: postgres://postgres:@localhost:5432/siren?sslmode=disable
     SERVICE_ENCRYPTION_KEY: ____STRING_OF_32_CHARACTERS_____
 
-siren-notification-dlq-worker:
+notification-dlq-worker:
   image:
     repository: odpf/siren
     pullPolicy: Always
