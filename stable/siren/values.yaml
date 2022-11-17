@@ -22,14 +22,8 @@ app:
       - server
       - migrate
 
-  service:
-    annotations:
-      projectcontour.io/upstream-protocol.h2c: tcp
-
   ingress:
     enabled: true
-    annotations:
-      kubernetes.io/ingress.class: contour
     hosts:
       - host: siren.example.com
         paths:
