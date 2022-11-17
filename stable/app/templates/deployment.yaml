@@ -41,9 +41,19 @@ spec:
               protocol: {{ $port.protocol }}
             {{- end }}
           livenessProbe:
+            {{- if .Values.container.livenessProbe.exec }}
+            exec:
+              {{- toYaml .Values.container.livenessProbe.exec | nindent 14 }}
+            {{- else }}
             {{- toYaml .Values.container.livenessProbe | nindent 12 }}
+            {{- end }}
           readinessProbe:
+            {{- if .Values.container.readinessProbe.exec }}
+            exec:
+              {{- toYaml .Values.container.readinessProbe.exec | nindent 14 }}
+            {{- else }}
             {{- toYaml .Values.container.readinessProbe | nindent 12 }}
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           command:
