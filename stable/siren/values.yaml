@@ -38,7 +38,7 @@ app:
     DB_DRIVER: postgres
     NOTIFICATION_QUEUE_KIND: postgres
     NOTIFICATION_MESSAGE_HANDLER_ENABLED: false
-    NOTIFICATION_MESSAGE_DLQ_HANDLER_ENABLED: false
+    NOTIFICATION_DLQ_HANDLER_ENABLED: false
     # PROVIDERS_CORTEX_WEBHOOK_BASE_API: http://localhost:8080/v1beta1/alerts/cortex
    
   secretConfig:
@@ -55,14 +55,22 @@ notification-worker:
       - worker
       - start
       - notification_handler
-    # livenessProbe:
-    #   exec:
-    #     command:
-    #     - /bin/bash
-    #     - -c
-    #     - ps -ef | grep siren | grep -v grep
-    #   initialDelaySeconds: 10
-    #   periodSeconds: 10
+    livenessProbe:
+      exec:
+        command:
+        - /bin/sh
+        - -c
+        - ps -ef | grep siren | grep -v grep
+      initialDelaySeconds: 10
+      periodSeconds: 10
+    readinessProbe:
+      exec:
+        command:
+        - /bin/sh
+        - -c
+        - ps -ef | grep siren | grep -v grep
+      initialDelaySeconds: 10
+      periodSeconds: 10
 
   migration:
     enabled: false
@@ -74,7 +82,7 @@ notification-worker:
     DB_DRIVER: postgres
     NOTIFICATION_QUEUE_KIND: postgres
     NOTIFICATION_MESSAGE_HANDLER_ENABLED: false
-    NOTIFICATION_MESSAGE_DLQ_HANDLER_ENABLED: false
+    NOTIFICATION_DLQ_HANDLER_ENABLED: false
    
   secretConfig:
     DB_URL: postgres://postgres:@localhost:5432/siren?sslmode=disable
@@ -90,14 +98,22 @@ notification-dlq-worker:
       - worker
       - start
       - notification_dlq_handler
-    # livenessProbe:
-    #   exec:
-    #     command:
-    #     - /bin/bash
-    #     - -c
-    #     - ps -ef | grep siren | grep -v grep
-    #   initialDelaySeconds: 10
-    #   periodSeconds: 10
+    livenessProbe:
+      exec:
+        command:
+        - /bin/sh
+        - -c
+        - ps -ef | grep siren | grep -v grep
+      initialDelaySeconds: 10
+      periodSeconds: 10
+    readinessProbe:
+      exec:
+        command:
+        - /bin/sh
+        - -c
+        - ps -ef | grep siren | grep -v grep
+      initialDelaySeconds: 10
+      periodSeconds: 10
 
   migration:
     enabled: false
@@ -109,7 +125,7 @@ notification-dlq-worker:
     DB_DRIVER: postgres
     NOTIFICATION_QUEUE_KIND: postgres
     NOTIFICATION_MESSAGE_HANDLER_ENABLED: false
-    NOTIFICATION_MESSAGE_DLQ_HANDLER_ENABLED: false
+    NOTIFICATION_DLQ_HANDLER_ENABLED: false
 
   secretConfig:
     DB_URL: postgres://postgres:@localhost:5432/siren?sslmode=disable
