@@ -2,16 +2,16 @@ apiVersion: v1
 entries:
   app:
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.946015374Z"
+    created: "2022-11-24T06:33:23.385770026Z"
     description: A Helm chart for Kubernetes
-    digest: 694bc139ce329e1d64cfc29086bf0f6f69d4ba3d47bcd545a16e625b397da4b8
+    digest: 6ae28a883a8fc023d3aced79ae1b65f040d851974672f1eb968de897fab2a1b3
     name: app
     type: application
     urls:
     - https://odpf.github.io/charts/app-0.4.3.tgz
     version: 0.4.3
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.94533977Z"
+    created: "2022-11-24T06:33:23.384912421Z"
     description: A Helm chart for Kubernetes
     digest: 4fd9e108b2acf35827d24bdcfe9bd90c5e45d318a79b1669eeaec05f1068c2af
     name: app
@@ -20,7 +20,7 @@ entries:
     - https://odpf.github.io/charts/app-0.4.2.tgz
     version: 0.4.2
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.944118361Z"
+    created: "2022-11-24T06:33:23.384127517Z"
     description: A Helm chart for Kubernetes
     digest: e3144a36fbc2bc97d96711995a8f90e5e5c76fda4fd0e7633161d2672c2e465a
     name: app
@@ -29,7 +29,7 @@ entries:
     - https://odpf.github.io/charts/app-0.4.1.tgz
     version: 0.4.1
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.943442356Z"
+    created: "2022-11-24T06:33:23.383300512Z"
     description: A Helm chart for Kubernetes
     digest: 91b5c7ade2ec1aaf000ac5eb7e7216ff0fe41374f2637b0b228f869bf26bd68b
     name: app
@@ -38,7 +38,7 @@ entries:
     - https://odpf.github.io/charts/app-0.4.0.tgz
     version: 0.4.0
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.942767152Z"
+    created: "2022-11-24T06:33:23.382308007Z"
     description: A Helm chart for Kubernetes
     digest: d1fe430c759477b19c5aa129c2e8c3dc39286a20865267d303d9a2bf52ccbea8
     name: app
@@ -47,7 +47,7 @@ entries:
     - https://odpf.github.io/charts/app-0.3.4.tgz
     version: 0.3.4
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.942145847Z"
+    created: "2022-11-24T06:33:23.379651392Z"
     description: A Helm chart for Kubernetes
     digest: 2ef4216aae207e68858449c4d5b27352e6c2db6d035bfb6edfd4c8580eef7534
     name: app
@@ -56,7 +56,7 @@ entries:
     - https://odpf.github.io/charts/app-0.3.3.tgz
     version: 0.3.3
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.941524943Z"
+    created: "2022-11-24T06:33:23.378221484Z"
     description: A Helm chart for Kubernetes
     digest: 930974a06260d90c34a2399de432ba97b369dea7d1800c56cce4781ca3abcd32
     name: app
@@ -65,7 +65,7 @@ entries:
     - https://odpf.github.io/charts/app-0.3.2.tgz
     version: 0.3.2
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.940898738Z"
+    created: "2022-11-24T06:33:23.376739576Z"
     description: A Helm chart for Kubernetes
     digest: 46aca5acca5acfc4d5720f998513a1549eedcd89d75de72739b58411e4a29b78
     name: app
@@ -74,7 +74,7 @@ entries:
     - https://odpf.github.io/charts/app-0.3.1.tgz
     version: 0.3.1
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.940305634Z"
+    created: "2022-11-24T06:33:23.376013772Z"
     description: A Helm chart for Kubernetes
     digest: fe48c8931c4814a74d331fabd6f2b5ce36271afffb0ebeac12bfc923dfac59ca
     name: app
@@ -83,7 +83,7 @@ entries:
     - https://odpf.github.io/charts/app-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.93972623Z"
+    created: "2022-11-24T06:33:23.374556663Z"
     description: A Helm chart for Kubernetes
     digest: 61d310d8e7a0c08865a2594d3fb3c22987c17301eb3395774f10300d5e13c7e8
     name: app
@@ -92,7 +92,7 @@ entries:
     - https://odpf.github.io/charts/app-0.2.2.tgz
     version: 0.2.2
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.939156026Z"
+    created: "2022-11-24T06:33:23.373796159Z"
     description: A Helm chart for Kubernetes
     digest: c703c96aa30e40071d17075c04ee217111cf290b2934cb3c8bd8405bfcbebad4
     name: app
@@ -101,7 +101,7 @@ entries:
     - https://odpf.github.io/charts/app-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.938040118Z"
+    created: "2022-11-24T06:33:23.372923954Z"
     description: A Helm chart for Kubernetes
     digest: da81c1420942e46fd3848fcefd1f9a715ad48906673afce44bd854cf67a8d0df
     name: app
@@ -110,7 +110,7 @@ entries:
     - https://odpf.github.io/charts/app-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.937296813Z"
+    created: "2022-11-24T06:33:23.371982649Z"
     description: A Helm chart for Kubernetes
     digest: fd4d3424210e0ab4102288789a26f34db35bc890e68306e0715c42dc506e29cb
     name: app
@@ -119,7 +119,7 @@ entries:
     - https://odpf.github.io/charts/app-0.1.4.tgz
     version: 0.1.4
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.936112305Z"
+    created: "2022-11-24T06:33:23.371271145Z"
     description: A Helm chart for Kubernetes
     digest: 19d5e3d976987cc250daf023c031fcf615c3d4bcc9fb888f431134215d251f9e
     name: app
@@ -128,7 +128,7 @@ entries:
     - https://odpf.github.io/charts/app-0.1.3.tgz
     version: 0.1.3
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.935538101Z"
+    created: "2022-11-24T06:33:23.37042364Z"
     description: A Helm chart for Kubernetes
     digest: 8a23cab82bc3c33277c234e5382fb1ab42f912bb49f4253c9acf6836bbfaafb1
     name: app
@@ -137,7 +137,7 @@ entries:
     - https://odpf.github.io/charts/app-0.1.2.tgz
     version: 0.1.2
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.935014997Z"
+    created: "2022-11-24T06:33:23.369398735Z"
     description: A Helm chart for Kubernetes
     digest: f15b318314a64887b931af53526cb749e5d8f899046ddd2628b7571ead29ac22
     name: app
@@ -146,7 +146,7 @@ entries:
     - https://odpf.github.io/charts/app-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.934439593Z"
+    created: "2022-11-24T06:33:23.368733631Z"
     description: A Helm chart for Kubernetes
     digest: 9aa4d7f013539714bbeb72899a1f824fd08affc4666e33d3850b805939fc48d5
     name: app
@@ -157,13 +157,13 @@ entries:
   columbus:
   - apiVersion: v2
     appVersion: 0.1.8
-    created: "2022-11-17T09:20:20.949372698Z"
+    created: "2022-11-24T06:33:23.390775654Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
       version: 0.2.0
     description: A Helm chart for Kubernetes
-    digest: 17a5b4180c8013cf07a9d5ebaab52f7ea5552fca5613ca6b42935ac3927851eb
+    digest: e09a0fa24f643e5655d8e484e0e0eb1d7d293a7845f1f0a92eaa5766da0d3b74
     name: columbus
     type: application
     urls:
@@ -171,7 +171,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.8
-    created: "2022-11-17T09:20:20.947888987Z"
+    created: "2022-11-24T06:33:23.389246546Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -185,7 +185,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.8
-    created: "2022-11-17T09:20:20.946992881Z"
+    created: "2022-11-24T06:33:23.386994333Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -200,13 +200,13 @@ entries:
   compass:
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2022-11-17T09:20:20.954840536Z"
+    created: "2022-11-24T06:33:23.399423403Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
       version: 0.4.2
     description: A Helm chart for running Compass in Kubernetes
-    digest: eec2e1711a8cc86df5c5f570a07c048cb861660d35dca91ad92bbbb849f37499
+    digest: 9655db9541c3d7b8d65df10a5e31351149a6f6e20f8a914e682a78c93e3bbc37
     name: compass
     type: application
     urls:
@@ -214,7 +214,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2022-11-17T09:20:20.953818829Z"
+    created: "2022-11-24T06:33:23.397777593Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -228,7 +228,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.2.2
-    created: "2022-11-17T09:20:20.952787822Z"
+    created: "2022-11-24T06:33:23.394559375Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -242,7 +242,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.2.1
-    created: "2022-11-17T09:20:20.951790615Z"
+    created: "2022-11-24T06:33:23.393373369Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -256,7 +256,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.2.1
-    created: "2022-11-17T09:20:20.950809508Z"
+    created: "2022-11-24T06:33:23.392129562Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -271,9 +271,9 @@ entries:
   consul:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-11-17T09:20:20.955114238Z"
+    created: "2022-11-24T06:33:23.399773005Z"
     description: Minimal Helm chart for deploying consul server on kubernetes.
-    digest: de9690515779a597d569f0b4e7d4177640a5648d5b05d89fc610f68bfd43f7a7
+    digest: 4cf9d3c739379746105ef60193a3188aa4b06c237e0ec2588eff3f7ee67f432a
     name: consul
     sources:
     - https://github.com/odpf/charts
@@ -283,7 +283,21 @@ entries:
   dex:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-11-17T09:20:20.956102845Z"
+    created: "2022-11-24T06:33:23.40249262Z"
+    dependencies:
+    - name: app
+      repository: https://odpf.github.io/charts/
+      version: 0.4.0
+    description: A Helm chart for Kubernetes
+    digest: b429ad5151dbbfd2eb02e6acc74f479bbab5978c967e91a06057ed9f8fa45e3b
+    name: dex
+    type: application
+    urls:
+    - https://odpf.github.io/charts/dex-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2022-11-24T06:33:23.401173012Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -298,13 +312,13 @@ entries:
   entropy:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-11-17T09:20:20.959061566Z"
+    created: "2022-11-24T06:33:23.407773649Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
       version: 0.3.4
     description: A Helm chart for Kubernetes
-    digest: d7230c0504828d839a9e61993043bf30bdb865fd491c2da76e4a6ad69699d859
+    digest: b3e6acf5858c7933d12690a203b42432db8994f05bbfeca4b9afab6f06ab53c7
     name: entropy
     type: application
     urls:
@@ -312,7 +326,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-11-17T09:20:20.958039659Z"
+    created: "2022-11-24T06:33:23.406582643Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -326,7 +340,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-11-17T09:20:20.957087052Z"
+    created: "2022-11-24T06:33:23.405360436Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -341,9 +355,9 @@ entries:
   firehose:
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2022-11-17T09:20:20.961247181Z"
+    created: "2022-11-24T06:33:23.412140074Z"
     description: A Helm chart for deploying Firehose on Kubernetes
-    digest: 4f479e88a91d6e0ee39d4201a80b1c30d509ac99b5ef5a35eafefe0180474f06
+    digest: 28de9b9bc75bedae91232ef07516f2668cb65937c17714ae03c68a7d4c61bbc1
     name: firehose
     type: application
     urls:
@@ -351,7 +365,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2022-11-17T09:20:20.960250274Z"
+    created: "2022-11-24T06:33:23.410248163Z"
     description: A Helm chart for deploying Firehose on Kubernetes
     digest: 368847c31492f855f87fc10a200f68fad5008a24cdf81ceb72284018904c7c45
     name: firehose
@@ -361,7 +375,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2022-11-17T09:20:20.95967397Z"
+    created: "2022-11-24T06:33:23.409516959Z"
     description: A Helm chart for deploying Firehose on Kubernetes
     digest: 588776982533168db163d6268c9ab2b2078be9c6ef05c75b94c4b0f386d197d7
     name: firehose
@@ -372,13 +386,13 @@ entries:
   guardian:
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2022-11-17T09:20:20.967358924Z"
+    created: "2022-11-24T06:33:23.42222913Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
       version: 0.4.0
     description: A Helm chart for Kubernetes
-    digest: 68eb8e6c02bd1f33c61ff7a9b331daba5e2aacdc28a8c89bb77e20589392620a
+    digest: e4061650c1935a1a81f4485290546636a53c361b394c7af2b5ebfafe29b2b4d4
     name: guardian
     type: application
     urls:
@@ -386,7 +400,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2022-11-17T09:20:20.966183016Z"
+    created: "2022-11-24T06:33:23.42038122Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -400,7 +414,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2022-11-17T09:20:20.965267209Z"
+    created: "2022-11-24T06:33:23.417334803Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -414,7 +428,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-11-17T09:20:20.964324303Z"
+    created: "2022-11-24T06:33:23.415771194Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -428,7 +442,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-11-17T09:20:20.962442789Z"
+    created: "2022-11-24T06:33:23.413727083Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -443,7 +457,7 @@ entries:
   guardian-jobs:
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2022-11-17T09:20:20.967654626Z"
+    created: "2022-11-24T06:33:23.422628132Z"
     description: A Helm chart for Guardian Jobs (github.com/odpf/guardian)
     digest: 5d2cc7e751099f74d965c412b370891926917385227cf8a0952d54128dcc5b3f
     name: guardian-jobs
@@ -453,16 +467,16 @@ entries:
   meteor:
   - apiVersion: v1
     appVersion: v0.5.1
-    created: "2022-11-17T09:20:20.969152036Z"
+    created: "2022-11-24T06:33:23.425057846Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
-    digest: 47cf88473c0ba62b4e268119ba5c5815ada46e0a14c8ef94e072de98019763d0
+    digest: 92e2835aa36d482a7d58e4b958e9b0a6ebb544e4ce8425c7f14a29497cbfbc2c
     name: meteor
     urls:
     - https://odpf.github.io/charts/meteor-0.1.5.tgz
     version: 0.1.5
   - apiVersion: v1
     appVersion: v0.5.1
-    created: "2022-11-17T09:20:20.968894935Z"
+    created: "2022-11-24T06:33:23.424729944Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: e617f696ee0e73d1b3920990c90e36027ab932ab317187f8a729c0adf4dd6017
     name: meteor
@@ -471,7 +485,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: v0.1.0
-    created: "2022-11-17T09:20:20.968638433Z"
+    created: "2022-11-24T06:33:23.424371142Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: 97a5c192f2aabc4c84d72c802d3fe36e07c85fd36ada92b2f95d9b20a7f57a25
     name: meteor
@@ -480,7 +494,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: v0.1.0
-    created: "2022-11-17T09:20:20.968371331Z"
+    created: "2022-11-24T06:33:23.423812039Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: 1364e04bfff3a5513a180c1b9a455403161640bc08d8a01904a589b765e40e43
     name: meteor
@@ -489,7 +503,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: v0.1.0
-    created: "2022-11-17T09:20:20.968139429Z"
+    created: "2022-11-24T06:33:23.423474937Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: 6390c21502e004327ae4c88799c7c478bcd5f4bb4a8ee1197d336fc3f16b5e44
     name: meteor
@@ -498,7 +512,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: v0.1.0
-    created: "2022-11-17T09:20:20.967904928Z"
+    created: "2022-11-24T06:33:23.422943134Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: ef9bf8d17c63c4818f3238ff03fc2dedfba4d9a2ca1398708358f6ba84bee793
     name: meteor
@@ -508,9 +522,9 @@ entries:
   optimus:
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2022-11-17T09:20:20.97104465Z"
+    created: "2022-11-24T06:33:23.428069963Z"
     description: A Helm chart for running optimus on kubernetes
-    digest: 7ae90b0efcf54069ff9b46ee624c99492dc4b54c6b53a1332a10bdfa17a8d9a0
+    digest: 83844dbe23a9f9f4e0b6515a8362f16a25abc41893737816e98799806375b382
     name: optimus
     type: application
     urls:
@@ -518,7 +532,7 @@ entries:
     version: 0.0.3
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2022-11-17T09:20:20.970391645Z"
+    created: "2022-11-24T06:33:23.427253358Z"
     description: A Helm chart for running optimus on kubernetes
     digest: 5a4e81f037317d4b2009b0cd790cee56838eca889be801fcd1f1e8500e461254
     name: optimus
@@ -528,7 +542,7 @@ entries:
     version: 0.0.2
   - apiVersion: v2
     appVersion: 0.2.5
-    created: "2022-11-17T09:20:20.969747141Z"
+    created: "2022-11-24T06:33:23.426308353Z"
     description: A Helm chart for running optimus on kubernetes
     digest: 82fb369b3f1274eed9ad81934ae72d3a5b6955ab6a82d9bfc573f19a281528c0
     name: optimus
@@ -539,9 +553,9 @@ entries:
   raccoon:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-11-17T09:20:20.971636454Z"
+    created: "2022-11-24T06:33:23.429909973Z"
     description: A Helm chart for deploying Raccoon on Kubernetes
-    digest: 927d79a74d46d656edadaca227fa4fe342770c157bad282dfff7087378a6cdb6
+    digest: a1ec4c642050ee35fe17d513fd1abeae99530bc627ca8d41939516ef45eea074
     name: raccoon
     type: application
     urls:
@@ -549,7 +563,7 @@ entries:
     version: 0.1.0
   shield:
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.980544016Z"
+    created: "2022-11-24T06:33:23.442663444Z"
     dependencies:
     - alias: shield-app
       condition: shield-app.enabled
@@ -569,7 +583,7 @@ entries:
     - https://odpf.github.io/charts/shield-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.979460909Z"
+    created: "2022-11-24T06:33:23.441059335Z"
     dependencies:
     - alias: shield-app
       condition: shield-app.enabled
@@ -582,14 +596,14 @@ entries:
       repository: https://odpf.github.io/charts/
       version: 0.3.4
     description: A Helm chart for Kubernetes
-    digest: 94018ada3044514e8e4b8025ad9129d1fde79f89c48de8fc4b3a8f9f500f576d
+    digest: 32e4e69fe5d314a978b407780f8626aa80bebe60850e1c7d6269c1b63f410357
     name: shield
     type: application
     urls:
     - https://odpf.github.io/charts/shield-0.1.4.tgz
     version: 0.1.4
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.9781659Z"
+    created: "2022-11-24T06:33:23.439054624Z"
     dependencies:
     - alias: shield-app
       condition: shield-app.enabled
@@ -609,7 +623,7 @@ entries:
     - https://odpf.github.io/charts/shield-0.1.3.tgz
     version: 0.1.3
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.976922491Z"
+    created: "2022-11-24T06:33:23.437415515Z"
     dependencies:
     - alias: shield-app
       condition: shield-app.enabled
@@ -629,7 +643,7 @@ entries:
     - https://odpf.github.io/charts/shield-0.1.2.tgz
     version: 0.1.2
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.975674782Z"
+    created: "2022-11-24T06:33:23.4347051Z"
     dependencies:
     - alias: shield-app
       condition: shield-app.enabled
@@ -649,7 +663,7 @@ entries:
     - https://odpf.github.io/charts/shield-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
-    created: "2022-11-17T09:20:20.973770969Z"
+    created: "2022-11-24T06:33:23.432424587Z"
     dependencies:
     - alias: shield-app
       condition: shield-app.enabled
@@ -670,7 +684,7 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: v0.0.1
-    created: "2022-11-17T09:20:20.972193158Z"
+    created: "2022-11-24T06:33:23.430817778Z"
     description: A Helm chart for deploying Shield on Kubernetes
     digest: a123fad4111981d41905fd94f5ad388c4c9135d5c989fa040021a5439546ea5e
     home: https://github.com/odpf/shield
@@ -685,7 +699,7 @@ entries:
   siren:
   - apiVersion: v2
     appVersion: v0.5.0
-    created: "2022-11-17T09:20:20.985168849Z"
+    created: "2022-11-24T06:33:23.449222781Z"
     dependencies:
     - alias: app
       condition: app.enabled
@@ -703,7 +717,7 @@ entries:
       repository: https://odpf.github.io/charts/
       version: 0.4.3
     description: Siren Helm chart
-    digest: 08512420fbd676e390adf9ccb73c11f815998ce80f66dd55ee6a8c3067b13e86
+    digest: 7ec70230a30e592b4d960270a94f1f59b2e2a3c33c5329251f99f11da36ed709
     home: https://github.com/odpf/siren
     name: siren
     urls:
@@ -711,7 +725,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: v0.5.0
-    created: "2022-11-17T09:20:20.983742239Z"
+    created: "2022-11-24T06:33:23.447355471Z"
     dependencies:
     - alias: app
       condition: app.enabled
@@ -737,7 +751,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: v0.5.0
-    created: "2022-11-17T09:20:20.98244573Z"
+    created: "2022-11-24T06:33:23.44542546Z"
     dependencies:
     - alias: siren-app
       condition: siren-app.enabled
@@ -763,7 +777,7 @@ entries:
     version: 0.1.0
   - apiVersion: v1
     appVersion: v0.0.1
-    created: "2022-11-17T09:20:20.98109952Z"
+    created: "2022-11-24T06:33:23.443542049Z"
     description: Siren Helm chart
     digest: 8fa9d25a323a39c15d6414f9db703e48ed66e52f2abf31ff773e4d4d9b701225
     home: https://github.com/odpf/siren
@@ -777,16 +791,16 @@ entries:
   stencil:
   - apiVersion: v2
     appVersion: 0.2.0
-    created: "2022-11-17T09:20:20.986466458Z"
+    created: "2022-11-24T06:33:23.450400788Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
       version: 0.2.1
     description: A Helm chart for Kubernetes
-    digest: 0c98ffa0c3802aab47cd4e0c1367582efadbf4755287f410f75f4e952890d28a
+    digest: 1685e1705034fc700432ea36aa0863bc8fcd81b3d6dc5830470ae7a27f33d94a
     name: stencil
     type: application
     urls:
     - https://odpf.github.io/charts/stencil-0.1.0.tgz
     version: 0.1.0
-generated: "2022-11-17T09:20:20.933382986Z"
+generated: "2022-11-24T06:33:23.367935126Z"
