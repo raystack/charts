@@ -18,6 +18,9 @@
 {{- define "firehose.telegraf.conf" }}
 [global_tags]
   app = "{{ include "firehose.fullname" . }}"
+{{- range $k, $v := .Values.telegraf.config.additional_global_tags }}
+  {{ $k }} = "{{ $v }}"
+{{- end }}
 [agent]
   collection_jitter = "0s"
   debug = false
@@ -41,15 +44,15 @@
 {{- end }}
 {{- if .Values.telegraf.config.output.prometheus_remote_write.enabled }}
 [[outputs.http]]
-  url = {{.Values.telegraf.config.output.prometheus_remote_write.url}}
+  url = "{{.Values.telegraf.config.output.prometheus_remote_write.url}}"
   data_format = "prometheusremotewrite"
   [outputs.http.headers]
       {{- if .Values.telegraf.config.output.prometheus_remote_write.authorization }}
-      Authorization = {{.Values.telegraf.config.output.prometheus_remote_write.authorization}}
+      Authorization = "{{.Values.telegraf.config.output.prometheus_remote_write.authorization}}"
       {{- end }}
       Content-Type = "application/x-protobuf"
       Content-Encoding = "snappy"
-      X-Prometheus-Remote-Write-Version = {{.Values.telegraf.config.output.prometheus_remote_write.version}}
+      X-Prometheus-Remote-Write-Version = "{{.Values.telegraf.config.output.prometheus_remote_write.version}}"
 {{- end }}
 [[inputs.statsd]]
   allowed_pending_messages = 10000

@@ -54,6 +54,9 @@ telegraf:
     pullPolicy: IfNotPresent
     tag: 1.7.4-alpine
   config:
+    additional_global_tags:
+      team: some-team
+      environment: testing
     output:
       influxdb:
         enabled: false
