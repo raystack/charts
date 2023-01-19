@@ -2,8 +2,8 @@ apiVersion: v2
 name: compass
 description: A Helm chart for running Compass in Kubernetes
 type: application
-version: 0.1.4
-appVersion: "0.2.4"
+version: 0.1.5
+appVersion: "0.3.0"
 dependencies:
   - name: app
     version: "0.4.2"

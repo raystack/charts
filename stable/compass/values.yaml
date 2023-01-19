@@ -2,7 +2,7 @@ app:
   image:
     repository: odpf/compass
     pullPolicy: Always
-    tag: "0.2.1"
+    tag: "0.3.0"
   container:
     command:
       - compass
@@ -44,6 +44,7 @@ app:
 
   config:
     COMPASS_SERVICE_PORT: 8080
+    COMPASS_SERVICE_GRPC_PORT: 8081
     # COMPASS_SERVICE_HOST: 0.0.0.0
     # COMPASS_STATSD_ENABLED: false
     # COMPASS_STATSD_PREFIX: compass
