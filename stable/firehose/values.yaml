@@ -52,7 +52,7 @@ telegraf:
   image:
     repository: telegraf
     pullPolicy: IfNotPresent
-    tag: 1.7.4-alpine
+    tag: 1.18.0-alpine
   config:
     additional_global_tags:
       team: some-team
