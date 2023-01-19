@@ -102,7 +102,7 @@
   field_prefix  = "class_count_"
   mbean         = "java.lang:type=ClassLoading"
   paths         = ["LoadedClassCount","UnloadedClassCount","TotalLoadedClassCount"]
-[[inputs.jolokia2_agent.metrics]]
+[[inputs.jolokia2_agent.metric]]
   name          = "jvm_"
   field_prefix  = "class_count_java_memory_pool_"
   mbean         = "java.lang:name=*,type=MemoryPool"
@@ -127,6 +127,9 @@
   field_prefix  = "metrics_"
   mbean         = "kafka.consumer:type=consumer-metrics,client-id=*"
   tag_keys      = ["client-id"]
+[[inputs.jolokia2_agent.metric]]
+  name = "jdbc_"
+  mbean = "com.zaxxer.hikari:type=*"
 {{- end }}
 {{- end }}
 {{- end }}
