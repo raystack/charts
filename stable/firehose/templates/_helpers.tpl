@@ -18,6 +18,9 @@
 {{- define "firehose.telegraf.conf" }}
 [global_tags]
   app = "{{ include "firehose.fullname" . }}"
+{{- range $k, $v := .Values.telegraf.config.additional_global_tags }}
+  {{ $k }} = "{{ $v }}"
+{{- end }}
 [agent]
   collection_jitter = "0s"
   debug = false
@@ -41,15 +44,15 @@
 {{- end }}
 {{- if .Values.telegraf.config.output.prometheus_remote_write.enabled }}
 [[outputs.http]]
-  url = {{.Values.telegraf.config.output.prometheus_remote_write.url}}
+  url = "{{.Values.telegraf.config.output.prometheus_remote_write.url}}"
   data_format = "prometheusremotewrite"
   [outputs.http.headers]
       {{- if .Values.telegraf.config.output.prometheus_remote_write.authorization }}
-      Authorization = {{.Values.telegraf.config.output.prometheus_remote_write.authorization}}
+      Authorization = "{{.Values.telegraf.config.output.prometheus_remote_write.authorization}}"
       {{- end }}
       Content-Type = "application/x-protobuf"
       Content-Encoding = "snappy"
-      X-Prometheus-Remote-Write-Version = {{.Values.telegraf.config.output.prometheus_remote_write.version}}
+      X-Prometheus-Remote-Write-Version = "{{.Values.telegraf.config.output.prometheus_remote_write.version}}"
 {{- end }}
 [[inputs.statsd]]
   allowed_pending_messages = 10000
@@ -99,7 +102,7 @@
   field_prefix  = "class_count_"
   mbean         = "java.lang:type=ClassLoading"
   paths         = ["LoadedClassCount","UnloadedClassCount","TotalLoadedClassCount"]
-[[inputs.jolokia2_agent.metrics]]
+[[inputs.jolokia2_agent.metric]]
   name          = "jvm_"
   field_prefix  = "class_count_java_memory_pool_"
   mbean         = "java.lang:name=*,type=MemoryPool"
@@ -124,6 +127,9 @@
   field_prefix  = "metrics_"
   mbean         = "kafka.consumer:type=consumer-metrics,client-id=*"
   tag_keys      = ["client-id"]
+[[inputs.jolokia2_agent.metric]]
+  name = "jdbc_"
+  mbean = "com.zaxxer.hikari:type=*"
 {{- end }}
 {{- end }}
 {{- end }}
