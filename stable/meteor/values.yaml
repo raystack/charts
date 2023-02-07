@@ -9,6 +9,7 @@ labels: {"application":"meteor"}
 
 config: {}
 secretConfig: {}
+ssl_secrets: []
 
 # sample recipe usage
 # recipes:

@@ -31,6 +31,10 @@ spec:
             volumeMounts:
               - name: "{{ include "meteor.name" . }}-volume"
                 mountPath: /opt/recipes
+              {{- range $k, $v := .Values.ssl_secrets }}
+              - name: {{ $v }}
+                mountPath: {{ printf "%s/%s" "/etc/secret" $v }}
+              {{- end }}
             envFrom:
               - configMapRef:
                   name: "{{ include "meteor.name" . }}-variables-configmap"
@@ -48,3 +52,10 @@ spec:
                 - key: {{ $k }}
                   path: {{ $k }}
                 {{- end }}
+            {{- range $k, $v := .Values.ssl_secrets }}
+            - name: {{ $v }}
+              secret:
+                defaultMode: 420
+                optional: true
+                secretName: {{ $v }}
+            {{- end }}
