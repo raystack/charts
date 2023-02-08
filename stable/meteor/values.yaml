@@ -9,6 +9,7 @@ labels: {"application":"meteor"}
 
 config: {}
 secretConfig: {}
+# pass in secret names to be mounted to cronjob
 ssl_secrets: []
 
 # sample recipe usage
