@@ -78,10 +78,8 @@ spec:
             volumeMounts:
               - name: telegraf-conf
                 mountPath: /etc/telegraf/
-          {{- end }}
           volumes:
-            {{- if .Values.telegraf.enabled }}
             - name: telegraf-conf
               configMap:
                 name: {{ include "meteor.name" . }}-telegraf
-            {{- end }}
+          {{- end }}
