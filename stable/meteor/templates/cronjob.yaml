@@ -80,9 +80,6 @@ spec:
                 mountPath: /etc/telegraf/
           {{- end }}
           volumes:
-            {{- range $volume := .Values.volumes }}
-            - {{- toYaml $volume | nindent 12 }}
-            {{- end }}
             {{- if .Values.telegraf.enabled }}
             - name: telegraf-conf
               configMap:
