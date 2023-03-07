@@ -59,3 +59,32 @@ spec:
                 optional: true
                 secretName: {{ $v }}
             {{- end }}
+          {{- if .Values.telegraf.enabled }}
+          - name: telegraf-sidecar
+            image: {{ .Values.telegraf.image }}
+            args:
+              {{- range .Values.telegraf.args }}
+              - {{ . }}
+              {{- end }}
+            command:
+              {{- range .Values.telegraf.command }}
+              - {{ . }}
+              {{- end }}
+            imagePullPolicy: IfNotPresent
+            ports:
+              - containerPort: {{ .Values.telegraf.containerPort }}
+                name: http
+                protocol: {{ .Values.telegraf.protocol }}
+            volumeMounts:
+              - name: telegraf-conf
+                mountPath: /etc/telegraf/
+          {{- end }}
+          volumes:
+            {{- range $volume := .Values.volumes }}
+            - {{- toYaml $volume | nindent 12 }}
+            {{- end }}
+            {{- if .Values.telegraf.enabled }}
+            - name: telegraf-conf
+              configMap:
+                name: {{ include "meteor.name" . }}-telegraf
+            {{- end }}
