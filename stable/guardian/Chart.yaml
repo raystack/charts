@@ -26,4 +26,4 @@ appVersion: "0.3.0"
 dependencies:
 - name: app
   version: "0.4.0"
-  repository: "https://odpf.github.io/charts/"
+  repository: "https://goto.github.io/charts-legacy/"

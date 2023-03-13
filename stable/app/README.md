@@ -17,11 +17,11 @@ This chart can be used for deploying any app on kubenetes using helm
 To install the chart with the release name `my-release` and image `siren`:
 
 ```bash
-$ helm install --name my-release . -f ./path-to/values.yaml --set image.repository=odpf/siren --set image.tag=latest --set ingress.enabled=true
+$ helm install --name my-release . -f ./path-to/values.yaml --set image.repository=gotocompany/siren --set image.tag=latest --set ingress.enabled=true
 
 ```
 
-The command deploys odpf/siren on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
+The command deploys gotocompany/siren on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
 
 > **Tip**: List all releases using `helm list`
 

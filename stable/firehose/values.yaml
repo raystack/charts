@@ -9,7 +9,7 @@ labels: { "application": "firehose" }
 
 firehose:
   image:
-    repository: odpf/firehose
+    repository: gotocompany/firehose
     pullPolicy: IfNotPresent
     tag: 1.1.0
   config:
@@ -25,7 +25,7 @@ firehose:
       "java",
       "-cp",
       "bin/*:/work-dir/*",
-      "io.odpf.firehose.launch.Main",
+      "com.gotocompany.firehose.launch.Main",
       "-server",
       "-Dlogback.configurationFile=etc/firehose/logback.xml",
       "-Xloggc:/var/log/firehose",

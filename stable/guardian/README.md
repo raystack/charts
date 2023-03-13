@@ -8,7 +8,7 @@ A Helm chart for Kubernetes
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://odpf.github.io/charts/ | app | 0.4.0 |
+| https://goto.github.io/charts/ | app | 0.4.0 |
 
 ## Values
 
@@ -53,7 +53,7 @@ A Helm chart for Kubernetes
 | app.cron.jobs[2].schedule | string | `"*/20 * * * *"` |  |
 | app.fullnameOverride | string | `""` |  |
 | app.image.pullPolicy | string | `"Always"` |  |
-| app.image.repository | string | `"odpf/guardian"` |  |
+| app.image.repository | string | `"gotocompany/guardian"` |  |
 | app.image.tag | string | `"latest"` |  |
 | app.ingress.annotations."kubernetes.io/ingress.class" | string | `"contour"` |  |
 | app.ingress.enabled | bool | `true` |  |

@@ -1,6 +1,6 @@
 app:
   image:
-    repository: odpf/stencil
+    repository: gotocompany/stencil
     pullPolicy: Always
     tag: latest
   container:

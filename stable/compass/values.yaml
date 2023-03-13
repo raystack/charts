@@ -1,6 +1,6 @@
 app:
   image:
-    repository: odpf/compass
+    repository: gotocompany/compass
     pullPolicy: Always
     tag: "0.3.0"
   container:

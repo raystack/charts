@@ -1,15 +1,15 @@
 # Raccoon
 
-[Raccoon](https://github.com/odpf/raccoon) is high throughput, low-latency service that provides an API to ingest clickstream data from mobile apps, sites and publish it to Kafka.
+[Raccoon](https://github.com/goto/raccoon) is high throughput, low-latency service that provides an API to ingest clickstream data from mobile apps, sites and publish it to Kafka.
 
 ## TL;DR
 ```
-$ helm install my-release odpf/raccoon
+$ helm install my-release gotocompany/raccoon
 ```
 The service will listen to `:8080` and publish to `host.docker.internal:9093` Kafka by default.
 ## Introduction
 
-This chart runs [Raccoon](https://github.com/odpf/raccoon) deployment on [Kubernetes](https://kubernetes.io/) using [Helm](https://helm.sh/) package manager. The deployment contains Raccoon service and [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) as a sidecar.
+This chart runs [Raccoon](https://github.com/goto/raccoon) deployment on [Kubernetes](https://kubernetes.io/) using [Helm](https://helm.sh/) package manager. The deployment contains Raccoon service and [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) as a sidecar.
 
 ## Prerequisites
 - Kubernetes 1.12+
@@ -19,10 +19,10 @@ This chart runs [Raccoon](https://github.com/odpf/raccoon) deployment on [Kubern
 
 ### Install released version using Helm repository
 
-**Add the odpf charts repo**
+**Add the gotocompany charts repo**
   
 ```bash
-$ helm repo add odpf https://odpf.github.io/charts/
+$ helm repo add gotocompany https://goto.github.io/charts/
 ```
 
 **Install it with Helm 3**
@@ -30,7 +30,7 @@ $ helm repo add odpf https://odpf.github.io/charts/
 Make sure you are in the correct Kubernetes context. Run the following command to deploy Raccoon. On the following command, you can adjust `PUBLISHER_KAFKA_CLIENT_BOOTSTRAP_SERVERS` and `SERVER_WEBSOCKET_PORT` as needed.
   
 ```bash
-$ helm install my-release odpf/raccoon \
+$ helm install my-release gotocompany/raccoon \
   --set raccoon.config.PUBLISHER_KAFKA_CLIENT_BOOTSTRAP_SERVERS=localhost:9092 \
   --set raccoon.config.SERVER_WEBSOCKET_PORT=8080
 ```
@@ -81,9 +81,9 @@ The following table lists the configurable parameters of Raccoon chart and their
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| raccoon.config | object | `{"SERVER_WEBSOCKET_PORT": "8080", "SERVER_WEBSOCKET_CONN_UNIQ_ID_HEADER": "x-user-id", "PUBLISHER_KAFKA_CLIENT_BOOTSTRAP_SERVERS": "host.docker.internal:9094", "METRIC_STATSD_ADDRESS": "host.docker.internal:8125"}` | env variables required by raccoon, [read more](https://odpf.gitbook.io/raccoon/reference/configurations) |
+| raccoon.config | object | `{"SERVER_WEBSOCKET_PORT": "8080", "SERVER_WEBSOCKET_CONN_UNIQ_ID_HEADER": "x-user-id", "PUBLISHER_KAFKA_CLIENT_BOOTSTRAP_SERVERS": "host.docker.internal:9094", "METRIC_STATSD_ADDRESS": "host.docker.internal:8125"}` | env variables required by raccoon, [read more](https://goto.gitbook.io/raccoon/reference/configurations) |
 | raccoon.image.pullPolicy | string | `"IfNotPresent"` | the Kubernetes [imagePullPolicy](https://kubernetes.io/docs/concepts/containers/images/#updating-images) value for raccoon container |
-| raccoon.image.repository | string | `"odpf/raccoon"` | docker repository to download raccoon image |
+| raccoon.image.repository | string | `"gotocompany/raccoon"` | docker repository to download raccoon image |
 | raccoon.image.tag | string | `"0.1.0"` | raccoon docker image tag |
 | raccoon.resources.limits.cpu | string | `"200m"` | raccoon container cpu limit |
 | raccoon.resources.limits.memory | string | `"512Mi"` | raccoon container memory limit |
@@ -121,7 +121,7 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```bash
-$ helm install my-release -f values.yaml odpf/raccoon
+$ helm install my-release -f values.yaml gotocompany/raccoon
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
@@ -131,7 +131,7 @@ The deployment is configurable by [overriding](https://helm.sh/docs/chart_templa
 ### Enable Telegraf As Sidecar
 Raccoon uses [statsd](https://www.datadoghq.com/blog/statsd/) to report metrics. Telegraf has statsd input plugin and has Influx output plugin. Once stored in Influx, the metrics can be visualized by using Grafana. More of that you can find it [here]().
 This chart includes Telegraf as sidecar. By default the sidecar is not enabled. To enable the Telegraf sidecar, you need to set `telegraf.enabled` and `telegraf.config.output.influxdb` to true.
-You also need to adjust `telegraf.config.output.influxdb.urls`, `telegraf.config.output.influxdb.database`, and `telegraf.config.output.influxdb.retention_policy`. By default, Raccoon is pointing to `:8086` for [METRIC_STATSD_ADDRESS](https://odpf.gitbook.io/raccoon/reference/configurations#metric_statsd_address). In which, will publish the metrics to the sidecar Telegraf.
+You also need to adjust `telegraf.config.output.influxdb.urls`, `telegraf.config.output.influxdb.database`, and `telegraf.config.output.influxdb.retention_policy`. By default, Raccoon is pointing to `:8086` for [METRIC_STATSD_ADDRESS](https://goto.gitbook.io/raccoon/reference/configurations#metric_statsd_address). In which, will publish the metrics to the sidecar Telegraf.
 Example of Telegraf enabled `values.yaml`
 ```
 telegraf:
@@ -150,7 +150,7 @@ telegraf:
         retention_policy: "autogen"
 ```
 ### Add Raccoon Configurations
-Apart from default Raccoon configurations mentioned above, Raccoon also has other application level [configurations](https://odpf.gitbook.io/raccoon/reference/configurations). You can provide the configuration under `raccoon.config.*`. Refer below for example
+Apart from default Raccoon configurations mentioned above, Raccoon also has other application level [configurations](https://goto.gitbook.io/raccoon/reference/configurations). You can provide the configuration under `raccoon.config.*`. Refer below for example
 ```
 raccoon:
   config:

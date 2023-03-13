@@ -8,8 +8,8 @@ A Helm chart for Kubernetes
 
 | Repository                     | Name            | Version |
 | ------------------------------ | --------------- | ------- |
-| https://odpf.github.io/charts/ | shield-app(app) | 0.3.0   |
-| https://odpf.github.io/charts/ | spicedb(app)    | 0.3.0   |
+| https://goto.github.io/charts/ | shield-app(app) | 0.3.0   |
+| https://goto.github.io/charts/ | spicedb(app)    | 0.3.0   |
 
 ## Values
 
@@ -30,7 +30,7 @@ A Helm chart for Kubernetes
 | shield-app.container.readinessProbe.httpGet.port                 | int    | `5556`                          |             |
 | shield-app.enabled                                               | bool   | `true`                          |             |
 | shield-app.image.pullPolicy                                      | string | `"IfNotPresent"`                |             |
-| shield-app.image.repository                                      | string | `"odpf/shield"`                 |             |
+| shield-app.image.repository                                      | string | `"gotocompany/shield"`                 |             |
 | shield-app.image.tag                                             | string | `"0.2.0-rc"`                    |             |
 | shield-app.ingress.annotations."kubernetes.io/ingress.class"     | string | `"contour"`                     |             |
 | shield-app.ingress.enabled                                       | bool   | `true`                          |             |
