@@ -16,7 +16,7 @@ deployment:
     type: RollingUpdate
 
 image:
-  repository: odpf/optimus
+  repository: gotocompany/optimus
   tag: "0.2.5"
   pullPolicy: Always
 

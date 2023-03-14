@@ -6,7 +6,7 @@ app:
   fullnameOverride: ""
 
   image:
-    repository: odpf/guardian
+    repository: gotocompany/guardian
     pullPolicy: Always
     tag: latest
   container:

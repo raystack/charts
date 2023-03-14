@@ -9,7 +9,7 @@ labels: {"application":"raccoon"}
 
 raccoon:
   image:
-    repository: odpf/raccoon
+    repository: gotocompany/raccoon
     pullPolicy: IfNotPresent
     tag: 0.1.0
   config:

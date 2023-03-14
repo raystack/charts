@@ -1,6 +1,6 @@
 # Meteor
 
-A [helm](https://helm.sh/) chart for [Meteor](https://github.com/odpf/meteor)
+A [helm](https://helm.sh/) chart for [Meteor](https://github.com/goto/meteor)
 
 ## TL;DR;
 
@@ -10,7 +10,7 @@ $ helm install [my-release] .
 
 ## Introduction
 
-This chart can be used for deploying [Meteor](https://github.com/odpf/meteor) on kubenetes using helm
+This chart can be used for deploying [Meteor](https://github.com/goto/meteor) on kubenetes using helm
 
 ## Installing the Chart
 
@@ -47,7 +47,7 @@ The following table lists the configurable parameters of the Meteor chart and th
 | recipes | object {\[filename\]: \[content\]} | [example](#sample-recipes-usage)  |  |
 | namespace | string | `-` | to override release namespace |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.repository | string | `"odpf/meteor"` | Image to use for deploying siren |
+| image.repository | string | `"gotocompany/meteor"` | Image to use for deploying siren |
 | image.tag | string | `"0.1.0"` |  |
 | labels | object | `{}` |  |
 | config | object | `{}` |  |

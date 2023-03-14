@@ -20,11 +20,11 @@ version: 0.1.4
 dependencies:
 - name: app
   version: "0.3.4"
-  repository: "https://odpf.github.io/charts/"
+  repository: "https://goto.github.io/charts-legacy/"
   alias: shield-app
   condition: shield-app.enabled
 - name: app
   version: "0.3.4"
-  repository: "https://odpf.github.io/charts/"
+  repository: "https://goto.github.io/charts-legacy/"
   alias: spicedb
   condition: spicedb.enabled

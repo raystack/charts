@@ -1,6 +1,6 @@
 app:
   image:
-    repository: odpf/entropy
+    repository: gotocompany/entropy
     pullPolicy: Always
     tag: "latest"
   container:

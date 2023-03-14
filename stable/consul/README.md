@@ -6,7 +6,7 @@ Minimal Helm chart for deploying consul server on kubernetes.
 
 ## Source Code
 
-- <https://github.com/odpf/charts>
+- <https://github.com/goto/charts>
 
 ## Values
 

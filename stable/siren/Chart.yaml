@@ -3,20 +3,20 @@ name: siren
 description: Siren Helm chart
 version: 0.1.2
 appVersion: v0.5.0
-home: https://github.com/odpf/siren
+home: https://github.com/goto/siren
 dependencies:
 - name: app
   version: "0.4.3"
-  repository: "https://odpf.github.io/charts/"
+  repository: "https://goto.github.io/charts-legacy/"
   alias: app
   condition: app.enabled
 - name: app
   version: "0.4.3"
-  repository: "https://odpf.github.io/charts/"
+  repository: "https://goto.github.io/charts-legacy/"
   alias: notification-worker
   condition: notification-worker.enabled
 - name: app
   version: "0.4.3"
-  repository: "https://odpf.github.io/charts/"
+  repository: "https://goto.github.io/charts-legacy/"
   alias: notification-dlq-worker
   condition: notification-dlq-worker.enabled

@@ -1,6 +1,6 @@
 # Siren
 
-A [helm](https://helm.sh/) chart for [Siren](https://github.com/odpf/siren)
+A [helm](https://helm.sh/) chart for [Siren](https://github.com/goto/siren)
 
 ## TL;DR;
 
@@ -10,7 +10,7 @@ $ helm install [my-release] .
 
 ## Introduction
 
-This chart can be used for deploying [Siren](https://github.com/odpf/siren) on kubenetes using helm
+This chart can be used for deploying [Siren](https://github.com/goto/siren) on kubenetes using helm
 
 ## Installing the Chart
 
@@ -45,7 +45,7 @@ The following table lists the configurable parameters of the Siren chart and the
 | affinity                           | object | `{}`                                                  |                                                                                                                                                                                        |
 | config                             | object | `{}` | Environement variables needed by siren                                                                                                                                                 |
 | image.pullPolicy                   | string | `"Always"`                                      |                                                                                                                                                                                        |
-| image.repository                   | string | `"odpf/siren"`                                        | Image to use for deploying siren                                                                                                                                                       |
+| image.repository                   | string | `"gotocompany/siren"`                                        | Image to use for deploying siren                                                                                                                                                       |
 | image.tag                          | string | `"v0.0.1"`                                            |                                                                                                                                                                                        |
 | ingress.annotations                | object | `{"kubernetes.io/ingress.class":"contour"}`           | Used to add custom labels to the Ingress Useful if for example you have multiple Ingress controllers and want your Ingress controllers to bind to specific Ingresses traffic: internal |
 | ingress.enabled                    | bool   | `true`                                                | Kubernetes ingress details                                                                                                                                                             |

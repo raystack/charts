@@ -1,6 +1,6 @@
 app:
   image:
-    repository: odpf/dex
+    repository: gotocompany/dex
     pullPolicy: Always
     tag: "latest"
   container:
