@@ -2,12 +2,13 @@ app:
   image:
     repository: gotocompany/compass
     pullPolicy: Always
-    tag: "0.3.0"
+    tag: "0.5.0"
   container:
     command:
       - compass
     args:
-      - serve
+      - server
+      - start
     livenessProbe:
       httpGet:
         path: /ping
@@ -22,6 +23,7 @@ app:
     command:
       - compass
     args:
+      - server
       - migrate
 
   service:
