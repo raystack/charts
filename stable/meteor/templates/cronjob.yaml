@@ -42,23 +42,6 @@ spec:
               - secretRef:
                   name: "{{ include "meteor.name" . }}-secret"
             {{- end }}
-          restartPolicy: Never
-          volumes:
-            - name: "{{ include "meteor.name" . }}-volume"
-              configMap:
-                name: "{{ include "meteor.name" . }}-recipe-configmap"
-                items:
-                {{- range $k, $v := .Values.recipes }}
-                - key: {{ $k }}
-                  path: {{ $k }}
-                {{- end }}
-            {{- range $k, $v := .Values.ssl_secrets }}
-            - name: {{ $v }}
-              secret:
-                defaultMode: 420
-                optional: true
-                secretName: {{ $v }}
-            {{- end }}
           {{- if .Values.telegraf.enabled }}
           - name: telegraf-sidecar
             image: {{ .Values.telegraf.image }}
@@ -78,7 +61,25 @@ spec:
             volumeMounts:
               - name: telegraf-conf
                 mountPath: /etc/telegraf/
+          {{- end }}
+          restartPolicy: Never
           volumes:
+            - name: "{{ include "meteor.name" . }}-volume"
+              configMap:
+                name: "{{ include "meteor.name" . }}-recipe-configmap"
+                items:
+                {{- range $k, $v := .Values.recipes }}
+                - key: {{ $k }}
+                  path: {{ $k }}
+                {{- end }}
+            {{- range $k, $v := .Values.ssl_secrets }}
+            - name: {{ $v }}
+              secret:
+                defaultMode: 420
+                optional: true
+                secretName: {{ $v }}
+            {{- end }}
+          {{- if .Values.telegraf.enabled }}
             - name: telegraf-conf
               configMap:
                 name: {{ include "meteor.name" . }}-telegraf
