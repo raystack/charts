@@ -47,8 +47,8 @@ The following table lists the configurable parameters of the Meteor chart and th
 | recipes | object {\[filename\]: \[content\]} | [example](#sample-recipes-usage)  |  |
 | namespace | string | `-` | to override release namespace |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.repository | string | `"gotocompany/meteor"` | Image to use for deploying siren |
-| image.tag | string | `"0.1.0"` |  |
+| image.repository | string | `"gotocompany/meteor"` | Image to use for deploying meteor |
+| image.tag | string | `"0.8.0"` |  |
 | labels | object | `{}` |  |
 | config | object | `{}` |  |
 | secretConfig | object | `{}` | secrets |

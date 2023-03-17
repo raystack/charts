@@ -3,7 +3,7 @@ concurrencyPolicy: "Forbid"
 image:
   # [required] repository where meteor Docker image is available
   repository: gotocompany/meteor
-  tag: "0.5.1"
+  tag: "0.8.0"
   pullPolicy: IfNotPresent
 labels: {"application":"meteor"}
 
