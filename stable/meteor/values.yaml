@@ -12,6 +12,7 @@ secretConfig: {}
 # pass in secret names to be mounted to cronjob
 ssl_secrets: []
 
+jobDeadlineSeconds: 14400
 # sample recipe usage
 # recipes:
 #   sample-recipe.yaml: |-
