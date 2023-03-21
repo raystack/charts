@@ -26,9 +26,17 @@ spec:
             image: "{{ required `image.repository is required` .Values.image.repository }}:{{ .Values.image.tag }}"
             imagePullPolicy: {{ .Values.image.pullPolicy }}
             command:
+            {{- if .Values.telegraf.enabled }}
+              - /bin/sh
+              - -c
+              - |
+                meteor run /opt/recipes;
+                pkill -SIGTERM telegraf
+            {{- else}}
               - meteor
               - run
               - /opt/recipes
+            {{- end }}
             volumeMounts:
               - name: "{{ include "meteor.name" . }}-volume"
                 mountPath: /opt/recipes
@@ -62,6 +70,7 @@ spec:
             volumeMounts:
               - name: telegraf-conf
                 mountPath: /etc/telegraf/
+          shareProcessNamespace: true
           {{- end }}
           restartPolicy: Never
           volumes:
