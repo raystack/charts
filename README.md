@@ -1,7 +1,7 @@
 # Charts
-[Helm](https://github.com/helm/helm) Charts for Open Data Platform
+[Helm](https://github.com/helm/helm) Charts for Goto company ecosystem.
 
-Charts are curated application definitions for [Helm](https://github.com/helm/helm). Use this repository to submit official Open Data Platform helm Charts. For more information about installing and using Helm, see it's `README.md`.
+Charts are curated application definitions for [Helm](https://github.com/helm/helm). Use this repository to submit official Goto company helm Charts. For more information about installing and using Helm, see it's `README.md`.
 
 ## TL;DR
 
