@@ -38,6 +38,10 @@ firehose:
       cpu: 200m
       memory: 512Mi
 
+taints: 
+  enabled: false
+  list: {}
+
 init-firehose:
   enabled: false
   image:
