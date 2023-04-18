@@ -29,11 +29,17 @@ spec:
         name: {{ .Chart.Name }}
         image: "{{ .Values.firehose.image.repository }}:{{ .Values.firehose.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.firehose.image.pullPolicy }}
+        {{- if or (index .Values "init-firehose" "enabled") (gt (len .Values.volumeMounts) 0) }}
         volumeMounts:
         {{- if index .Values "init-firehose" "enabled" }}
         - mountPath: /work-dir
           name: workdir
         {{- end }}
+        {{- range $_, $volumeMount := .Values.volumeMounts }}
+        - name: {{ $volumeMount.name}}
+          mountPath: {{ $volumeMount.mountPath }}
+        {{- end}}
+        {{- end}}
         resources:
           {{- toYaml .Values.firehose.resources | nindent 12 }}
         envFrom:
@@ -75,6 +81,7 @@ spec:
         - mountPath: /work-dir
           name: workdir
       {{- end }}
+      {{if or (index .Values.telegraf.enabled) (index .Values "init-firehose" "enabled") (gt (len .Values.volumes) 0)}}
       volumes:
       {{- if index .Values.telegraf.enabled }}
       - configMap:
@@ -85,3 +92,50 @@ spec:
       - emptyDir: {}
         name: workdir
       {{- end }}
+      {{- range $_, $volume := .Values.volumes }}
+      - name: {{ $volume.name}}
+        secretName: {{ $volume.secretName }}
+        defaultMode: {{ $volume.defaultMode }}
+        items: {{- range $_, $item := $volume.items }}
+          - key: {{ $item.key }}
+            path: {{ $item.path }}
+        {{- end}}
+      {{- end}}
+      {{- end}}
+
+      {{- if (gt (len .Values.tolerations) 0) }}
+      tolerations: {{- range $_, $toleration := .Values.tolerations }}
+        - key: {{ $toleration.key }}
+          operator: {{ $toleration.operator }}
+          value: {{ $toleration.value }}
+          effect: {{ $toleration.effect }}
+        {{- end }}
+      {{- end}}
+      {{- if or (gt (len .Values.nodeAffinitiyMatchExpressions.requiredDuringSchedulingIgnoredDuringExecution) 0) (gt (len .Values.nodeAffinitiyMatchExpressions.preferredDuringSchedulingIgnoredDuringExecution) 0) }}
+      affinity:
+        nodeAffinity:
+          {{- if (gt (len .Values.nodeAffinitiyMatchExpressions.requiredDuringSchedulingIgnoredDuringExecution) 0) }}
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions: {{- range $_, $expression := .Values.nodeAffinitiyMatchExpressions.requiredDuringSchedulingIgnoredDuringExecution }}
+                  - key: {{ $expression.key }}
+                    operator: {{ $expression.operator }}
+                    values: {{- range $expression.values }}
+                      - {{ . }}
+                    {{- end}}
+              {{- end}}
+          {{- end}}
+          {{- if (gt (len .Values.nodeAffinitiyMatchExpressions.preferredDuringSchedulingIgnoredDuringExecution) 0) }}
+          preferredDuringSchedulingIgnoredDuringExecution: {{- range $_, $expression := .Values.nodeAffinitiyMatchExpressions.preferredDuringSchedulingIgnoredDuringExecution }}
+            - weight: {{ $expression.weight}}   
+              preference:   
+                matchExpressions: {{- range $_, $pref := $expression.preference }}   
+                  - key: {{ $pref.key }}
+                    operator: {{ $pref.operator }}
+                    values: {{- range $pref.values }}
+                      - {{ . }}
+                    {{- end}}
+                {{- end}}
+          {{- end}}
+          {{- end}}
+      {{- end}}

@@ -93,6 +93,30 @@ The following table lists the configurable parameters of Firehose chart and thei
 | telegraf.resources.limits.memory | string | `"64Mi"` | telegraf container memory limit |
 | telegraf.resources.requests.cpu | string | `"50m"` | telegraf container cpu requests |
 | telegraf.resources.requests.memory | string | `"64Mi"` | telegraf container memory requests |
+| tolerations | list | - | List of Kubernetes [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) |
+| volumes | list | - | List of Kubernetes [volumes](https://kubernetes.io/docs/concepts/storage/volumes/) |
+| volumeMounts | list | - | List of Kubernetes [volume mounts](https://kubernetes.io/docs/concepts/storage/volumes/#using-volumes) |
+| nodeAffinityMatchExpressions.requiredDuringSchedulingIgnoredDuringExecution | list | - | List of Kubernetes [node affinity match expressions](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity) that are required for the pod to be scheduled on a node |
+| nodeAffinityMatchExpressions.preferredDuringSchedulingIgnoredDuringExecution | list | - | List of Kubernetes [preferred node affinity match expressions](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#preferred-during-scheduling-ignoreduringexecution) for the pod scheduling |
+| tolerations.key | string | `"key1"` | Key to be mached |
+| tolerations.operator | string | `"Equal"` | Operation to be checked |
+| tolerations.value | string | `"value1"` | Values against which operation is performed |
+| tolerations.effect | string | `"NoSchedule"` | Taint effect |
+| volumes.name | string | - | Name of the Kubernetes volume |
+| volumes.items.key | string | - | Key of the secret data |
+| volumes.items.path | string | - | Path where the secret data will be mounted |
+| volumes.secretName | string | - | Name of the Kubernetes secret |
+| volumes.defaultMode | integer | - | Default file permissions for the volume |
+| volumeMounts.name | string | - | Name of the Kubernetes volume |
+| volumeMounts.mountPath | string | - | Path within the container where the volume should be mounted |
+| nodeAffinityMatchExpressions.requiredDuringSchedulingIgnoredDuringExecution.key | string | - | Key of the node affinity match expression |
+| nodeAffinityMatchExpressions.requiredDuringSchedulingIgnoredDuringExecution.operator | string | - | Operator of the node affinity match expression |
+| nodeAffinityMatchExpressions.requiredDuringSchedulingIgnoredDuringExecution.values | list | - | List of values of the node affinity match expression |
+| nodeAffinityMatchExpressions.preferredDuringSchedulingIgnoredDuringExecution.weight | integer | - | Weight of the preferred node affinity match expression |
+| nodeAffinityMatchExpressions.preferredDuringSchedulingIgnoredDuringExecution.preference.key | string | - | Key of the preferred node affinity match expression |
+| nodeAffinityMatchExpressions.preferredDuringSchedulingIgnoredDuringExecution.preference.operator | string | - | Operator of the preferred node affinity match expression |
+| nodeAffinityMatchExpressions.preferredDuringSchedulingIgnoredDuringExecution.preference.values | list | - | List of values of the preferred node affinity match expression |
+
 ---
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.

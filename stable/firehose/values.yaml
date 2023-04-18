@@ -38,6 +38,16 @@ firehose:
       cpu: 200m
       memory: 512Mi
 
+tolerations: []
+
+volumes: []
+
+volumeMounts: []
+
+nodeAffinitiyMatchExpressions:
+  requiredDuringSchedulingIgnoredDuringExecution: []
+  preferredDuringSchedulingIgnoredDuringExecution: []
+
 init-firehose:
   enabled: false
   image:
