@@ -29,13 +29,13 @@ spec:
         name: {{ .Chart.Name }}
         image: "{{ .Values.firehose.image.repository }}:{{ .Values.firehose.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.firehose.image.pullPolicy }}
-        {{- if or (index .Values "init-firehose" "enabled") (gt (len .Values.volumeMounts) 0) }}
+        {{- if or (index .Values "init-firehose" "enabled") (gt (len .Values.firehose.volumeMounts) 0) }}
         volumeMounts:
         {{- if index .Values "init-firehose" "enabled" }}
         - mountPath: /work-dir
           name: workdir
         {{- end }}
-        {{- range $_, $volumeMount := .Values.volumeMounts }}
+        {{- range $_, $volumeMount := .Values.firehose.volumeMounts }}
         - name: {{ $volumeMount.name}}
           mountPath: {{ $volumeMount.mountPath }}
         {{- end}}

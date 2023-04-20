@@ -37,12 +37,11 @@ firehose:
     requests:
       cpu: 200m
       memory: 512Mi
+  volumeMounts: []
 
 tolerations: []
 
 volumes: []
-
-volumeMounts: []
 
 nodeAffinitiyMatchExpressions:
   requiredDuringSchedulingIgnoredDuringExecution: []
