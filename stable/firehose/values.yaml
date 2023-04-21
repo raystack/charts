@@ -43,7 +43,7 @@ tolerations: []
 
 volumes: []
 
-nodeAffinitiyMatchExpressions:
+nodeAffinityMatchExpressions:
   requiredDuringSchedulingIgnoredDuringExecution: []
   preferredDuringSchedulingIgnoredDuringExecution: []
 
