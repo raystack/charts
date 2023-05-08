@@ -3,6 +3,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ include "app.fullname" . }}-migration-job
+  namespace: "{{ include "app.namespace" . }}"
   labels:
     {{- include "app.labels" . | nindent 4 }}
   annotations:
