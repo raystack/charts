@@ -141,3 +141,5 @@ telegraf:
   args:
   command:
     - telegraf
+
+podLabels: {}
