@@ -7,7 +7,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: "{{ $fullName | trunc 24 }}-{{ $i }}-{{ $job.name | trunc 24}}"
-  namespace: {{ $.Release.Namespace }}
+  namespace: "{{ include "app.namespace" . }}"
   labels:
     {{- $appLabels | nindent 4 }}
 spec:
