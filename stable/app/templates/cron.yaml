@@ -2,6 +2,7 @@
 {{- $fullName := include "app.fullname" . -}}
 {{- $appLabels := include "app.labels" . -}}
 {{- $appSelectorLabels := include "app.selectorLabels" . -}}
+{{- $podLabels := .Values.podLabels }}
 {{- range $i, $job := .Values.cron.jobs }}
 apiVersion: batch/v1
 kind: CronJob
@@ -18,7 +19,10 @@ spec:
       template:
         metadata:
           labels:
-        {{- $appSelectorLabels | nindent 12 }}
+            {{- $appSelectorLabels | nindent 12 }}
+            {{- with $podLabels }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
         spec:
           containers:
             - name: {{ $job.name }}
