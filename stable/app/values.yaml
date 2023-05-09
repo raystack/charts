@@ -142,3 +142,16 @@ telegraf:
   args:
   command:
     - telegraf
+
+serviceAccount:
+  enabled: false
+  annotations: {}
+  automountServiceAccountToken: true
+
+rbac:
+  enabled: false
+  annotations: {}
+  rules:
+    - apiGroups: [""]
+      resources: ["pods"]
+      verbs: ["get", "watch", "list"]
