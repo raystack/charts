@@ -1,0 +1,24 @@
+{{- if .Values.cleanupConfig.enabled -}}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "app.fullname" . }}-cleanup
+spec:
+  schedule: {{ .Values.cleanupConfig.schedule }}
+  concurrencyPolicy: {{ .Values.cleanupConfig.concurrencyPolicy }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: {{ include "app.fullname" . }}-cleanup
+            image: {{ .Values.cleanupConfig.image }}
+            envFrom:
+            - configMapRef:
+                name: {{ template "app.fullname" . }}
+            env:
+            - name: QUERIES
+              value: "{{- range .Values.cleanupConfig.queries -}} {{.}} {{- end }}"
+            command: ["sh", "-c", "set -x; echo $QUERIES; psql $OPTIMUS_SERVE_DB_DSN -c \"$QUERIES\";"]
+          restartPolicy: {{ .Values.cleanupConfig.restartPolicy }}
+{{- end }}

@@ -68,6 +68,18 @@ config:
 
 secretConfig: {}
 
+cleanupConfig:
+  enabled: true
+  schedule: "0 0 1 * *" # Runs At 00:00 on day-of-month 1
+  image: "postgres:15.2-alpine3.17"
+  restartPolicy: OnFailure
+  concurrencyPolicy: Forbid
+  queries:
+    - "delete from sensor_run where start_time < now() - Interval '30d';"
+    - "delete from task_run   where start_time < now() - Interval '30d';"
+    - "delete from hook_run   where start_time < now() - Interval '30d';"
+    - "delete from job_run    where start_time < now() - Interval '60d';"
+
 service:
   type: ClusterIP
   ports:
