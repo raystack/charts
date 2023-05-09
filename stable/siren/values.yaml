@@ -15,6 +15,7 @@ app:
       httpGet:
         path: /ping
         port: tcp
+  podLabels: {}
 
   migration:
     enabled: true
