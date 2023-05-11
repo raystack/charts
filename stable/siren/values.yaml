@@ -72,6 +72,7 @@ notification-worker:
         - ps -ef | grep siren | grep -v grep
       initialDelaySeconds: 10
       periodSeconds: 10
+  podLabels: {}
 
   migration:
     enabled: false
@@ -115,6 +116,7 @@ notification-dlq-worker:
         - ps -ef | grep siren | grep -v grep
       initialDelaySeconds: 10
       periodSeconds: 10
+  podLabels: {}
 
   migration:
     enabled: false
