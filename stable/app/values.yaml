@@ -155,3 +155,11 @@ rbac:
     - apiGroups: [""]
       resources: ["pods"]
       verbs: ["get", "watch", "list"]
+
+autoscaling:
+  enabled: false
+  annotations: {}
+  minReplicas: 1
+  maxReplicas: 2
+  targetMemory: 80
+  targetCPU: 80
