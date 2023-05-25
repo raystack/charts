@@ -27,7 +27,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.serviceAccount.enabled -}}
+      {{- if .Values.serviceAccount.enabled }}
       serviceAccountName: {{ include "app.fullname" . }}
       {{- end }}
       securityContext:
