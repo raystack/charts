@@ -68,10 +68,42 @@ spec:
           envFrom:
             - configMapRef:
                 name: "{{ include "app.fullname" . }}"
-         {{- if .Values.secretConfig }}      
+         {{- if .Values.secretConfig }}
             - secretRef:
                 name: "{{ template "app.fullname" . }}-secret"
          {{- end }}
+        {{- if .Values.otelcollector.enabled }}
+        - name: otel-collector-sidecar
+          image: {{ .Values.otelcollector.image }}
+          command:
+            - "--config=/etc/otelcollector/config.yaml"
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 1888
+            name: pprof
+            protocol: tcp
+          - containerPort: 8888
+            name: prometheus_self
+            protocol: tcp
+          - containerPort: 8889
+            name: prometheus
+            protocol: tcp
+          - containerPort: 13133
+            name: healthcheck
+            protocol: tcp
+          - containerPort: 4317
+            name: otlpgrpcreceiver
+            protocol: tcp
+          - containerPort: 4318
+            name: otlphttpreceiver
+            protocol: tcp
+          - containerPort: 55679
+            name: zpages
+            protocol: tcp
+          volumeMounts:
+            - name: otelcollector-conf
+              mountPath: /etc/otelcollector/
+        {{- end }}
         {{- if .Values.telegraf.enabled }}
         - name: telegraf-sidecar
           image: {{ .Values.telegraf.image }}
@@ -100,6 +132,11 @@ spec:
         - name: telegraf-conf
           configMap:
             name: {{ template "app.fullname" . }}-telegraf
+        {{- end }}
+        {{- if .Values.otelcollector.enabled }}
+        - name: otelcollector-conf
+          configMap:
+            name: {{ template "app.fullname" . }}-otelcollector
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
