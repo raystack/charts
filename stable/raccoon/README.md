@@ -22,7 +22,7 @@ This chart runs [Raccoon](https://github.com/odpf/raccoon) deployment on [Kubern
 **Add the odpf charts repo**
   
 ```bash
-$ helm repo add odpf https://odpf.github.io/charts/
+$ helm repo add odpf https://raystack.github.io/charts/
 ```
 
 **Install it with Helm 3**

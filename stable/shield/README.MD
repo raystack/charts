@@ -8,8 +8,8 @@ A Helm chart for Kubernetes
 
 | Repository                     | Name            | Version |
 | ------------------------------ | --------------- | ------- |
-| https://odpf.github.io/charts/ | shield-app(app) | 0.3.0   |
-| https://odpf.github.io/charts/ | spicedb(app)    | 0.3.0   |
+| https://raystack.github.io/charts/ | shield-app(app) | 0.3.0   |
+| https://raystack.github.io/charts/ | spicedb(app)    | 0.3.0   |
 
 ## Values
 
