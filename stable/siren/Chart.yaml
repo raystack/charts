@@ -7,16 +7,16 @@ home: https://github.com/odpf/siren
 dependencies:
 - name: app
   version: "0.4.3"
-  repository: "https://odpf.github.io/charts/"
+  repository: "https://raystack.github.io/charts/"
   alias: app
   condition: app.enabled
 - name: app
   version: "0.4.3"
-  repository: "https://odpf.github.io/charts/"
+  repository: "https://raystack.github.io/charts/"
   alias: notification-worker
   condition: notification-worker.enabled
 - name: app
   version: "0.4.3"
-  repository: "https://odpf.github.io/charts/"
+  repository: "https://raystack.github.io/charts/"
   alias: notification-dlq-worker
   condition: notification-dlq-worker.enabled

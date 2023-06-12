@@ -8,7 +8,7 @@ A Helm chart for Kubernetes
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://odpf.github.io/charts/ | app | 0.4.0 |
+| https://raystack.github.io/charts/ | app | 0.4.0 |
 
 ## Values
 

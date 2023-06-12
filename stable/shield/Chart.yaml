@@ -20,11 +20,11 @@ version: 0.1.4
 dependencies:
 - name: app
   version: "0.3.4"
-  repository: "https://odpf.github.io/charts/"
+  repository: "https://raystack.github.io/charts/"
   alias: shield-app
   condition: shield-app.enabled
 - name: app
   version: "0.3.4"
-  repository: "https://odpf.github.io/charts/"
+  repository: "https://raystack.github.io/charts/"
   alias: spicedb
   condition: spicedb.enabled

@@ -17,7 +17,7 @@ Install [helm3](https://helm.sh/docs/intro/install/#helm)
 * Add the odpf charts repo
   
 ```bash
-$ helm repo add odpf https://odpf.github.io/charts/
+$ helm repo add odpf https://raystack.github.io/charts/
 ```
 
 * Install it with Helm 3
