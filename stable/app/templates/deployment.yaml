@@ -81,25 +81,25 @@ spec:
           ports:
           - containerPort: 1888
             name: pprof
-            protocol: tcp
+            protocol: TCP
           - containerPort: 8888
-            name: prometheus_self
-            protocol: tcp
+            name: prometheusself
+            protocol: TCP
           - containerPort: 8889
             name: prometheus
-            protocol: tcp
+            protocol: TCP
           - containerPort: 13133
             name: healthcheck
-            protocol: tcp
+            protocol: TCP
           - containerPort: 4317
-            name: otlpgrpcreceiver
-            protocol: tcp
+            name: otlpgrpcrecv
+            protocol: TCP
           - containerPort: 4318
-            name: otlphttpreceiver
-            protocol: tcp
+            name: otlphttprecv
+            protocol: TCP
           - containerPort: 55679
             name: zpages
-            protocol: tcp
+            protocol: TCP
           volumeMounts:
             - name: otelcollector-conf
               mountPath: /etc/otelcollector/
