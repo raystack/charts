@@ -1,0 +1,13 @@
+{{- if .Values.telegraf.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "meteor.name" . }}-telegraf
+  labels:
+{{- if .Values.labels }}
+{{ toYaml .Values.labels | indent 4 }}
+{{- end }}
+data:
+  telegraf.conf: |-
+{{ .Values.telegraf.config | indent 4 }}
+{{- end }}

@@ -22,3 +22,12 @@ ssl_secrets: []
 #         foo: "bar"
 #     sinks:
 #       - name: console
+telegraf:
+  enabled: false
+  image: telegraf:1.19.3-alpine
+  config: ~ # telegraf config
+  containerPort: 8125
+  protocol: UDP
+  args:
+  command:
+    - telegraf

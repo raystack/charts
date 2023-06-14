@@ -52,6 +52,12 @@ The following table lists the configurable parameters of the Meteor chart and th
 | labels | object | `{}` |  |
 | config | object | `{}` |  |
 | secretConfig | object | `{}` | secrets |
+| telegraf.enabled                      | bool   | `false`                                                                                       |                                                                      |
+| telegraf.command                      | list   | `["telegraf"]`                                                                                |                                                                      |
+| telegraf.args                         | list   | `[]`                                                                                          |                                                                      |
+| telegraf.containerPort                | int    | `8125`                                                                                        |                                                                      |
+| telegraf.protocol                     | string | `UDP`                                                                                         |                                                                      |
+| telegraf.config                       | string | `""`                                                                                          | telegraf config file content                                         |
 
 ### Using recipes values
 ```
