@@ -75,9 +75,9 @@ spec:
         {{- if .Values.otelcollector.enabled }}
         - name: otel-collector-sidecar
           image: {{ .Values.otelcollector.image }}
-          command:
-            - "--config=/etc/otelcollector/config.yaml"
           imagePullPolicy: IfNotPresent
+          args:
+            - "--config=/etc/otelcollector/config.yaml"
           ports:
           - containerPort: 1888
             name: pprof
