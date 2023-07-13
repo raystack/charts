@@ -29,22 +29,24 @@ spec:
         name: {{ .Chart.Name }}
         image: "{{ .Values.firehose.image.repository }}:{{ .Values.firehose.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.firehose.image.pullPolicy }}
-        {{- if or (index .Values "init-firehose" "enabled") (gt (len .Values.firehose.volumeMounts) 0) }}
+        {{- if or (index .Values "init-firehose" "enabled") (gt (len .Values.mountSecrets) 0 ) }}
         volumeMounts:
         {{- if index .Values "init-firehose" "enabled" }}
         - mountPath: /work-dir
           name: workdir
         {{- end }}
-        {{- range $_, $volumeMount := .Values.firehose.volumeMounts }}
-        - name: {{ $volumeMount.name}}
-          mountPath: {{ $volumeMount.mountPath }}
-        {{- end}}
-        {{- end}}
+        {{- if (gt (len .Values.mountSecrets) 0 ) }}
+        - mountPath: /etc/secret/{{ include "firehose.fullname" . }}-mount-secrets
+          name: {{ include "firehose.fullname" . }}-mount-secrets
+        {{- end }}
+        {{- end }}
         resources:
           {{- toYaml .Values.firehose.resources | nindent 12 }}
         envFrom:
           - configMapRef:
               name: {{ include "firehose.fullname" . }}-config
+          - secretRef:
+              name: {{ include "firehose.fullname" . }}-secrets
         env:
         - name: POD_NAME
           valueFrom:
@@ -81,7 +83,7 @@ spec:
         - mountPath: /work-dir
           name: workdir
       {{- end }}
-      {{if or (index .Values.telegraf.enabled) (index .Values "init-firehose" "enabled") (gt (len .Values.secretsAsVolumes) 0)}}
+      {{if or (index .Values.telegraf.enabled) (index .Values "init-firehose" "enabled") (gt (len .Values.mountSecrets) 0 ) }}
       volumes:
       {{- if index .Values.telegraf.enabled }}
       - configMap:
@@ -92,14 +94,15 @@ spec:
       - emptyDir: {}
         name: workdir
       {{- end }}
-      {{- range $_, $volume := .Values.secretsAsVolumes }}
-      - name: {{ $volume.name}}
+      {{- if (gt (len .Values.mountSecrets) 0 ) }}
+      - name: {{ include "firehose.fullname" . }}-mount-secrets
         secret:
-          secretName: {{ $volume.secretName }}
-          defaultMode: {{ $volume.defaultMode }}
-          items: {{- range $_, $item := $volume.items }}
-            - key: {{ $item.key }}
-              path: {{ $item.path }}
+          secretName: {{ include "firehose.fullname" . }}-mount-secrets
+          defaultMode:  420
+          items:
+          {{- range $_, $mountSecret := .Values.mountSecrets}}
+            - key: {{$mountSecret.key}}
+              path: {{$mountSecret.path}}
           {{- end}}
       {{- end}}
       {{- end}}

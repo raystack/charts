@@ -37,11 +37,8 @@ firehose:
     requests:
       cpu: 200m
       memory: 512Mi
-  volumeMounts: []
 
 tolerations: []
-
-secretsAsVolumes: []
 
 nodeAffinityMatchExpressions:
   requiredDuringSchedulingIgnoredDuringExecution: []
@@ -85,3 +82,7 @@ telegraf:
     requests:
       cpu: 50m
       memory: 64Mi
+
+envSecrets: {}
+mountSecrets: []
+
