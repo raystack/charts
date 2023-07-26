@@ -20,6 +20,8 @@ firehose:
     SOURCE_KAFKA_CONSUMER_CONFIG_AUTO_OFFSET_RESET: latest
     INPUT_SCHEMA_PROTO_CLASS: com.github.firehose.sampleLogProto.SampleLogMessage
     JAVA_TOOL_OPTIONS: "-javaagent:jolokia-jvm-agent.jar=port=8778,host=localhost"
+    METRIC_STATSD_HOST: localhost
+    METRIC_STATSD_PORT: 8125
   args:
     [
       "java",
