@@ -2,16 +2,16 @@ apiVersion: v1
 entries:
   app:
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.910152041Z"
+    created: "2023-07-27T07:37:21.512809078Z"
     description: A Helm chart for Kubernetes
-    digest: 00d5104eea448837100f1a2d7b8a677b6aa05ce842c9751ff0aa3e8a81297282
+    digest: 1ed3aef60fcb59b22e76dc81cbf6012cc7845a43bb444a3b885bfc55e50d5795
     name: app
     type: application
     urls:
     - https://raystack.github.io/charts/app-0.5.2.tgz
     version: 0.5.2
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.909137793Z"
+    created: "2023-07-27T07:37:21.511960162Z"
     description: A Helm chart for Kubernetes
     digest: 94b3bebde6eaa705cdbca16bed6b6f8525a0c74e2a91465fd0aac84aab94f2ff
     name: app
@@ -20,7 +20,7 @@ entries:
     - https://raystack.github.io/charts/app-0.5.1.tgz
     version: 0.5.1
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.908100833Z"
+    created: "2023-07-27T07:37:21.511094446Z"
     description: A Helm chart for Kubernetes
     digest: b48da9947e72b08e34df836af721fc8c814d1095ba248b919840670079a71bc6
     name: app
@@ -29,7 +29,7 @@ entries:
     - https://raystack.github.io/charts/app-0.5.0.tgz
     version: 0.5.0
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.907055468Z"
+    created: "2023-07-27T07:37:21.51025363Z"
     description: A Helm chart for Kubernetes
     digest: 0df32d2e2b8199a55fa155c2bde75ef49e6e6df5c436a60ab9247eafb26df418
     name: app
@@ -38,7 +38,7 @@ entries:
     - https://raystack.github.io/charts/app-0.4.3.tgz
     version: 0.4.3
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.905998396Z"
+    created: "2023-07-27T07:37:21.509516916Z"
     description: A Helm chart for Kubernetes
     digest: 4fd9e108b2acf35827d24bdcfe9bd90c5e45d318a79b1669eeaec05f1068c2af
     name: app
@@ -47,7 +47,7 @@ entries:
     - https://raystack.github.io/charts/app-0.4.2.tgz
     version: 0.4.2
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.904971141Z"
+    created: "2023-07-27T07:37:21.508807303Z"
     description: A Helm chart for Kubernetes
     digest: e3144a36fbc2bc97d96711995a8f90e5e5c76fda4fd0e7633161d2672c2e465a
     name: app
@@ -56,7 +56,7 @@ entries:
     - https://raystack.github.io/charts/app-0.4.1.tgz
     version: 0.4.1
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.903968099Z"
+    created: "2023-07-27T07:37:21.508071789Z"
     description: A Helm chart for Kubernetes
     digest: 91b5c7ade2ec1aaf000ac5eb7e7216ff0fe41374f2637b0b228f869bf26bd68b
     name: app
@@ -65,7 +65,7 @@ entries:
     - https://raystack.github.io/charts/app-0.4.0.tgz
     version: 0.4.0
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.902085982Z"
+    created: "2023-07-27T07:37:21.507355275Z"
     description: A Helm chart for Kubernetes
     digest: d1fe430c759477b19c5aa129c2e8c3dc39286a20865267d303d9a2bf52ccbea8
     name: app
@@ -74,7 +74,7 @@ entries:
     - https://raystack.github.io/charts/app-0.3.4.tgz
     version: 0.3.4
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.90006559Z"
+    created: "2023-07-27T07:37:21.506654062Z"
     description: A Helm chart for Kubernetes
     digest: 2ef4216aae207e68858449c4d5b27352e6c2db6d035bfb6edfd4c8580eef7534
     name: app
@@ -83,7 +83,7 @@ entries:
     - https://raystack.github.io/charts/app-0.3.3.tgz
     version: 0.3.3
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.899021025Z"
+    created: "2023-07-27T07:37:21.505896848Z"
     description: A Helm chart for Kubernetes
     digest: 930974a06260d90c34a2399de432ba97b369dea7d1800c56cce4781ca3abcd32
     name: app
@@ -92,7 +92,7 @@ entries:
     - https://raystack.github.io/charts/app-0.3.2.tgz
     version: 0.3.2
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.897951748Z"
+    created: "2023-07-27T07:37:21.504787327Z"
     description: A Helm chart for Kubernetes
     digest: 46aca5acca5acfc4d5720f998513a1549eedcd89d75de72739b58411e4a29b78
     name: app
@@ -101,7 +101,7 @@ entries:
     - https://raystack.github.io/charts/app-0.3.1.tgz
     version: 0.3.1
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.897041556Z"
+    created: "2023-07-27T07:37:21.503985312Z"
     description: A Helm chart for Kubernetes
     digest: fe48c8931c4814a74d331fabd6f2b5ce36271afffb0ebeac12bfc923dfac59ca
     name: app
@@ -110,7 +110,7 @@ entries:
     - https://raystack.github.io/charts/app-0.3.0.tgz
     version: 0.3.0
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.896220412Z"
+    created: "2023-07-27T07:37:21.503163496Z"
     description: A Helm chart for Kubernetes
     digest: 61d310d8e7a0c08865a2594d3fb3c22987c17301eb3395774f10300d5e13c7e8
     name: app
@@ -119,7 +119,7 @@ entries:
     - https://raystack.github.io/charts/app-0.2.2.tgz
     version: 0.2.2
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.895546648Z"
+    created: "2023-07-27T07:37:21.501542665Z"
     description: A Helm chart for Kubernetes
     digest: c703c96aa30e40071d17075c04ee217111cf290b2934cb3c8bd8405bfcbebad4
     name: app
@@ -128,7 +128,7 @@ entries:
     - https://raystack.github.io/charts/app-0.2.1.tgz
     version: 0.2.1
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.894840966Z"
+    created: "2023-07-27T07:37:21.500975155Z"
     description: A Helm chart for Kubernetes
     digest: da81c1420942e46fd3848fcefd1f9a715ad48906673afce44bd854cf67a8d0df
     name: app
@@ -137,7 +137,7 @@ entries:
     - https://raystack.github.io/charts/app-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.894160499Z"
+    created: "2023-07-27T07:37:21.500413744Z"
     description: A Helm chart for Kubernetes
     digest: fd4d3424210e0ab4102288789a26f34db35bc890e68306e0715c42dc506e29cb
     name: app
@@ -146,7 +146,7 @@ entries:
     - https://raystack.github.io/charts/app-0.1.4.tgz
     version: 0.1.4
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.893454017Z"
+    created: "2023-07-27T07:37:21.499855533Z"
     description: A Helm chart for Kubernetes
     digest: 19d5e3d976987cc250daf023c031fcf615c3d4bcc9fb888f431134215d251f9e
     name: app
@@ -155,7 +155,7 @@ entries:
     - https://raystack.github.io/charts/app-0.1.3.tgz
     version: 0.1.3
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.892761743Z"
+    created: "2023-07-27T07:37:21.499305123Z"
     description: A Helm chart for Kubernetes
     digest: 8a23cab82bc3c33277c234e5382fb1ab42f912bb49f4253c9acf6836bbfaafb1
     name: app
@@ -164,7 +164,7 @@ entries:
     - https://raystack.github.io/charts/app-0.1.2.tgz
     version: 0.1.2
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.892064666Z"
+    created: "2023-07-27T07:37:21.498765013Z"
     description: A Helm chart for Kubernetes
     digest: f15b318314a64887b931af53526cb749e5d8f899046ddd2628b7571ead29ac22
     name: app
@@ -173,7 +173,7 @@ entries:
     - https://raystack.github.io/charts/app-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.891385499Z"
+    created: "2023-07-27T07:37:21.498217703Z"
     description: A Helm chart for Kubernetes
     digest: 9aa4d7f013539714bbeb72899a1f824fd08affc4666e33d3850b805939fc48d5
     name: app
@@ -184,7 +184,7 @@ entries:
   columbus:
   - apiVersion: v2
     appVersion: 0.1.8
-    created: "2023-06-12T15:24:36.91364663Z"
+    created: "2023-07-27T07:37:21.515745234Z"
     dependencies:
     - name: app
       repository: https://raystack.github.io/charts/
@@ -198,7 +198,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.8
-    created: "2023-06-12T15:24:36.912575951Z"
+    created: "2023-07-27T07:37:21.514830816Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -212,7 +212,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.8
-    created: "2023-06-12T15:24:36.911386909Z"
+    created: "2023-07-27T07:37:21.513857198Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -227,13 +227,13 @@ entries:
   compass:
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2023-06-12T15:24:36.923568993Z"
+    created: "2023-07-27T07:37:21.523813586Z"
     dependencies:
     - name: app
       repository: https://raystack.github.io/charts/
       version: 0.4.2
     description: A Helm chart for running Compass in Kubernetes
-    digest: 630f09a9b649d895f89255c0a5d814802d8628c360ce2f064944be37af8bb991
+    digest: 807e7caff2d9f78d730d742569088b2d706341c6759992d60663c03d0bf063bd
     name: compass
     type: application
     urls:
@@ -241,7 +241,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2023-06-12T15:24:36.922058977Z"
+    created: "2023-07-27T07:37:21.522722266Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -255,7 +255,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2023-06-12T15:24:36.920514542Z"
+    created: "2023-07-27T07:37:21.521601244Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -269,7 +269,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.2.2
-    created: "2023-06-12T15:24:36.918360678Z"
+    created: "2023-07-27T07:37:21.520524024Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -283,7 +283,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.2.1
-    created: "2023-06-12T15:24:36.916179999Z"
+    created: "2023-07-27T07:37:21.519475404Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -297,7 +297,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.2.1
-    created: "2023-06-12T15:24:36.914879696Z"
+    created: "2023-07-27T07:37:21.517833173Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -312,25 +312,25 @@ entries:
   consul:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2023-06-12T15:24:36.924020037Z"
+    created: "2023-07-27T07:37:21.524099892Z"
     description: Minimal Helm chart for deploying consul server on kubernetes.
-    digest: ee062e4a452cd148370a1f50edf2cb8802fb6edda5481d07d668a44e1e42cfaf
+    digest: b9fec235c5f5ba33d60c6422a37a27cd527a35ca2ce825d848f8ac9b01bf469d
     name: consul
     sources:
-    - https://github.com/odpf/charts
+    - https://github.com/raystack/charts
     urls:
     - https://raystack.github.io/charts/consul-0.1.0.tgz
     version: 0.1.0
   dex:
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2023-06-12T15:24:36.926610336Z"
+    created: "2023-07-27T07:37:21.526229432Z"
     dependencies:
     - name: app
       repository: https://raystack.github.io/charts/
       version: 0.4.0
     description: A Helm chart for Kubernetes
-    digest: 6840957891ce0dbffefbe8ab8340a433cc693279e28a811fd8d01897957f62ad
+    digest: 0c6d93273339318faaf01b8ef7b5bf2a6def6cf5ff1988e8adfbef5ff1e9c8e2
     name: dex
     type: application
     urls:
@@ -338,7 +338,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-06-12T15:24:36.925370967Z"
+    created: "2023-07-27T07:37:21.525120911Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -353,13 +353,13 @@ entries:
   entropy:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-06-12T15:24:36.930219687Z"
+    created: "2023-07-27T07:37:21.529650196Z"
     dependencies:
     - name: app
       repository: https://raystack.github.io/charts/
       version: 0.3.4
     description: A Helm chart for Kubernetes
-    digest: a48fa94fe0037842369ed0fdbdd93274c91110349c7131be5eb787d7a114bdb1
+    digest: f5704da31d91588c5fcc40c1f9db0d00c2aca6b768b8e4696a25f44b4fa9e963
     name: entropy
     type: application
     urls:
@@ -367,7 +367,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-06-12T15:24:36.929044952Z"
+    created: "2023-07-27T07:37:21.528314871Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -381,7 +381,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-06-12T15:24:36.927840902Z"
+    created: "2023-07-27T07:37:21.527294352Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -396,9 +396,9 @@ entries:
   firehose:
   - apiVersion: v2
     appVersion: 0.7.1
-    created: "2023-06-12T15:24:36.933115152Z"
+    created: "2023-07-27T07:37:21.533116762Z"
     description: A Helm chart for deploying Firehose on Kubernetes
-    digest: a296d56cfd8692c84a9d7330629bd88e841d77ce82cbb60b26837effee55d038
+    digest: 724b1d2ac0a49eb83ca16c6724213a28c6d3b61c13bc8f118f6ef2a154e3239b
     name: firehose
     type: application
     urls:
@@ -406,7 +406,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2023-06-12T15:24:36.932351439Z"
+    created: "2023-07-27T07:37:21.532435449Z"
     description: A Helm chart for deploying Firehose on Kubernetes
     digest: 433c46c9ca2dc2cfd6119fadeaff78644ce1575a4c83548cf908045ad005a08e
     name: firehose
@@ -416,7 +416,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2023-06-12T15:24:36.931623746Z"
+    created: "2023-07-27T07:37:21.531330828Z"
     description: A Helm chart for deploying Firehose on Kubernetes
     digest: 368847c31492f855f87fc10a200f68fad5008a24cdf81ceb72284018904c7c45
     name: firehose
@@ -426,7 +426,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2023-06-12T15:24:36.930915663Z"
+    created: "2023-07-27T07:37:21.530507913Z"
     description: A Helm chart for deploying Firehose on Kubernetes
     digest: 588776982533168db163d6268c9ab2b2078be9c6ef05c75b94c4b0f386d197d7
     name: firehose
@@ -434,16 +434,37 @@ entries:
     urls:
     - https://raystack.github.io/charts/firehose-0.1.0.tgz
     version: 0.1.0
+  frontier:
+  - apiVersion: v2
+    created: "2023-07-27T07:37:21.534475488Z"
+    dependencies:
+    - alias: frontier-app
+      condition: frontier-app.enabled
+      name: app
+      repository: https://raystack.github.io/charts/
+      version: 0.3.4
+    - alias: spicedb
+      condition: spicedb.enabled
+      name: app
+      repository: https://raystack.github.io/charts/
+      version: 0.3.4
+    description: A Helm chart for Kubernetes
+    digest: 7ada9e019e2c96d44f173a59e59bbf42b74603639af19decd82ed4d1bc1b6f05
+    name: frontier
+    type: application
+    urls:
+    - https://raystack.github.io/charts/frontier-0.1.4.tgz
+    version: 0.1.4
   guardian:
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2023-06-12T15:24:36.940489238Z"
+    created: "2023-07-27T07:37:21.539586584Z"
     dependencies:
     - name: app
       repository: https://raystack.github.io/charts/
       version: 0.4.0
     description: A Helm chart for Kubernetes
-    digest: 13eccd521ec415eaa6ca48a73645aa1e874ed9257d3cb7b26f1eb11e26a2ee71
+    digest: 256fdad57a7ab146a5f43244b1d6036f69f3b49445d1b3b6885f33597fa45fe3
     name: guardian
     type: application
     urls:
@@ -451,7 +472,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2023-06-12T15:24:36.938907182Z"
+    created: "2023-07-27T07:37:21.538280959Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -465,7 +486,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2023-06-12T15:24:36.937831901Z"
+    created: "2023-07-27T07:37:21.537293341Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -479,7 +500,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-06-12T15:24:36.936693186Z"
+    created: "2023-07-27T07:37:21.536355323Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -493,7 +514,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-06-12T15:24:36.934857894Z"
+    created: "2023-07-27T07:37:21.535397805Z"
     dependencies:
     - name: app
       repository: https://odpf.github.io/charts/
@@ -508,7 +529,7 @@ entries:
   guardian-jobs:
   - apiVersion: v2
     appVersion: v0.1.0
-    created: "2023-06-12T15:24:36.940866241Z"
+    created: "2023-07-27T07:37:21.53986989Z"
     description: A Helm chart for Guardian Jobs (github.com/odpf/guardian)
     digest: 5d2cc7e751099f74d965c412b370891926917385227cf8a0952d54128dcc5b3f
     name: guardian-jobs
@@ -518,7 +539,7 @@ entries:
   meteor:
   - apiVersion: v1
     appVersion: v0.5.1
-    created: "2023-06-12T15:24:36.94347325Z"
+    created: "2023-07-27T07:37:21.542584441Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: 3f1311d04dc132640f02e7a7235439e347c570697a8e9d2350ef64958911fb5c
     name: meteor
@@ -527,16 +548,16 @@ entries:
     version: 0.2.0
   - apiVersion: v1
     appVersion: v0.5.1
-    created: "2023-06-12T15:24:36.943075535Z"
-    description: A Helm chart for Meteor (github.com/odpf/meteor)
-    digest: b2cbd5f07d98422f59343273d4e021ea20a286d4081efb70286a48b6f99ddc1e
+    created: "2023-07-27T07:37:21.541879127Z"
+    description: A Helm chart for Meteor (github.com/raystack/meteor)
+    digest: a5803c1eab8fc0529f462d096ecac1e8e0794e44fd0ba122721c042d105849cd
     name: meteor
     urls:
     - https://raystack.github.io/charts/meteor-0.1.6.tgz
     version: 0.1.6
   - apiVersion: v1
     appVersion: v0.5.1
-    created: "2023-06-12T15:24:36.94271394Z"
+    created: "2023-07-27T07:37:21.541453219Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: 5a6f7f68cc25fb69f4b97400b9b9b1ed4ddbd0468b0bb9287f07d35e1c77fc15
     name: meteor
@@ -545,7 +566,7 @@ entries:
     version: 0.1.5
   - apiVersion: v1
     appVersion: v0.5.1
-    created: "2023-06-12T15:24:36.942391566Z"
+    created: "2023-07-27T07:37:21.541169114Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: e617f696ee0e73d1b3920990c90e36027ab932ab317187f8a729c0adf4dd6017
     name: meteor
@@ -554,7 +575,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: v0.1.0
-    created: "2023-06-12T15:24:36.942047079Z"
+    created: "2023-07-27T07:37:21.540883109Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: 97a5c192f2aabc4c84d72c802d3fe36e07c85fd36ada92b2f95d9b20a7f57a25
     name: meteor
@@ -563,7 +584,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: v0.1.0
-    created: "2023-06-12T15:24:36.941740714Z"
+    created: "2023-07-27T07:37:21.540619104Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: 1364e04bfff3a5513a180c1b9a455403161640bc08d8a01904a589b765e40e43
     name: meteor
@@ -572,7 +593,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: v0.1.0
-    created: "2023-06-12T15:24:36.941452058Z"
+    created: "2023-07-27T07:37:21.540375499Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: 6390c21502e004327ae4c88799c7c478bcd5f4bb4a8ee1197d336fc3f16b5e44
     name: meteor
@@ -581,7 +602,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: v0.1.0
-    created: "2023-06-12T15:24:36.941166203Z"
+    created: "2023-07-27T07:37:21.540126494Z"
     description: A Helm chart for Meteor (github.com/odpf/meteor)
     digest: ef9bf8d17c63c4818f3238ff03fc2dedfba4d9a2ca1398708358f6ba84bee793
     name: meteor
@@ -591,9 +612,9 @@ entries:
   optimus:
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2023-06-12T15:24:36.945883953Z"
+    created: "2023-07-27T07:37:21.5456989Z"
     description: A Helm chart for running optimus on kubernetes
-    digest: 313c1b46f67cda096c8e9c33a6a8ed16595071b3208a440d9010bf7506390674
+    digest: 021332a9d1bb21fcf85235aeb300611bc213d9ccfb4976d9717928a75a6f5d98
     name: optimus
     type: application
     urls:
@@ -601,7 +622,7 @@ entries:
     version: 0.0.3
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2023-06-12T15:24:36.944987969Z"
+    created: "2023-07-27T07:37:21.544722581Z"
     description: A Helm chart for running optimus on kubernetes
     digest: 5a4e81f037317d4b2009b0cd790cee56838eca889be801fcd1f1e8500e461254
     name: optimus
@@ -611,7 +632,7 @@ entries:
     version: 0.0.2
   - apiVersion: v2
     appVersion: 0.2.5
-    created: "2023-06-12T15:24:36.944191438Z"
+    created: "2023-07-27T07:37:21.543527559Z"
     description: A Helm chart for running optimus on kubernetes
     digest: 82fb369b3f1274eed9ad81934ae72d3a5b6955ab6a82d9bfc573f19a281528c0
     name: optimus
@@ -622,9 +643,9 @@ entries:
   raccoon:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-06-12T15:24:36.946586733Z"
+    created: "2023-07-27T07:37:21.546357912Z"
     description: A Helm chart for deploying Raccoon on Kubernetes
-    digest: 7727881a6c147b14be0ae4fe7329726a29f1f992b868d7e1d722d4e16fd4d395
+    digest: a0b3aacff9346e5dab7320a4cc8c8de176c57c1d46c3362fe666316fdc081a54
     name: raccoon
     type: application
     urls:
@@ -632,7 +653,7 @@ entries:
     version: 0.1.0
   shield:
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.957458709Z"
+    created: "2023-07-27T07:37:21.561150092Z"
     dependencies:
     - alias: shield-app
       condition: shield-app.enabled
@@ -652,7 +673,7 @@ entries:
     - https://raystack.github.io/charts/shield-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.956068057Z"
+    created: "2023-07-27T07:37:21.557963231Z"
     dependencies:
     - alias: shield-app
       condition: shield-app.enabled
@@ -672,7 +693,7 @@ entries:
     - https://raystack.github.io/charts/shield-0.1.4.tgz
     version: 0.1.4
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.954532327Z"
+    created: "2023-07-27T07:37:21.554388864Z"
     dependencies:
     - alias: shield-app
       condition: shield-app.enabled
@@ -692,7 +713,7 @@ entries:
     - https://raystack.github.io/charts/shield-0.1.3.tgz
     version: 0.1.3
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.953006703Z"
+    created: "2023-07-27T07:37:21.551417008Z"
     dependencies:
     - alias: shield-app
       condition: shield-app.enabled
@@ -712,7 +733,7 @@ entries:
     - https://raystack.github.io/charts/shield-0.1.2.tgz
     version: 0.1.2
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.951469272Z"
+    created: "2023-07-27T07:37:21.550058482Z"
     dependencies:
     - alias: shield-app
       condition: shield-app.enabled
@@ -732,7 +753,7 @@ entries:
     - https://raystack.github.io/charts/shield-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
-    created: "2023-06-12T15:24:36.949491303Z"
+    created: "2023-07-27T07:37:21.548744257Z"
     dependencies:
     - alias: shield-app
       condition: shield-app.enabled
@@ -753,7 +774,7 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: v0.0.1
-    created: "2023-06-12T15:24:36.947271303Z"
+    created: "2023-07-27T07:37:21.546965124Z"
     description: A Helm chart for deploying Shield on Kubernetes
     digest: a123fad4111981d41905fd94f5ad388c4c9135d5c989fa040021a5439546ea5e
     home: https://github.com/odpf/shield
@@ -768,7 +789,7 @@ entries:
   siren:
   - apiVersion: v2
     appVersion: v0.5.0
-    created: "2023-06-12T15:24:36.963137778Z"
+    created: "2023-07-27T07:37:21.570981277Z"
     dependencies:
     - alias: app
       condition: app.enabled
@@ -786,15 +807,15 @@ entries:
       repository: https://raystack.github.io/charts/
       version: 0.4.3
     description: Siren Helm chart
-    digest: b0ff242ba063c08b97043893900b3f86322adec801f5751f06a40b31c70a4d77
-    home: https://github.com/odpf/siren
+    digest: a5c5c5e48cc7130332d86e365ee0f56cd422c96354f8656d8d31ef1354bbcbbd
+    home: https://github.com/raystack/siren
     name: siren
     urls:
     - https://raystack.github.io/charts/siren-0.1.2.tgz
     version: 0.1.2
   - apiVersion: v2
     appVersion: v0.5.0
-    created: "2023-06-12T15:24:36.96143906Z"
+    created: "2023-07-27T07:37:21.569361547Z"
     dependencies:
     - alias: app
       condition: app.enabled
@@ -820,7 +841,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: v0.5.0
-    created: "2023-06-12T15:24:36.959781364Z"
+    created: "2023-07-27T07:37:21.567530212Z"
     dependencies:
     - alias: siren-app
       condition: siren-app.enabled
@@ -846,7 +867,7 @@ entries:
     version: 0.1.0
   - apiVersion: v1
     appVersion: v0.0.1
-    created: "2023-06-12T15:24:36.95814588Z"
+    created: "2023-07-27T07:37:21.562746322Z"
     description: Siren Helm chart
     digest: 8fa9d25a323a39c15d6414f9db703e48ed66e52f2abf31ff773e4d4d9b701225
     home: https://github.com/odpf/siren
@@ -860,16 +881,16 @@ entries:
   stencil:
   - apiVersion: v2
     appVersion: 0.2.0
-    created: "2023-06-12T15:24:36.965006488Z"
+    created: "2023-07-27T07:37:21.572008497Z"
     dependencies:
     - name: app
       repository: https://raystack.github.io/charts/
       version: 0.2.1
     description: A Helm chart for Kubernetes
-    digest: 24c46e6f85978811c9469c0c99f1d354fcfdb6e06dca6596683d1c213c13fb92
+    digest: e23923ee49302b34e29e2913e76942133cf350efe3d3bd43820325aceb4e2cae
     name: stencil
     type: application
     urls:
     - https://raystack.github.io/charts/stencil-0.1.0.tgz
     version: 0.1.0
-generated: "2023-06-12T15:24:36.890400166Z"
+generated: "2023-07-27T07:37:21.497470188Z"
