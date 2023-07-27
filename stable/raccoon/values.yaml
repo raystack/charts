@@ -5,13 +5,13 @@ nameOverride: ""
 ## Value to fully override raccoon.fullname template
 fullnameOverride: ""
 
-labels: {"application":"raccoon"}
+labels: { "application": "raccoon" }
 
 raccoon:
   image:
-    repository: odpf/raccoon
+    repository: raystack/raccoon
     pullPolicy: IfNotPresent
-    tag: 0.1.0
+    tag: 0.2.1
   config:
     SERVER_WEBSOCKET_PORT: "8080"
     SERVER_WEBSOCKET_CONN_UNIQ_ID_HEADER: x-user-id
@@ -27,8 +27,7 @@ raccoon:
 
 service:
   type: LoadBalancer
-  annotations:
-    {}
+  annotations: {}
 
 telegraf:
   enabled: false
@@ -55,8 +54,7 @@ telegraf:
 ingress:
   enabled: false
   path: /
-  annotations:
-    {}
+  annotations: {}
   hosts:
     - localhost
   tls:

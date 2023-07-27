@@ -1,6 +1,6 @@
 # Meteor
 
-A [helm](https://helm.sh/) chart for [Meteor](https://github.com/odpf/meteor)
+A [helm](https://helm.sh/) chart for [Meteor](https://github.com/raystack/meteor)
 
 ## TL;DR;
 
@@ -10,7 +10,7 @@ $ helm install [my-release] .
 
 ## Introduction
 
-This chart can be used for deploying [Meteor](https://github.com/odpf/meteor) on kubenetes using helm
+This chart can be used for deploying [Meteor](https://github.com/raystack/meteor) on kubenetes using helm
 
 ## Installing the Chart
 
@@ -40,20 +40,21 @@ The following table lists the configurable parameters of the Meteor chart and th
 
 ## Values
 
-| Key | Type | Default | Description |
-| --- | ---- | ------- | ----------- |
-| schedule | string | `"0 1 * * *"`  | https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/#schedule |
-| concurrencyPolicy | string | `"Forbid"`  | https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/#concurrency-policy |
-| recipes | object {\[filename\]: \[content\]} | [example](#sample-recipes-usage)  |  |
-| namespace | string | `-` | to override release namespace |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.repository | string | `"odpf/meteor"` | Image to use for deploying siren |
-| image.tag | string | `"0.1.0"` |  |
-| labels | object | `{}` |  |
-| config | object | `{}` |  |
-| secretConfig | object | `{}` | secrets |
+| Key               | Type                               | Default                          | Description                                                                             |
+| ----------------- | ---------------------------------- | -------------------------------- | --------------------------------------------------------------------------------------- |
+| schedule          | string                             | `"0 1 * * *"`                    | https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/#schedule           |
+| concurrencyPolicy | string                             | `"Forbid"`                       | https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/#concurrency-policy |
+| recipes           | object {\[filename\]: \[content\]} | [example](#sample-recipes-usage) |                                                                                         |
+| namespace         | string                             | `-`                              | to override release namespace                                                           |
+| image.pullPolicy  | string                             | `"IfNotPresent"`                 |                                                                                         |
+| image.repository  | string                             | `"raystack/meteor"`              | Image to use for deploying siren                                                        |
+| image.tag         | string                             | `"0.1.0"`                        |                                                                                         |
+| labels            | object                             | `{}`                             |                                                                                         |
+| config            | object                             | `{}`                             |                                                                                         |
+| secretConfig      | object                             | `{}`                             | secrets                                                                                 |
 
 ### Using recipes values
+
 ```
 recipes:
   recipe-filename.yaml: |-

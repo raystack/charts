@@ -1,6 +1,6 @@
 app:
   image:
-    repository: odpf/siren
+    repository: raystack/siren
     pullPolicy: Always
     tag: latest
   container:
@@ -40,14 +40,14 @@ app:
     NOTIFICATION_MESSAGE_HANDLER_ENABLED: false
     NOTIFICATION_DLQ_HANDLER_ENABLED: false
     # PROVIDERS_CORTEX_WEBHOOK_BASE_API: http://localhost:8080/v1beta1/alerts/cortex
-   
+
   secretConfig:
     DB_URL: postgres://postgres:@localhost:5432/siren?sslmode=disable
     SERVICE_ENCRYPTION_KEY: ____STRING_OF_32_CHARACTERS_____
 
 notification-worker:
   image:
-    repository: odpf/siren
+    repository: raystack/siren
     pullPolicy: Always
     tag: latest
   container:
@@ -58,17 +58,17 @@ notification-worker:
     livenessProbe:
       exec:
         command:
-        - /bin/sh
-        - -c
-        - ps -ef | grep siren | grep -v grep
+          - /bin/sh
+          - -c
+          - ps -ef | grep siren | grep -v grep
       initialDelaySeconds: 10
       periodSeconds: 10
     readinessProbe:
       exec:
         command:
-        - /bin/sh
-        - -c
-        - ps -ef | grep siren | grep -v grep
+          - /bin/sh
+          - -c
+          - ps -ef | grep siren | grep -v grep
       initialDelaySeconds: 10
       periodSeconds: 10
 
@@ -83,14 +83,14 @@ notification-worker:
     NOTIFICATION_QUEUE_KIND: postgres
     NOTIFICATION_MESSAGE_HANDLER_ENABLED: false
     NOTIFICATION_DLQ_HANDLER_ENABLED: false
-   
+
   secretConfig:
     DB_URL: postgres://postgres:@localhost:5432/siren?sslmode=disable
     SERVICE_ENCRYPTION_KEY: ____STRING_OF_32_CHARACTERS_____
 
 notification-dlq-worker:
   image:
-    repository: odpf/siren
+    repository: raystack/siren
     pullPolicy: Always
     tag: latest
   container:
@@ -101,17 +101,17 @@ notification-dlq-worker:
     livenessProbe:
       exec:
         command:
-        - /bin/sh
-        - -c
-        - ps -ef | grep siren | grep -v grep
+          - /bin/sh
+          - -c
+          - ps -ef | grep siren | grep -v grep
       initialDelaySeconds: 10
       periodSeconds: 10
     readinessProbe:
       exec:
         command:
-        - /bin/sh
-        - -c
-        - ps -ef | grep siren | grep -v grep
+          - /bin/sh
+          - -c
+          - ps -ef | grep siren | grep -v grep
       initialDelaySeconds: 10
       periodSeconds: 10
 
@@ -120,7 +120,7 @@ notification-dlq-worker:
 
   ingress:
     enabled: false
-    
+
   config:
     DB_DRIVER: postgres
     NOTIFICATION_QUEUE_KIND: postgres

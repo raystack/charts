@@ -9,9 +9,9 @@ labels: { "application": "firehose" }
 
 firehose:
   image:
-    repository: odpf/firehose
+    repository: raystack/firehose
     pullPolicy: IfNotPresent
-    tag: 1.1.0
+    tag: 0.8.0
   config:
     SOURCE_KAFKA_BROKERS: 127.0.0.1:6667
     SOURCE_KAFKA_CONSUMER_GROUP_ID: kafka-consumer-group-id
@@ -25,7 +25,7 @@ firehose:
       "java",
       "-cp",
       "bin/*:/work-dir/*",
-      "io.odpf.firehose.launch.Main",
+      "io.raystack.firehose.launch.Main",
       "-server",
       "-Dlogback.configurationFile=etc/firehose/logback.xml",
       "-Xloggc:/var/log/firehose",

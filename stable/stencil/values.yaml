@@ -1,6 +1,6 @@
 app:
   image:
-    repository: odpf/stencil
+    repository: raystack/stencil
     pullPolicy: Always
     tag: latest
   container:

@@ -17,11 +17,11 @@ This chart can be used for deploying any app on kubenetes using helm
 To install the chart with the release name `my-release` and image `siren`:
 
 ```bash
-$ helm install --name my-release . -f ./path-to/values.yaml --set image.repository=odpf/siren --set image.tag=latest --set ingress.enabled=true
+$ helm install --name my-release . -f ./path-to/values.yaml --set image.repository=raystack/siren --set image.tag=latest --set ingress.enabled=true
 
 ```
 
-The command deploys odpf/siren on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
+The command deploys raystack/siren on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
 
 > **Tip**: List all releases using `helm list`
 
@@ -39,9 +39,8 @@ The command removes all the Kubernetes components associated with the chart and 
 
 The following table lists the configurable parameters of the Siren chart and their default values.
 
-
 | Key                                   | Type   | Default                                                                                       | Description                                                          |
-|---------------------------------------|--------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
+| ------------------------------------- | ------ | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
 | affinity                              | object | `{}`                                                                                          |                                                                      |
 | config                                | object | `{}`                                                                                          |                                                                      |
 | container.command                     | list   | `[]`                                                                                          |                                                                      |

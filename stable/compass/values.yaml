@@ -1,8 +1,8 @@
 app:
   image:
-    repository: odpf/compass
+    repository: raystack/compass
     pullPolicy: Always
-    tag: "0.3.0"
+    tag: "0.6.0"
   container:
     command:
       - compass
@@ -52,7 +52,8 @@ app:
     # COMPASS_NEWRELIC_APPNAME: compass
     # COMPASS_LOG_LEVEL: info
 
-  secretConfig: {}
+  secretConfig:
+    {}
     # COMPASS_ELASTICSEARCH_BROKERS: ~
     # COMPASS_STATSD_ADDRESS: ~
     # COMPASS_NEWRELIC_LICENSEKEY: ~

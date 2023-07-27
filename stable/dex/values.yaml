@@ -1,6 +1,6 @@
 app:
   image:
-    repository: odpf/dex
+    repository: raystack/dex
     pullPolicy: Always
     tag: "latest"
   container:

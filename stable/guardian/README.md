@@ -6,73 +6,74 @@ A Helm chart for Kubernetes
 
 ## Requirements
 
-| Repository | Name | Version |
-|------------|------|---------|
-| https://raystack.github.io/charts/ | app | 0.4.0 |
+| Repository                         | Name | Version |
+| ---------------------------------- | ---- | ------- |
+| https://raystack.github.io/charts/ | app  | 0.4.0   |
 
 ## Values
 
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| app.config.AUTHENTICATED_USER_HEADER_KEY | string | `"x-authenticated-user-email"` |  |
-| app.config.JOBS_EXPIRING_ACCESS_NOTIFICATION_ENABLED | bool | `false` |  |
-| app.config.JOBS_EXPIRING_ACCESS_NOTIFICATION_INTERVAL | string | `"0 9 * * *"` |  |
-| app.config.JOBS_FETCH_RESOURCES_ENABLED | bool | `false` |  |
-| app.config.JOBS_FETCH_RESOURCES_INTERVAL | string | `"0 */2 * * *"` |  |
-| app.config.JOBS_REVOKE_EXPIRED_ACCESS_ENABLED | bool | `false` |  |
-| app.config.JOBS_REVOKE_EXPIRED_ACCESS_INTERVAL | string | `"*/20 * * * *"` |  |
-| app.config.LOG_LEVEL | string | `"info"` |  |
-| app.config.NOTIFIER_PROVIDER | string | `"slack"` |  |
-| app.container.args[0] | string | `"server"` |  |
-| app.container.args[1] | string | `"start"` |  |
-| app.container.livenessProbe.httpGet.path | string | `"/ping"` |  |
-| app.container.livenessProbe.httpGet.port | string | `"tcp"` |  |
-| app.container.readinessProbe.httpGet.path | string | `"/ping"` |  |
-| app.container.readinessProbe.httpGet.port | string | `"tcp"` |  |
-| app.cron.enabled | bool | `true` |  |
-| app.cron.jobs[0].args[0] | string | `"job"` |  |
-| app.cron.jobs[0].args[1] | string | `"run"` |  |
-| app.cron.jobs[0].args[2] | string | `"fetch_resources"` |  |
-| app.cron.jobs[0].command | list | `[]` |  |
-| app.cron.jobs[0].name | string | `"fetch-resources"` |  |
-| app.cron.jobs[0].restartPolicy | string | `"Never"` |  |
-| app.cron.jobs[0].schedule | string | `"0 */2 * * *"` |  |
-| app.cron.jobs[1].args[0] | string | `"job"` |  |
-| app.cron.jobs[1].args[1] | string | `"run"` |  |
-| app.cron.jobs[1].args[2] | string | `"appeal_expiration_reminder"` |  |
-| app.cron.jobs[1].command | list | `[]` |  |
-| app.cron.jobs[1].name | string | `"appeal-expiration-reminder"` |  |
-| app.cron.jobs[1].restartPolicy | string | `"Never"` |  |
-| app.cron.jobs[1].schedule | string | `"0 9 * * *"` |  |
-| app.cron.jobs[2].args[0] | string | `"job"` |  |
-| app.cron.jobs[2].args[1] | string | `"run"` |  |
-| app.cron.jobs[2].args[2] | string | `"appeal_expiration_revocation"` |  |
-| app.cron.jobs[2].command | list | `[]` |  |
-| app.cron.jobs[2].name | string | `"appeal-expiration-revocation"` |  |
-| app.cron.jobs[2].restartPolicy | string | `"Never"` |  |
-| app.cron.jobs[2].schedule | string | `"*/20 * * * *"` |  |
-| app.fullnameOverride | string | `""` |  |
-| app.image.pullPolicy | string | `"Always"` |  |
-| app.image.repository | string | `"odpf/guardian"` |  |
-| app.image.tag | string | `"latest"` |  |
-| app.ingress.annotations."kubernetes.io/ingress.class" | string | `"contour"` |  |
-| app.ingress.enabled | bool | `true` |  |
-| app.ingress.hosts[0].host | string | `"guardian.example.com"` |  |
-| app.ingress.hosts[0].paths[0].backend.service.port.number | int | `80` |  |
-| app.ingress.hosts[0].paths[0].path | string | `"/"` |  |
-| app.ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
-| app.migration.args[0] | string | `"server"` |  |
-| app.migration.args[1] | string | `"migrate"` |  |
-| app.migration.enabled | bool | `true` |  |
-| app.nameOverride | string | `""` |  |
-| app.secretConfig.DB_HOST | string | `"localhost"` |  |
-| app.secretConfig.DB_NAME | string | `"guardian"` |  |
-| app.secretConfig.DB_PASSWORD | string | `nil` |  |
-| app.secretConfig.DB_PORT | string | `nil` |  |
-| app.secretConfig.DB_USER | string | `"guardian"` |  |
-| app.secretConfig.ENCRYPTION_SECRET_KEY | string | `nil` |  |
-| app.secretConfig.NOTIFIER_ACCESS_TOKEN | string | `nil` |  |
-| app.service.annotations."projectcontour.io/upstream-protocol.h2c" | string | `"tcp"` |  |
+| Key                                                               | Type   | Default                          | Description |
+| ----------------------------------------------------------------- | ------ | -------------------------------- | ----------- |
+| app.config.AUTHENTICATED_USER_HEADER_KEY                          | string | `"x-authenticated-user-email"`   |             |
+| app.config.JOBS_EXPIRING_ACCESS_NOTIFICATION_ENABLED              | bool   | `false`                          |             |
+| app.config.JOBS_EXPIRING_ACCESS_NOTIFICATION_INTERVAL             | string | `"0 9 * * *"`                    |             |
+| app.config.JOBS_FETCH_RESOURCES_ENABLED                           | bool   | `false`                          |             |
+| app.config.JOBS_FETCH_RESOURCES_INTERVAL                          | string | `"0 */2 * * *"`                  |             |
+| app.config.JOBS_REVOKE_EXPIRED_ACCESS_ENABLED                     | bool   | `false`                          |             |
+| app.config.JOBS_REVOKE_EXPIRED_ACCESS_INTERVAL                    | string | `"*/20 * * * *"`                 |             |
+| app.config.LOG_LEVEL                                              | string | `"info"`                         |             |
+| app.config.NOTIFIER_PROVIDER                                      | string | `"slack"`                        |             |
+| app.container.args[0]                                             | string | `"server"`                       |             |
+| app.container.args[1]                                             | string | `"start"`                        |             |
+| app.container.livenessProbe.httpGet.path                          | string | `"/ping"`                        |             |
+| app.container.livenessProbe.httpGet.port                          | string | `"tcp"`                          |             |
+| app.container.readinessProbe.httpGet.path                         | string | `"/ping"`                        |             |
+| app.container.readinessProbe.httpGet.port                         | string | `"tcp"`                          |             |
+| app.cron.enabled                                                  | bool   | `true`                           |             |
+| app.cron.jobs[0].args[0]                                          | string | `"job"`                          |             |
+| app.cron.jobs[0].args[1]                                          | string | `"run"`                          |             |
+| app.cron.jobs[0].args[2]                                          | string | `"fetch_resources"`              |             |
+| app.cron.jobs[0].command                                          | list   | `[]`                             |             |
+| app.cron.jobs[0].name                                             | string | `"fetch-resources"`              |             |
+| app.cron.jobs[0].restartPolicy                                    | string | `"Never"`                        |             |
+| app.cron.jobs[0].schedule                                         | string | `"0 */2 * * *"`                  |             |
+| app.cron.jobs[1].args[0]                                          | string | `"job"`                          |             |
+| app.cron.jobs[1].args[1]                                          | string | `"run"`                          |             |
+| app.cron.jobs[1].args[2]                                          | string | `"appeal_expiration_reminder"`   |             |
+| app.cron.jobs[1].command                                          | list   | `[]`                             |             |
+| app.cron.jobs[1].name                                             | string | `"appeal-expiration-reminder"`   |             |
+| app.cron.jobs[1].restartPolicy                                    | string | `"Never"`                        |             |
+| app.cron.jobs[1].schedule                                         | string | `"0 9 * * *"`                    |             |
+| app.cron.jobs[2].args[0]                                          | string | `"job"`                          |             |
+| app.cron.jobs[2].args[1]                                          | string | `"run"`                          |             |
+| app.cron.jobs[2].args[2]                                          | string | `"appeal_expiration_revocation"` |             |
+| app.cron.jobs[2].command                                          | list   | `[]`                             |             |
+| app.cron.jobs[2].name                                             | string | `"appeal-expiration-revocation"` |             |
+| app.cron.jobs[2].restartPolicy                                    | string | `"Never"`                        |             |
+| app.cron.jobs[2].schedule                                         | string | `"*/20 * * * *"`                 |             |
+| app.fullnameOverride                                              | string | `""`                             |             |
+| app.image.pullPolicy                                              | string | `"Always"`                       |             |
+| app.image.repository                                              | string | `"raystack/guardian"`            |             |
+| app.image.tag                                                     | string | `"latest"`                       |             |
+| app.ingress.annotations."kubernetes.io/ingress.class"             | string | `"contour"`                      |             |
+| app.ingress.enabled                                               | bool   | `true`                           |             |
+| app.ingress.hosts[0].host                                         | string | `"guardian.example.com"`         |             |
+| app.ingress.hosts[0].paths[0].backend.service.port.number         | int    | `80`                             |             |
+| app.ingress.hosts[0].paths[0].path                                | string | `"/"`                            |             |
+| app.ingress.hosts[0].paths[0].pathType                            | string | `"ImplementationSpecific"`       |             |
+| app.migration.args[0]                                             | string | `"server"`                       |             |
+| app.migration.args[1]                                             | string | `"migrate"`                      |             |
+| app.migration.enabled                                             | bool   | `true`                           |             |
+| app.nameOverride                                                  | string | `""`                             |             |
+| app.secretConfig.DB_HOST                                          | string | `"localhost"`                    |             |
+| app.secretConfig.DB_NAME                                          | string | `"guardian"`                     |             |
+| app.secretConfig.DB_PASSWORD                                      | string | `nil`                            |             |
+| app.secretConfig.DB_PORT                                          | string | `nil`                            |             |
+| app.secretConfig.DB_USER                                          | string | `"guardian"`                     |             |
+| app.secretConfig.ENCRYPTION_SECRET_KEY                            | string | `nil`                            |             |
+| app.secretConfig.NOTIFIER_ACCESS_TOKEN                            | string | `nil`                            |             |
+| app.service.annotations."projectcontour.io/upstream-protocol.h2c" | string | `"tcp"`                          |             |
 
-----------------------------------------------
+---
+
 Autogenerated from chart metadata using [helm-docs v1.7.0](https://github.com/norwoodj/helm-docs/releases/v1.7.0)

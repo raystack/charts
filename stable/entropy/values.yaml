@@ -1,6 +1,6 @@
 app:
   image:
-    repository: odpf/entropy
+    repository: raystack/entropy
     pullPolicy: Always
     tag: "latest"
   container:

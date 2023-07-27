@@ -1,12 +1,11 @@
 app:
-
   ## Value to fully override guardian.name template
   nameOverride: ""
   ## Value to fully override guardian.fullname template
   fullnameOverride: ""
 
   image:
-    repository: odpf/guardian
+    repository: raystack/guardian
     pullPolicy: Always
     tag: latest
   container:
@@ -85,7 +84,6 @@ app:
     JOBS_REVOKE_EXPIRED_ACCESS_INTERVAL: "*/20 * * * *"
     JOBS_EXPIRING_ACCESS_NOTIFICATION_ENABLED: false
     JOBS_EXPIRING_ACCESS_NOTIFICATION_INTERVAL: "0 9 * * *"
-
 
   secretConfig:
     ENCRYPTION_SECRET_KEY:
