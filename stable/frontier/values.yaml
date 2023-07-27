@@ -3,7 +3,7 @@ frontier-app:
   image:
     repository: raystack/frontier
     pullPolicy: IfNotPresent
-    tag: 0.7.0
+    tag: 0.7.1
   container:
     args:
       - serve
