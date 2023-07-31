@@ -5,34 +5,33 @@ frontier-app:
     pullPolicy: IfNotPresent
     tag: 0.7.1
   container:
-    args:
-      - serve
+    command: ["frontier", "server", "start"]
     livenessProbe:
       httpGet:
         path: /ping
-        port: 5556
+        port: 8080
     readinessProbe:
       httpGet:
         path: /ping
-        port: 5556
+        port: 8080
     ports:
-      - name: tcp
+      - name: rest
         containerPort: 8080
         protocol: TCP
-      - name: proxy
-        containerPort: 5556
+      - name: grpc
+        containerPort: 8081
         protocol: TCP
   service:
     type: ClusterIP
     ports:
       - port: 8080
-        targetPort: tcp
+        targetPort: 8080
         protocol: TCP
         name: tcp
-      - port: 5556
-        targetPort: proxy
+      - port: 8081
+        targetPort: 8081
         protocol: TCP
-        name: proxy
+        name: grpc
     annotations: {}
   ingress:
     enabled: true
@@ -41,24 +40,22 @@ frontier-app:
     hosts:
       - host: frontier.example.com
         paths:
-          - path: /admin
+          - path: /
             pathType: Prefix
             backend:
               service:
                 port:
                   number: 8080
-          - path: /
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                port:
-                  number: 5556
   config:
-    SHIELD_SPICEDB_HOST: spicedb.namespace.svc.local
-    SHIELD_SPICEDB_PORT: 50051
+    FRONTIER_SPICEDB_HOST: spicedb.namespace.svc.local
+    FRONTIER_SPICEDB_PORT: 50051
+    FRONTIER_APP_PORT: 8080
+    FRONTIER_APP_GRPC_PORT: 8081
+    FRONTIER_LOG_LEVEL: info
+    FRONTIER_DB_DRIVER: postgres
   secretConfig:
-    SHIELD_DB_URL:
-    SHIELD_SPICEDB_PRE_SHARED_KEY:
+    FRONTIER_DB_URL:
+    FRONTIER_SPICEDB_PRE_SHARED_KEY:
 
 spicedb:
   enabled: true
@@ -66,7 +63,7 @@ spicedb:
   replicaCount: 2
   image:
     repository: quay.io/authzed/spicedb
-    tag: v1.2.0
+    tag: v1.19.1
   secretConfig:
     SPICEDB_GRPC_PRESHARED_KEY:
     SPICEDB_DATASTORE_CONN_URI:
