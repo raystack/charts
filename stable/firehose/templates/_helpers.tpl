@@ -17,7 +17,6 @@
 
 {{- define "firehose.telegraf.conf" }}
 [global_tags]
-  app = "{{ include "firehose.fullname" . }}"
 {{- range $k, $v := .Values.telegraf.config.additional_global_tags }}
   {{ $k }} = "{{ $v }}"
 {{- end }}
