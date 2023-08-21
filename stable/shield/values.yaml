@@ -22,6 +22,7 @@ shield-app:
     - name: proxy
       containerPort: 5556
       protocol: TCP
+  podLabels: {}
   service:
     type: ClusterIP
     ports:
@@ -88,6 +89,7 @@ spicedb:
         path: /
         port: 8080
     command: ["spicedb", "serve"]
+  podLabels: {}
   ingress:
     enabled: true
     annotations:
