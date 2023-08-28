@@ -36,17 +36,17 @@ spec:
           name: workdir
         {{- end }}
         {{- if (gt (len .Values.mountSecrets) 0 ) }}
-        - mountPath: /etc/secret/{{ include "firehose.fullname" . }}-mount-secrets
-          name: {{ include "firehose.fullname" . }}-mount-secrets
+        - mountPath: /etc/secret
+          name: {{ include "firehose.fullname" . }}-mount
         {{- end }}
         {{- end }}
         resources:
           {{- toYaml .Values.firehose.resources | nindent 12 }}
         envFrom:
           - configMapRef:
-              name: {{ include "firehose.fullname" . }}-config
+              name: {{ include "firehose.fullname" . }}
           - secretRef:
-              name: {{ include "firehose.fullname" . }}-secrets
+              name: {{ include "firehose.fullname" . }}
         env:
         - name: POD_NAME
           valueFrom:
@@ -87,7 +87,7 @@ spec:
       volumes:
       {{- if index .Values.telegraf.enabled }}
       - configMap:
-          name: {{ include "firehose.fullname" . }}-telegraf-config
+          name: {{ include "firehose.fullname" . }}-telegraf
         name: telegraf-conf
       {{- end }}
       {{- if index .Values "init-firehose" "enabled" }}
@@ -95,9 +95,9 @@ spec:
         name: workdir
       {{- end }}
       {{- if (gt (len .Values.mountSecrets) 0 ) }}
-      - name: {{ include "firehose.fullname" . }}-mount-secrets
+      - name: {{ include "firehose.fullname" . }}-mount
         secret:
-          secretName: {{ include "firehose.fullname" . }}-mount-secrets
+          secretName: {{ include "firehose.fullname" . }}-mount
           defaultMode:  420
           items:
           {{- range $_, $mountSecret := .Values.mountSecrets}}
