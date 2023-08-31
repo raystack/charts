@@ -20,6 +20,8 @@ podAnnotations: {}
 podSecurityContext: {}
 # -- Eg: fsGroup: 2000
 
+serviceAccountName: ""
+
 securityContext:
   {}
   # -- capabilities:
