@@ -18,7 +18,6 @@ app:
         path: /ping
         port: tcp
   podLabels: {}
-  serviceAccountName: ""
 
   migration:
     enabled: true
