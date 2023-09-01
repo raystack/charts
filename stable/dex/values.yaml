@@ -19,6 +19,8 @@ app:
         port: tcp
   podLabels: {}
 
+  serviceAccountName: ""
+
   migration:
     enabled: false
 
