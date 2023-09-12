@@ -3,7 +3,7 @@ frontier-app:
   image:
     repository: raystack/frontier
     pullPolicy: IfNotPresent
-    tag: 0.7.1
+    tag: 0.7.4
   container:
     command: ["frontier", "server", "start"]
     livenessProbe:
@@ -63,28 +63,41 @@ spicedb:
   replicaCount: 2
   image:
     repository: quay.io/authzed/spicedb
-    tag: v1.19.1
+    tag: v1.25.0
   secretConfig:
     SPICEDB_GRPC_PRESHARED_KEY:
     SPICEDB_DATASTORE_CONN_URI:
   config:
     SPICEDB_LOG_LEVEL: info
     SPICEDB_DATASTORE_ENGINE:
+    SPICEDB_GRPC_ENABLED: "true"
+    SPICEDB_HTTP_ENABLED: "true"
     SPICEDB_GRPC_SHUTDOWN_GRACE_PERIOD: "5s"
   container:
     ports:
-      - name: tcp
-        containerPort: 50051
-        protocol: TCP
+    - containerPort: 50051
+      protocol: TCP
+    - containerPort: 8443
+      protocol: TCP
     livenessProbe:
-      httpGet:
-        path: /
-        port: 8080
+      exec:
+        command: ["grpc_health_probe", "-v", "-addr=localhost:50051"]
     readinessProbe:
-      httpGet:
-        path: /
-        port: 8080
+      exec:
+        command: ["grpc_health_probe", "-v", "-addr=localhost:50051"]
     command: ["spicedb", "serve"]
+  service:
+    type: ClusterIP
+    ports:
+      - port: 80
+        name: rest
+        targetPort: 8443
+        protocol: TCP
+      - port: 50051
+        name: grpc
+        targetPort: 50051
+        protocol: TCP
+    annotations: {}
   ingress:
     enabled: true
     annotations:
