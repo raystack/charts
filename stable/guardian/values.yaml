@@ -89,7 +89,6 @@ app:
 
   secretConfig:
     ENCRYPTION_SECRET_KEY:
-    NOTIFIER_ACCESS_TOKEN:
     DB_HOST: localhost
     DB_PORT:
     DB_NAME: guardian
