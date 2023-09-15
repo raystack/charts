@@ -75,10 +75,10 @@ cleanupConfig:
   restartPolicy: OnFailure
   concurrencyPolicy: Forbid
   queries:
-    - "delete from sensor_run where start_time < now() - Interval '30d';"
-    - "delete from task_run   where start_time < now() - Interval '30d';"
-    - "delete from hook_run   where start_time < now() - Interval '30d';"
-    - "delete from job_run    where start_time < now() - Interval '60d';"
+    - "delete from sensor_run where start_time < now() - Interval '5 months';"
+    - "delete from task_run   where start_time < now() - Interval '5 months';"
+    - "delete from hook_run   where start_time < now() - Interval '5 months';"
+    - "delete from job_run    where start_time < now() - Interval '5 months';"
 
 service:
   type: ClusterIP
