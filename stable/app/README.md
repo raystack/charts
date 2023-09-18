@@ -41,6 +41,7 @@ The following table lists the configurable parameters of the Siren chart and the
 
 | Key                                   | Type   | Default                                                                                       | Description                                                          |
 | ------------------------------------- | ------ | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| additionalLabels                      | object | `{}`                                                                                          | Additional labels to be added in resources                           |
 | affinity                              | object | `{}`                                                                                          |                                                                      |
 | config                                | object | `{}`                                                                                          |                                                                      |
 | container.command                     | list   | `[]`                                                                                          |                                                                      |

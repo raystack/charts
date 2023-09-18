@@ -18,6 +18,8 @@ namespaceOverride: ""
 
 podAnnotations: {}
 
+additionalLabels: {}
+
 podSecurityContext: {}
 # -- Eg: fsGroup: 2000
 
