@@ -1,7 +1,7 @@
 apiVersion: v2
 name: siren
 description: Siren Helm chart
-version: 0.1.5
+version: 0.1.6
 appVersion: v0.6.7
 home: https://github.com/goto/siren
 dependencies:

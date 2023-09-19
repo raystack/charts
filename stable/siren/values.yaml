@@ -10,11 +10,11 @@ app:
     livenessProbe:
       httpGet:
         path: /ping
-        port: tcp
+        port: http
     readinessProbe:
       httpGet:
         path: /ping
-        port: tcp
+        port: http
     ports:
       - name: http
         containerPort: 8080
