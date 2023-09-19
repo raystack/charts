@@ -15,6 +15,26 @@ app:
       httpGet:
         path: /ping
         port: tcp
+    ports:
+      - name: http
+        containerPort: 8080
+        protocol: TCP
+      - name: grpc
+        containerPort: 8081
+        protocol: TCP
+    volumeMounts:
+      - mountPath: /work-dir
+        name: workdir
+  initContainers:
+    - args: ["wget -c https://github.com/goto/siren/releases/download/v0.6.7/siren-cortex_Linux_x86_64.tar.gz -O - | sudo tar -xz -C /work-dir/"]
+      command: ["/bin/sh", "-c"]
+      image: busybox:latest
+      imagePullPolicy: IfNotPresent
+      name: init-siren-app
+      volumeMounts:
+      - mountPath: /work-dir
+        name: workdir
+        
   podLabels: {}
 
   migration:
@@ -22,6 +42,17 @@ app:
     args:
       - server
       - migrate
+
+  service:
+    ports:
+      - port: 80
+        name: http
+        targetPort: http
+        protocol: TCP
+      - port: 8081
+        name: grpc
+        targetPort: grpc
+        protocol: TCP
 
   ingress:
     enabled: true
@@ -34,8 +65,17 @@ app:
               service:
                 port:
                   number: 80
+      - host: siren-grpc.example.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                port:
+                  number: 8081
   config:
-    # SERVICE_PORT: 80
+    # SERVICE_PORT: 8080
+    SERVICE_GRPC_PORT: 8081
     DB_DRIVER: postgres
     NOTIFICATION_QUEUE_KIND: postgres
     NOTIFICATION_MESSAGE_HANDLER_ENABLED: false
@@ -45,6 +85,11 @@ app:
   secretConfig:
     DB_URL: postgres://postgres:@localhost:5432/siren?sslmode=disable
     SERVICE_ENCRYPTION_KEY: ____STRING_OF_32_CHARACTERS_____
+
+  volumes:
+    - name: workdir
+      emptyDir: {}
+
 
 notification-worker:
   image:
