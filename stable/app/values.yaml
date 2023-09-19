@@ -17,6 +17,8 @@ fullnameOverride: ""
 
 podAnnotations: {}
 
+initContainers: {}
+
 podSecurityContext: {}
 # -- Eg: fsGroup: 2000
 
