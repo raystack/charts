@@ -26,16 +26,15 @@ spec:
             image: "{{ required `image.repository is required` .Values.image.repository }}:{{ .Values.image.tag }}"
             imagePullPolicy: {{ .Values.image.pullPolicy }}
             command:
-            {{- if .Values.telegraf.enabled }}
               - /bin/sh
               - -c
               - |
                 meteor run /opt/recipes;
+            {{- if .Values.telegraf.enabled }}
                 pkill -SIGTERM telegraf
-            {{- else}}
-              - meteor
-              - run
-              - /opt/recipes
+            {{- end }}
+            {{- if .Values.otelcollector.enabled }}
+                pkill -SIGTERM otelcol-contrib
             {{- end }}
             volumeMounts:
               - name: "{{ include "meteor.name" . }}-volume"
@@ -51,6 +50,58 @@ spec:
               - secretRef:
                   name: "{{ include "meteor.name" . }}-secret"
             {{- end }}
+          {{- if .Values.otelcollector.enabled }}
+          - name: otel-collector-sidecar
+            image: {{ .Values.otelcollector.image }}
+            imagePullPolicy: IfNotPresent
+            args:
+              - "--config=/etc/otelcollector/config.yaml"
+            ports:
+            - containerPort: 1888
+              name: pprof
+              protocol: TCP
+            - containerPort: 8888
+              name: prometheusself
+              protocol: TCP
+            - containerPort: 8889
+              name: prometheus
+              protocol: TCP
+            - containerPort: 13133
+              name: healthcheck
+              protocol: TCP
+            - containerPort: 4317
+              name: otlpgrpcrecv
+              protocol: TCP
+            - containerPort: 4318
+              name: otlphttprecv
+              protocol: TCP
+            - containerPort: 55679
+              name: zpages
+              protocol: TCP
+            env:
+              - name: K8S_NODE_NAME
+                valueFrom:
+                  fieldRef:
+                    fieldPath: spec.nodeName
+              - name: K8S_POD_NAME
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.name
+              - name: K8S_POD_NAMESPACE
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.namespace
+              - name: K8S_POD_IP
+                valueFrom:
+                  fieldRef:
+                    fieldPath: status.podIP
+              - name: OTEL_RESOURCE_ATTRIBUTES
+                value: |
+                  k8s.deployment.name={{ include "meteor.name" . }},k8s.namespace.name=$(K8S_POD_NAMESPACE),k8s.node.name=$(K8S_NODE_NAME),k8s.pod.name=$(K8S_POD_NAME),k8s.pod.ip=$(K8S_POD_IP)
+            volumeMounts:
+              - name: otelcollector-conf
+                mountPath: /etc/otelcollector/
+          {{- end }}
           {{- if .Values.telegraf.enabled }}
           - name: telegraf-sidecar
             image: {{ .Values.telegraf.image }}
@@ -70,8 +121,10 @@ spec:
             volumeMounts:
               - name: telegraf-conf
                 mountPath: /etc/telegraf/
-          shareProcessNamespace: true
           {{- end }}
+          {{- if or .Values.telegraf.enabled .Values.otelcollector.enabled }}
+          shareProcessNamespace: true
+          {{- end}}
           restartPolicy: Never
           volumes:
             - name: "{{ include "meteor.name" . }}-volume"
@@ -93,4 +146,9 @@ spec:
             - name: telegraf-conf
               configMap:
                 name: {{ include "meteor.name" . }}-telegraf
+          {{- end }}
+          {{- if .Values.otelcollector.enabled }}
+            - name: otelcollector-conf
+              configMap:
+                name: {{ include "meteor.name" . }}-otelcollector
           {{- end }}

@@ -1,0 +1,13 @@
+{{- if .Values.otelcollector.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "meteor.name" . }}-otelcollector
+  labels:
+{{- if .Values.labels }}
+{{ toYaml .Values.labels | indent 4 }}
+{{- end }}
+data:
+  config.yaml: |-
+{{ .Values.otelcollector.config | indent 4 }}
+{{- end }}

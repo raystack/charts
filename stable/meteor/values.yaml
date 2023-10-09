@@ -32,3 +32,22 @@ telegraf:
   args:
   command:
     - telegraf
+
+otelcollector:
+  enabled: false
+  image: otel/opentelemetry-collector-contrib:0.79.0
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+          http:
+    processors:
+    exporters:
+      logging:
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: []
+          exporters: [logging]
