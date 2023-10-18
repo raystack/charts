@@ -77,7 +77,13 @@ telegraf:
         url: "http://localhost:8088"
         version: "0.1.0"
         # authorization: Bearer <token>
-  resources: {}
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 2000Mi
+    requests:
+      cpu: 70m
+      memory: 100Mi
 
 envSecrets: {}
 mountSecrets: []
