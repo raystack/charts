@@ -1,0 +1,26 @@
+{{- $dot := . }}
+{{- if .Values.app.additionalServices }}
+{{- range $i, $service := .Values.app.additionalServices }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "app.fullname" $dot}}-{{ $service.name }}
+  labels:
+    {{- include "app.labels" $dot | nindent 4 }}
+  {{- with $service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ $service.type }}
+  ports:
+    {{- range $port := $service.ports }}
+    - port: {{ $port.port }}
+      targetPort: {{ $port.targetPort }}
+      protocol: {{ $port.protocol }}
+      name: {{ $port.name }}
+    {{- end }}
+  selector:
+    {{- include "app.selectorLabels" $dot | nindent 4 }}
+{{- end -}}
+{{- end -}}
