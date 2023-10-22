@@ -180,3 +180,9 @@ iap:
   serviceAccountFileName: sa.json
   serviceAccountSecret: iap-credentials-secret
   logLevel: error
+  readinessProbe:
+    initialDelaySeconds: 0
+    timeoutSeconds: 5
+  livenessProbe:
+    initialDelaySeconds: 0
+    timeoutSeconds: 5

@@ -164,13 +164,13 @@ spec:
           readinessProbe:
             tcpSocket:
               port: {{ .Values.iap.containerPort }}
-            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
-            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            initialDelaySeconds: {{ .Values.iap.livenessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.iap.livenessProbe.timeoutSeconds }}
           livenessProbe:
             tcpSocket:
               port: {{ .Values.iap.containerPort }}
-            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
-            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            initialDelaySeconds: {{ .Values.iap.livenessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.iap.livenessProbe.timeoutSeconds }}
           env:
           - name: REFRESH_TIME_SECONDS
             value: {{ .Values.iap.refreshTimeSeconds }}
