@@ -170,3 +170,13 @@ otelcollector:
           exporters: [logging]
 
 podLabels: {}
+
+iap:
+  enabled: false
+  image: gojektech/iap-auth:0.1.0-99f7459df4481772d30176e3b39b3857cd538745
+  containerPort: 8989
+  refreshTimeSeconds: 3590s
+  serviceAccountMountPath: /etc/iap_auth
+  serviceAccountFileName: sa.json
+  serviceAccountSecret: iap-credentials-secret
+  logLevel: error
