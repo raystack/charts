@@ -154,40 +154,40 @@ spec:
               mountPath: /etc/telegraf/
         {{- end }}
         {{- if .Values.iap.enabled }}
-              - name: iap-sidecar
-                image: {{ .Values.iap.image }}
-                imagePullPolicy: IfNotPresent
-                ports:
-                - containerPort: {{ .Values.iap.containerPort }}
-                  name: http
-                  protocol: TCP
-                readinessProbe:
-                  tcpSocket:
-                    port: {{ .Values.iap.containerPort }}
-                  initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
-                  timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
-                livenessProbe:
-                  tcpSocket:
-                    port: {{ .Values.iap.containerPort }}
-                  initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
-                  timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
-                env:
-                - name: REFRESH_TIME_SECONDS
-                  value: {{ .Values.iap.refreshTimeSeconds }}
-                - name: SERVICE_ACCOUNT_CREDENTIALS
-                  value: {{ .Values.iap.serviceAccountMountPath }}/{{ .Values.iap.serviceAccountFileName }}
-                - name: IAP_HOST
-                  value: {{ .Values.iap.host }}
-                - name: CLIENT_ID
-                  value: {{ .Values.iap.clientID }}
-                - name: LOGGER_LEVEL
-                  value: {{ .Values.iap.logLevel }}
-                - name: PORT
-                  value: "{{ .Values.iap.containerPort }}"
-                volumeMounts:
-                - mountPath: {{ .Values.iap.serviceAccountMountPath }}
-                  name: {{ .Values.iap.serviceAccountSecret }}
-        {{- end -}}
+        - name: iap-sidecar
+          image: {{ .Values.iap.image }}
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: {{ .Values.iap.containerPort }}
+            name: http
+            protocol: TCP
+          readinessProbe:
+            tcpSocket:
+              port: {{ .Values.iap.containerPort }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+          livenessProbe:
+            tcpSocket:
+              port: {{ .Values.iap.containerPort }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+          env:
+          - name: REFRESH_TIME_SECONDS
+            value: {{ .Values.iap.refreshTimeSeconds }}
+          - name: SERVICE_ACCOUNT_CREDENTIALS
+            value: {{ .Values.iap.serviceAccountMountPath }}/{{ .Values.iap.serviceAccountFileName }}
+          - name: IAP_HOST
+            value: {{ .Values.iap.host }}
+          - name: CLIENT_ID
+            value: {{ .Values.iap.clientID }}
+          - name: LOGGER_LEVEL
+            value: {{ .Values.iap.logLevel }}
+          - name: PORT
+            value: "{{ .Values.iap.containerPort }}"
+          volumeMounts:
+          - mountPath: {{ .Values.iap.serviceAccountMountPath }}
+            name: {{ .Values.iap.serviceAccountSecret }}
+        {{- end }}
       volumes:
         {{- range $volume := .Values.volumes }}
         - {{- toYaml $volume | nindent 10 }}
