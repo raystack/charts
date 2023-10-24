@@ -26,15 +26,18 @@ app:
       - mountPath: /work-dir
         name: workdir
   initContainers:
-    - args: ["wget -c https://github.com/goto/siren/releases/download/v0.6.7/siren-cortex_Linux_x86_64.tar.gz -O - | sudo tar -xz -C /work-dir/"]
+    - args:
+        [
+          "wget -c https://github.com/goto/siren/releases/download/v0.6.9/siren-cortex_Linux_x86_64.tar.gz -O - | sudo tar -xz -C /work-dir/",
+        ]
       command: ["/bin/sh", "-c"]
       image: busybox:latest
       imagePullPolicy: IfNotPresent
-      name: init-siren-app
+      name: init-cortex
       volumeMounts:
-      - mountPath: /work-dir
-        name: workdir
-        
+        - mountPath: /work-dir
+          name: workdir
+
   podLabels: {}
 
   migration:
@@ -81,7 +84,7 @@ app:
     NOTIFICATION_MESSAGE_HANDLER_ENABLED: false
     NOTIFICATION_DLQ_HANDLER_ENABLED: false
     # PROVIDERS_CORTEX_WEBHOOK_BASE_API: http://localhost:8080/v1beta1/alerts/cortex
-   
+
   secretConfig:
     DB_URL: postgres://postgres:@localhost:5432/siren?sslmode=disable
     SERVICE_ENCRYPTION_KEY: ____STRING_OF_32_CHARACTERS_____
@@ -89,7 +92,6 @@ app:
   volumes:
     - name: workdir
       emptyDir: {}
-
 
 notification-worker:
   image:
@@ -104,17 +106,17 @@ notification-worker:
     livenessProbe:
       exec:
         command:
-        - /bin/sh
-        - -c
-        - ps -ef | grep siren | grep -v grep
+          - /bin/sh
+          - -c
+          - ps -ef | grep siren | grep -v grep
       initialDelaySeconds: 10
       periodSeconds: 10
     readinessProbe:
       exec:
         command:
-        - /bin/sh
-        - -c
-        - ps -ef | grep siren | grep -v grep
+          - /bin/sh
+          - -c
+          - ps -ef | grep siren | grep -v grep
       initialDelaySeconds: 10
       periodSeconds: 10
   podLabels: {}
@@ -130,7 +132,7 @@ notification-worker:
     NOTIFICATION_QUEUE_KIND: postgres
     NOTIFICATION_MESSAGE_HANDLER_ENABLED: false
     NOTIFICATION_DLQ_HANDLER_ENABLED: false
-   
+
   secretConfig:
     DB_URL: postgres://postgres:@localhost:5432/siren?sslmode=disable
     SERVICE_ENCRYPTION_KEY: ____STRING_OF_32_CHARACTERS_____
@@ -148,17 +150,17 @@ notification-dlq-worker:
     livenessProbe:
       exec:
         command:
-        - /bin/sh
-        - -c
-        - ps -ef | grep siren | grep -v grep
+          - /bin/sh
+          - -c
+          - ps -ef | grep siren | grep -v grep
       initialDelaySeconds: 10
       periodSeconds: 10
     readinessProbe:
       exec:
         command:
-        - /bin/sh
-        - -c
-        - ps -ef | grep siren | grep -v grep
+          - /bin/sh
+          - -c
+          - ps -ef | grep siren | grep -v grep
       initialDelaySeconds: 10
       periodSeconds: 10
   podLabels: {}
@@ -168,7 +170,7 @@ notification-dlq-worker:
 
   ingress:
     enabled: false
-    
+
   config:
     DB_DRIVER: postgres
     NOTIFICATION_QUEUE_KIND: postgres

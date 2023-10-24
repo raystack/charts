@@ -21,6 +21,8 @@ spec:
       name: {{ $port.name }}
     {{- end }}
   selector:
-    {{- include "app.selectorLabels" $dot | nindent 4 }}
+    {{- range $k, $v := $service.selectorLabels }}
+    {{ $k }}: {{ $v }}
+    {{- end }}
 {{- end -}}
 {{- end -}}
