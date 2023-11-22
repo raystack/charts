@@ -55,7 +55,7 @@
 {{- end }}
 [[inputs.statsd]]
   allowed_pending_messages = 10000
-  delete_counters = true
+  delete_counters = false
   delete_gauges = true
   delete_sets = true
   delete_timings = true
