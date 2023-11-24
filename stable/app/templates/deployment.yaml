@@ -132,6 +132,18 @@ spec:
           volumeMounts:
             - name: otelcollector-conf
               mountPath: /etc/otelcollector/
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 13133
+            initialDelaySeconds: {{ .Values.otelcollector.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.otelcollector.readinessProbe.periodSeconds }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 13133
+            initialDelaySeconds: {{ .Values.otelcollector.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.otelcollector.livenessProbe.periodSeconds }}
         {{- end }}
         {{- if .Values.telegraf.enabled }}
         - name: telegraf-sidecar

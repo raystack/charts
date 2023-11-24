@@ -152,7 +152,13 @@ telegraf:
 
 otelcollector:
   enabled: false
-  image: otel/opentelemetry-collector-contrib:0.79.0
+  image: otel/opentelemetry-collector-contrib:0.89.0
+  readinessProbe:
+    initialDelaySeconds: 15
+    periodSeconds: 5
+  livenessProbe:
+    initialDelaySeconds: 15
+    periodSeconds: 5
   config: |
     receivers:
       otlp:
