@@ -50,6 +50,8 @@ spec:
               - secretRef:
                   name: "{{ include "meteor.name" . }}-secret"
             {{- end }}
+            resources:
+              {{- toYaml .Values.resources | nindent 14 }}
           {{- if .Values.otelcollector.enabled }}
           - name: otel-collector-sidecar
             image: {{ .Values.otelcollector.image }}
