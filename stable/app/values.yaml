@@ -68,6 +68,21 @@ ingress:
   # --  - secretName: chart-example-tls
   # --    hosts:
   # --      - chart-example.local
+  additionalIngress:
+  - name: grpc
+    className: ""
+    annotations: {}
+    hosts:
+      - host: grpc-chart-example.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                # name: backend_01
+                port:
+                  number: 8081
+            tls: [] 
 
 resources:
   {}
