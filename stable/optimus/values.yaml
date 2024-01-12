@@ -14,6 +14,15 @@ deployment:
       maxUnavailable: 25%
     type: RollingUpdate
 
+rollback:
+  command:
+    - optimus
+  args:
+    - migration
+    - rollback
+    - -c
+    - /etc/optimus/config.yaml
+
 image:
   repository: raystack/optimus
   tag: "0.7.1"
