@@ -6,17 +6,17 @@ appVersion: v0.6.9
 home: https://github.com/goto/siren
 dependencies:
   - name: app
-    version: "0.5.10"
+    version: "0.5.12"
     repository: "https://goto.github.io/charts/"
     alias: app
     condition: app.enabled
   - name: app
-    version: "0.5.10"
+    version: "0.5.12"
     repository: "https://goto.github.io/charts/"
     alias: notification-worker
     condition: notification-worker.enabled
   - name: app
-    version: "0.5.10"
+    version: "0.5.12"
     repository: "https://goto.github.io/charts/"
     alias: notification-dlq-worker
     condition: notification-dlq-worker.enabled
