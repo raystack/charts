@@ -1,0 +1,16 @@
+{{ if .Values.mount.files }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ include "app.fullname" . }}-files"
+  namespace: "{{ include "app.namespace" . }}"
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/resource-policy": "keep"
+data:
+{{- range $k, $v := .Values.mount.files }}
+  {{ $k }}: |
+{{ $v | indent 4}}
+{{- end }}
+{{ end }}

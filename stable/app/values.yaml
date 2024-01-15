@@ -165,3 +165,10 @@ autoscaling:
   maxReplicas: 2
   targetMemory: 80
   targetCPU: 80
+
+mount:
+  path: /etc/some_path
+  files:
+    # -- can be set using --set-file mount.files.config\\.yaml=./config.yaml
+    config.yaml: |
+      plan: works

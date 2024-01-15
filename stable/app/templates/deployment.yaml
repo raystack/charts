@@ -66,6 +66,10 @@ spec:
             {{- toYaml .Values.container.args | nindent 12 }}
           volumeMounts:
             {{- toYaml .Values.container.volumeMounts | nindent 12 }}
+          {{- if .Values.mount.files }}
+          - name: mounted-files
+            mountPath: .Values.mount.path
+          {{- end }}
           envFrom:
             - configMapRef:
                 name: "{{ include "app.fullname" . }}"
@@ -101,6 +105,11 @@ spec:
         - name: telegraf-conf
           configMap:
             name: {{ template "app.fullname" . }}-telegraf
+        {{- end }}
+        {{- if .Values.mount.files }}
+        - name: mounted-files
+          configMap:
+            name: {{ template "app.fullname" . }}-files
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
