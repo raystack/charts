@@ -112,10 +112,10 @@ container:
     httpGet:
       path: /
       port: tcp
-  # volumeMounts:
-  #   - mountPath: /data/config.yaml
-  #       name: config
-  #       subPath: config.yaml
+  volumeMounts:
+    - mountPath: /data/config.yaml
+      name: config
+      subPath: config.yaml
 # volumes:
 # - name: app-service-account
 #   secret:
@@ -167,8 +167,7 @@ autoscaling:
   targetCPU: 80
 
 mount:
-  path: /etc/some_path
+  path: /etc/some_path_2
   files:
-    # -- can be set using --set-file mount.files.config\\.yaml=./config.yaml
     config.yaml: |
       plan: works

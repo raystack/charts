@@ -65,11 +65,13 @@ spec:
           args:
             {{- toYaml .Values.container.args | nindent 12 }}
           volumeMounts:
-            {{- toYaml .Values.container.volumeMounts | nindent 12 }}
           {{- if .Values.mount.files }}
-          - name: mounted-files
-            mountPath: .Values.mount.path
+            - mountPath: {{ .Values.mount.path }}
+              name: mounted-files
           {{- end }}
+          {{- if .Values.container.volumeMounts }}
+          {{- toYaml .Values.container.volumeMounts | nindent 12 }}
+          {{- end}}
           envFrom:
             - configMapRef:
                 name: "{{ include "app.fullname" . }}"
