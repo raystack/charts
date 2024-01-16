@@ -20,11 +20,11 @@ version: 0.2.0
 dependencies:
   - name: app
     version: "0.6.0"
-    repository: "/Users/anuj/Raystack/charts/stable/app"
+    repository: "https://raystack.github.io/charts/"
     alias: frontier-app
     condition: frontier-app.enabled
   - name: app
     version: "0.6.0"
-    repository: "/Users/anuj/Raystack/charts/stable/app"
+    repository: "https://raystack.github.io/charts/"
     alias: spicedb
     condition: spicedb.enabled
