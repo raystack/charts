@@ -166,8 +166,8 @@ autoscaling:
   targetMemory: 80
   targetCPU: 80
 
-mount:
-  path: /etc/some_path_2
-  files:
-    config.yaml: |
-      plan: works
+# mount:
+#   path: /etc/some_path_2
+#   files:
+#     config.yaml: |
+#       plan: works
