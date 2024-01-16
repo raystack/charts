@@ -112,10 +112,10 @@ container:
     httpGet:
       path: /
       port: tcp
-  volumeMounts:
-    - mountPath: /data/config.yaml
-      name: config
-      subPath: config.yaml
+  # volumeMounts:
+  #   - mountPath: /data/config.yaml
+  #     name: config
+  #     subPath: config.yaml
 # volumes:
 # - name: app-service-account
 #   secret:
