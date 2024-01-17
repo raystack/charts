@@ -1,4 +1,4 @@
-{{ if .Values.mount.files }}
+{{ if ((.Values.mount).files) }}
 apiVersion: v1
 kind: ConfigMap
 metadata:

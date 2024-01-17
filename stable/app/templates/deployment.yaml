@@ -65,7 +65,7 @@ spec:
           args:
             {{- toYaml .Values.container.args | nindent 12 }}
           volumeMounts:
-          {{- if .Values.mount.files }}
+          {{- if ((.Values.mount).files) }}
             - mountPath: {{ .Values.mount.path }}
               name: mounted-files
           {{- end }}
@@ -108,7 +108,7 @@ spec:
           configMap:
             name: {{ template "app.fullname" . }}-telegraf
         {{- end }}
-        {{- if .Values.mount.files }}
+        {{- if ((.Values.mount).files) }}
         - name: mounted-files
           configMap:
             name: {{ template "app.fullname" . }}-files
