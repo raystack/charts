@@ -17,7 +17,7 @@ deployment:
 
 image:
   repository: gotocompany/optimus
-  tag: "0.2.5"
+  tag: "0.11.1"
   pullPolicy: Always
 
 container:
@@ -25,8 +25,11 @@ container:
   securityContext:
     runAsUser: 1000
   ports:
-    - name: optimus
+    - name: http
       containerPort: 9100
+      protocol: TCP
+    - name: grpc
+      containerPort: 9101
       protocol: TCP
   command:
     - optimus
@@ -37,14 +40,14 @@ container:
   livenessProbe:
     httpGet:
       path: /ping
-      port: optimus
-    initialDelaySeconds: 60
+      port: http
+    initialDelaySeconds: 30
     timeoutSeconds: 1
   readinessProbe:
     httpGet:
       path: /ping
-      port: optimus
-    initialDelaySeconds: 60
+      port: http
+    initialDelaySeconds: 30
     timeoutSeconds: 1
 
 # serve.host field in configYaml breaks the live-ness probe
@@ -54,7 +57,9 @@ configYaml: |-
     level: DEBUG
   serve:
     port: 9100
+    port_grpc: 9101
     ingress_host: optimus.optimus.svc.cluster.local
+    ingress_host_grpc: optimus.grpc.optimus.svc.cluster.local
     deployer:
       num_workers: 2
   scheduler:
@@ -84,14 +89,19 @@ service:
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: optimus
+      targetPort: http
       protocol: TCP
       name: http
+    - port: 8081
+      name: grpc
+      targetPort: grpc
+      protocol: TCP
   annotations:
-    projectcontour.io/upstream-protocol.h2c: 80,http
+    projectcontour.io/upstream-protocol.h2c: grpc
 
 ingress:
   enabled: false
+  className: ""
   annotations:
     kubernetes.io/ingress.class: contour
     projectcontour.io/response-timeout: infinity
@@ -105,6 +115,20 @@ ingress:
               name: optimus
               port:
                 number: 80
+  additionalIngress:
+  - name: grpc
+    className: ""
+    annotations: {}
+    hosts:
+      - host: optimus-grpc.example.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: optimus
+                port:
+                  number: 9101
 
 telegraf:
   enabled: false
