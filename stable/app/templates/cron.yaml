@@ -54,6 +54,8 @@ spec:
             - {{- toYaml $volume | nindent 14 }}
             {{- end }}
           {{- end }}
+          resources:
+            {{- toYaml $job.resources | nindent 14 }}
 ---
 {{- end -}}
 {{- end -}}

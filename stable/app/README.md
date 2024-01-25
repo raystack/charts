@@ -58,7 +58,8 @@ The following table lists the configurable parameters of the Siren chart and the
 | cron.jobs[0].command                  | string | `""`                                                                                          |                                                                      |
 | cron.jobs[0].args                     | string | `""`                                                                                          |                                                                      |
 | cron.jobs[0].schedule                 | string | `"0 0 * * *"`                                                                                 |                                                                      |
-| cron.jobs[0].restartPolicy            | string | `Never`                                                                                       |                                                                      |
+| cron.jobs[0].restartPolicy            | string | `Never`                                                                                       |    
+| cron.jobs[0].resources                 | object |                              {}
 | fullnameOverride                      | string | `""`                                                                                          |                                                                      |
 | image.pullPolicy                      | string | `"IfNotPresent"`                                                                              | Specify the docker image path/repository.                            |
 | image.repository                      | string | `nil`                                                                                         |                                                                      |
