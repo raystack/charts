@@ -47,6 +47,8 @@ spec:
               volumeMounts:
                 {{- toYaml $job.volumeMounts | nindent 16 }}
               {{- end }}
+              resources:
+                {{- toYaml $job.resources | nindent 16 }}
           restartPolicy: {{ $job.restartPolicy }}
           {{- if $job.volumes }}
           volumes:
@@ -54,8 +56,6 @@ spec:
             - {{- toYaml $volume | nindent 14 }}
             {{- end }}
           {{- end }}
-          resources:
-            {{- toYaml $job.resources | nindent 14 }}
 ---
 {{- end -}}
 {{- end -}}
