@@ -32,6 +32,10 @@ frontier-app:
         targetPort: 8081
         protocol: TCP
         name: grpc
+      - port: 3000
+        targetPort: 3000
+        protocol: TCP
+        name: admin-ui
     annotations: {}
   ingress:
     enabled: false
