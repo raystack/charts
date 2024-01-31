@@ -32,11 +32,14 @@ frontier-app:
         targetPort: 8081
         protocol: TCP
         name: grpc
+      - port: 3000
+        targetPort: 3000
+        protocol: TCP
+        name: admin-ui
     annotations: {}
   ingress:
-    enabled: true
-    annotations:
-      kubernetes.io/ingress.class: contour
+    enabled: false
+    annotations: {}
     hosts:
       - host: frontier.example.com
         paths:
@@ -75,10 +78,10 @@ spicedb:
     SPICEDB_GRPC_SHUTDOWN_GRACE_PERIOD: "5s"
   container:
     ports:
-    - containerPort: 50051
-      protocol: TCP
-    - containerPort: 8443
-      protocol: TCP
+      - containerPort: 50051
+        protocol: TCP
+      - containerPort: 8443
+        protocol: TCP
     livenessProbe:
       exec:
         command: ["grpc_health_probe", "-v", "-addr=localhost:50051"]
@@ -99,9 +102,8 @@ spicedb:
         protocol: TCP
     annotations: {}
   ingress:
-    enabled: true
-    annotations:
-      kubernetes.io/ingress.class: contour
+    enabled: false
+    annotations: {}
     hosts:
       - host: spicedb.example.com
         paths:
