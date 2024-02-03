@@ -132,6 +132,10 @@ spec:
           volumeMounts:
             - name: otelcollector-conf
               mountPath: /etc/otelcollector/
+          {{- if .Values.otelcollector.resources }}
+          resources:
+            {{- toYaml .Values.otelcollector.resources | nindent 12 }}
+          {{- end }}
           readinessProbe:
             httpGet:
               path: /readyz
@@ -157,6 +161,10 @@ spec:
             - {{ . }}
             {{- end }}
           imagePullPolicy: IfNotPresent
+          {{- if .Values.telegraf.resources }}
+          resources:
+            {{- toYaml .Values.telegraf.resources | nindent 12 }}
+          {{- end }}
           ports:
             - containerPort: {{ .Values.telegraf.containerPort }}
               name: http
@@ -183,6 +191,10 @@ spec:
               port: {{ .Values.iap.containerPort }}
             initialDelaySeconds: {{ .Values.iap.livenessProbe.initialDelaySeconds }}
             timeoutSeconds: {{ .Values.iap.livenessProbe.timeoutSeconds }}
+          {{- if .Values.iap.resources }}
+          resources:
+            {{- toYaml .Values.iap.resources | nindent 12 }}
+          {{- end }}
           env:
           - name: REFRESH_TIME_SECONDS
             value: {{ .Values.iap.refreshTimeSeconds }}
