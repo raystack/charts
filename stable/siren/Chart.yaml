@@ -1,22 +1,22 @@
 apiVersion: v2
 name: siren
 description: Siren Helm chart
-version: 0.1.10
-appVersion: v0.6.9
+version: 0.1.11
+appVersion: v0.6.11
 home: https://github.com/goto/siren
 dependencies:
   - name: app
-    version: "0.5.12"
+    version: "0.5.15"
     repository: "https://goto.github.io/charts/"
     alias: app
     condition: app.enabled
   - name: app
-    version: "0.5.12"
+    version: "0.5.15"
     repository: "https://goto.github.io/charts/"
     alias: notification-worker
     condition: notification-worker.enabled
   - name: app
-    version: "0.5.12"
+    version: "0.5.15"
     repository: "https://goto.github.io/charts/"
     alias: notification-dlq-worker
     condition: notification-dlq-worker.enabled
