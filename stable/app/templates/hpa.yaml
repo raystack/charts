@@ -1,0 +1,41 @@
+{{- if .Values.hpa.enabled }}
+{{- $fullName := include "app.fullname" . -}}
+{{- $appLabels := include "app.labels" . -}}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ $fullName }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- $appLabels | nindent 4 }}
+spec:
+  minReplicas: {{ .Values.hpa.replicas.min }}
+  maxReplicas: {{ .Values.hpa.replicas.max }}
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ $fullName }}
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: {{ .Values.hpa.stabilizationWindowSeconds.scaleDown }}
+    scaleUp:
+      stabilizationWindowSeconds: {{ .Values.hpa.stabilizationWindowSeconds.scaleUp }}
+  metrics:
+    {{- if .Values.hpa.targetUtilization.memory }}
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.hpa.targetUtilization.memory }}
+    {{- end }}
+    {{- if .Values.hpa.targetUtilization.cpu }}
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.hpa.targetUtilization.cpu }}
+    {{- end }}
+---
+{{- end -}}
