@@ -5,6 +5,8 @@ app:
   ## Value to fully override guardian.fullname template
   fullnameOverride: ""
 
+  podLabels: {}
+
   image:
     repository: gotocompany/guardian
     pullPolicy: Always
