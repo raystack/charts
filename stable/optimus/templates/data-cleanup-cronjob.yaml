@@ -8,9 +8,13 @@ metadata:
 spec:
   schedule: {{ .Values.cleanupConfig.schedule }}
   concurrencyPolicy: {{ .Values.cleanupConfig.concurrencyPolicy }}
+  successfulJobsHistoryLimit: {{ .Values.cleanupConfig.successJobHistoryLimit }}
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            {{- include "app.labels" . | nindent 12 }}
         spec:
           containers:
           - name: {{ include "app.fullname" . }}-cleanup

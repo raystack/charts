@@ -79,6 +79,7 @@ cleanupConfig:
   image: "postgres:15.2-alpine3.17"
   restartPolicy: OnFailure
   concurrencyPolicy: Forbid
+  successJobHistoryLimit: 1
   queries:
     - "delete from sensor_run where start_time < now() - Interval '5 months';"
     - "delete from task_run   where start_time < now() - Interval '5 months';"
