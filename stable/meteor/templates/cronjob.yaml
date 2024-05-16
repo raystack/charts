@@ -21,6 +21,9 @@ spec:
 {{ toYaml .Values.labels | indent 12 }}
 {{- end }}
         spec:
+          {{- if .Values.serviceAccount.name }}
+          serviceAccountName: {{ .Values.serviceAccount.name }}
+          {{- end }}
           containers:
           - name: "{{ include "meteor.name" . }}"
             image: "{{ required `image.repository is required` .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -43,6 +46,10 @@ spec:
               - name: {{ $v }}
                 mountPath: {{ printf "%s/%s" "/etc/secret" $v }}
               {{- end }}
+              {{- if .Values.serviceAccount.tokenProjection.enabled }}
+              - name: {{ .Values.serviceAccount.name }}
+                mountPath: {{ .Values.serviceAccount.tokenProjection.mountPath }}
+              {{- end}}
             envFrom:
               - configMapRef:
                   name: "{{ include "meteor.name" . }}-variables-configmap"
@@ -154,3 +161,12 @@ spec:
               configMap:
                 name: {{ include "meteor.name" . }}-otelcollector
           {{- end }}
+          {{- if .Values.serviceAccount.tokenProjection.enabled }}
+            - name: {{ .Values.serviceAccount.name }}
+              projected:
+                sources:
+                  - serviceAccountToken:
+                      path: {{ .Values.serviceAccount.tokenProjection.subPath }}
+                      expirationSeconds: {{ .Values.serviceAccount.tokenProjection.expirationSeconds }}
+                      audience: {{ .Values.serviceAccount.tokenProjection.audience }}
+          {{- end}}

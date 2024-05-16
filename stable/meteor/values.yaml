@@ -66,3 +66,12 @@ otelcollector:
           receivers: [otlp]
           processors: []
           exporters: [logging]
+
+serviceAccount:
+  name: ""
+  tokenProjection:
+    enabled: false
+    mountPath: "/var/run/secrets"
+    subPath: "token"
+    expirationSeconds: 600
+    audience: ""
