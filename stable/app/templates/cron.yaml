@@ -35,7 +35,15 @@ spec:
               image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
               imagePullPolicy: {{ $.Values.image.pullPolicy }}
               command:
-              {{- toYaml $job.command | nindent 16 }}
+              {{- if $.Values.otelcollector.enabled }}
+                  - /bin/sh
+                  - -c
+                  - |
+                    {{ join " " $job.command }}
+                    pkill -SIGTERM otelcol-contrib
+              {{- else }}
+                {{- toYaml $job.command | nindent 16 }}
+              {{- end }}
               args:
               {{- toYaml $job.args | nindent 16 }}
               envFrom:
@@ -49,13 +57,69 @@ spec:
               {{- end }}
               resources:
                 {{- toYaml $job.resources | nindent 16 }}
+            {{- if $.Values.otelcollector.enabled }}
+            - name: otel-collector-sidecar
+              image: {{ $.Values.otelcollector.image }}
+              imagePullPolicy: IfNotPresent
+              args:
+                - "--config=/etc/otelcollector/config.yaml"
+              ports:
+              - containerPort: 1888
+                name: pprof
+                protocol: TCP
+              - containerPort: 8888
+                name: prometheusself
+                protocol: TCP
+              - containerPort: 8889
+                name: prometheus
+                protocol: TCP
+              - containerPort: 13133
+                name: healthcheck
+                protocol: TCP
+              - containerPort: 4317
+                name: otlpgrpcrecv
+                protocol: TCP
+              - containerPort: 4318
+                name: otlphttprecv
+                protocol: TCP
+              - containerPort: 55679
+                name: zpages
+                protocol: TCP
+              env:
+                - name: K8S_NODE_NAME
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: spec.nodeName
+                - name: K8S_POD_NAME
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.name
+                - name: K8S_POD_NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.namespace
+                - name: K8S_POD_IP
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: status.podIP
+                - name: OTEL_RESOURCE_ATTRIBUTES
+                  value: |
+                    k8s.deployment.name={{ $job.name }},k8s.namespace.name=$(K8S_POD_NAMESPACE),k8s.node.name=$(K8S_NODE_NAME),k8s.pod.name=$(K8S_POD_NAME),k8s.pod.ip=$(K8S_POD_IP)
+              volumeMounts:
+                - name: otelcollector-conf
+                  mountPath: /etc/otelcollector/
+          shareProcessNamespace: true
+          {{- end}}
           restartPolicy: {{ $job.restartPolicy }}
-          {{- if $job.volumes }}
           volumes:
             {{- range $volume := $job.volumes }}
             - {{- toYaml $volume | nindent 14 }}
             {{- end }}
-          {{- end }}
+            {{- if $.Values.otelcollector.enabled }}
+            - name: otelcollector-conf
+              configMap:
+                name: {{ $job.name }}-otelcollector
+            {{- end }}
 ---
 {{- end -}}
 {{- end -}}
