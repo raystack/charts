@@ -109,6 +109,7 @@ cron:
       #     memory: "100Mi"
 
 container:
+  enabled: true
   command: []
   args: []
   ports:
