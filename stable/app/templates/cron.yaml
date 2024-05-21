@@ -49,8 +49,10 @@ spec:
               envFrom:
                 - configMapRef:
                     name: {{ $fullName }}
+                {{- if $.Values.secretConfig }}
                 - secretRef:
                     name: {{ $fullName }}-secret
+                {{- end }}
               {{- if $job.volumeMounts }}
               volumeMounts:
                 {{- toYaml $job.volumeMounts | nindent 16 }}
