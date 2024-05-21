@@ -118,7 +118,7 @@ spec:
             {{- if $.Values.otelcollector.enabled }}
             - name: otelcollector-conf
               configMap:
-                name: {{ template "app.fullname" . }}-otelcollector
+                name: {{ $fullName }}-otelcollector
             {{- end }}
 ---
 {{- end -}}
