@@ -2,11 +2,11 @@ shield-app:
   enabled: true
   image:
     repository: gotocompany/shield
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
     tag: 0.2.10
   container:
     args:
-    - serve
+      - serve
     livenessProbe:
       httpGet:
         path: /ping
@@ -16,12 +16,12 @@ shield-app:
         path: /ping
         port: 5556
     ports:
-    - name: tcp
-      containerPort: 8080
-      protocol: TCP
-    - name: proxy
-      containerPort: 5556
-      protocol: TCP
+      - name: tcp
+        containerPort: 8080
+        protocol: TCP
+      - name: proxy
+        containerPort: 5556
+        protocol: TCP
   podLabels: {}
   service:
     type: ClusterIP
@@ -58,28 +58,28 @@ shield-app:
     SHIELD_SPICEDB_HOST: spicedb.namespace.svc.local
     SHIELD_SPICEDB_PORT: 50051
   secretConfig:
-    SHIELD_DB_URL: 
-    SHIELD_SPICEDB_PRE_SHARED_KEY: 
+    SHIELD_DB_URL:
+    SHIELD_SPICEDB_PRE_SHARED_KEY:
 
-spicedb: 
+spicedb:
   enabled: true
   nameOverride: shield-spicedb
   replicaCount: 2
   image:
     repository: quay.io/authzed/spicedb
     tag: v1.2.0
-  secretConfig: 
+  secretConfig:
     SPICEDB_GRPC_PRESHARED_KEY:
-    SPICEDB_DATASTORE_CONN_URI: 
+    SPICEDB_DATASTORE_CONN_URI:
   config:
     SPICEDB_LOG_LEVEL: info
     SPICEDB_DATASTORE_ENGINE:
     SPICEDB_GRPC_SHUTDOWN_GRACE_PERIOD: "5s"
   container:
     ports:
-    - name: tcp
-      containerPort: 50051
-      protocol: TCP
+      - name: tcp
+        containerPort: 50051
+        protocol: TCP
     livenessProbe:
       httpGet:
         path: /
