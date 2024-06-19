@@ -100,6 +100,7 @@ cron:
         - app
       args:
         - startJob
+      serviceAccountName: ""
       # resources:
       #   limits:
       #     cpu: "100m"
