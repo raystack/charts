@@ -110,6 +110,15 @@ spec:
           - containerPort: 55679
             name: zpages
             protocol: TCP
+          {{- if .Values.otelcollector.useEnvFromConfig }}
+          envFrom:
+            - configMapRef:
+                name: "{{ include "app.fullname" . }}"
+            {{- if .Values.secretConfig }}
+            - secretRef:
+                name: "{{ template "app.fullname" . }}-secret"
+            {{- end }}
+          {{- end }}
           env:
             - name: K8S_NODE_NAME
               valueFrom:
