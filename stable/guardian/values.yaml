@@ -80,7 +80,6 @@ app:
   config:
     LOG_LEVEL: info
     AUTHENTICATED_USER_HEADER_KEY: x-authenticated-user-email
-    NOTIFIER_PROVIDER: slack
     JOBS_FETCH_RESOURCES_ENABLED: false
     JOBS_FETCH_RESOURCES_INTERVAL: "0 */2 * * *"
     JOBS_REVOKE_EXPIRED_ACCESS_ENABLED: false
