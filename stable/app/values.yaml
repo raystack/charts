@@ -165,3 +165,8 @@ autoscaling:
   maxReplicas: 2
   targetMemory: 80
   targetCPU: 80
+
+pdb:
+  enabled: false
+  # minAvailable: 0
+  # maxUnavailable: 1
