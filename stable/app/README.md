@@ -91,6 +91,9 @@ The following table lists the configurable parameters of the Siren chart and the
 | telegraf.containerPort                | int    | `8125`                                                                                        |                                                                      |
 | telegraf.protocol                     | string | `UDP`                                                                                         |                                                                      |
 | telegraf.config                       | string | `""`                                                                                          | telegraf config file content                                         |
+| pdb.enabled | bool | `false` | Whether to enable pod disruption budget on the release | 
+| pdb.minAvailable | int | `0` | minimum number of pods that should be available according to PDB |
+| pdb.maxUnavailable | int | `` | maximum number of pods that can be unavailable according to PDB |
 
 ---
 
