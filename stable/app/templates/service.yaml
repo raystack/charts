@@ -19,4 +19,5 @@ spec:
       name: {{ $port.name }}
     {{- end }}
   selector:
+    app.kubernetes.io/type: deployment
     {{- include "app.selectorLabels" . | nindent 4 }}

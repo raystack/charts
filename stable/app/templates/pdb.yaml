@@ -14,5 +14,6 @@ spec:
   {{- end }}
   selector:
     matchLabels:
+      app.kubernetes.io/type: deployment
       {{- include "app.selectorLabels" . | nindent 6 }}
 {{- end }}

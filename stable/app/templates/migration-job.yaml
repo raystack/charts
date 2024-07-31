@@ -18,7 +18,8 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "app.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/type: job
+        {{- include "app.selectorLabels" . | nindent 8 }}     
     spec:
       restartPolicy: Never
       containers:

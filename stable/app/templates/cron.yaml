@@ -18,6 +18,7 @@ spec:
       template:
         metadata:
           labels:
+            app.kubernetes.io/type: cronjob
         {{- $appSelectorLabels | nindent 12 }}
         spec:
           containers:
