@@ -9,7 +9,9 @@ spec:
   {{- if .Values.pdb.maxUnavailable }}
   maxUnavailable: {{ .Values.pdb.maxUnavailable }}
   {{- end }}
+  {{- if not .Values.pdb.maxUnavailable }}
   minAvailable: {{ .Values.pdb.minAvailable | default 0 }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "app.selectorLabels" . | nindent 6 }}
