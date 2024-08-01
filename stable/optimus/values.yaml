@@ -67,9 +67,22 @@ configYaml: |-
   telemetry:
     profile_addr: ":9110"
     jaeger_addr: "http://jaeger-collector:14268/api/traces"
+  plugin:
+    artifacts:
+      - /etc/optimus-plugins
 
 config:
   OPTIMUS_TELEMETRY_JAEGER_ADDR: http://jaeger-collector.optimus:14268/api/traces
+
+pluginYaml:
+  bq2bq.yaml: |-
+    name: bq2bq
+    description: BigQuery to BigQuery transformation task
+    plugintype: task
+    pluginversion: 0.4.2
+    image: 'docker.io/gotocompany/optimus-task-bq2bq-executor:0.4.2'
+    entrypoint:
+      script: "python3 /opt/bumblebee/main.py"
 
 secretConfig: {}
 

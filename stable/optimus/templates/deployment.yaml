@@ -59,6 +59,9 @@ spec:
             - mountPath: /etc/optimus
               name: configuration-volume
               readOnly: true
+            - mountPath: /etc/optimus-plugins
+              name: plugins-volume
+              readOnly: true
             {{- range $volumeMount := .Values.container.volumeMounts }}
             - {{- toYaml $volumeMount | nindent 16 }}
             {{- end }}
@@ -111,6 +114,9 @@ spec:
         - name: configuration-volume
           configMap:
             name: {{ template "app.fullname" . }}-yaml
+        - name: plugins-volume
+          configMap:
+            name: {{ template "app.fullname" . }}-plugin-yaml
         {{- range $volume := .Values.volumes }}
         - {{- toYaml $volume | nindent 12 }}
         {{- end }}

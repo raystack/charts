@@ -19,3 +19,15 @@ metadata:
     "helm.sh/hook-weight": "-5"
 data:
   config.yaml: {{ toYaml .Values.configYaml | indent 4 }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "app.fullname" . }}-plugin-yaml
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-5"
+data:
+  {{- range $k, $v := .Values.pluginYaml }}
+  {{ $k }}: {{ toYaml $v | indent 4 }}
+  {{- end }}
