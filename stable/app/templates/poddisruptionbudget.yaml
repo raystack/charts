@@ -7,6 +7,6 @@ spec:
   maxUnavailable: {{ .Values.maxUnavailable }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: "{{ template "app.fullname" . }}"
+      {{- include "app.selectorLabels" . | nindent 6 }}
+      app.pixxel.co.in/governed-by: "deployment"
 {{- end }}
-  
