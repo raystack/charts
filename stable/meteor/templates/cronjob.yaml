@@ -33,6 +33,12 @@ spec:
               - -c
               - |
                 meteor run /opt/recipes;
+                {{- if .Values.postCmd.enabled }}
+                METEOR_EXIT_CODE=$?
+                if [ $METEOR_EXIT_CODE -eq 0 ]; then
+                  {{- .Values.postCmd.cmd | nindent 18 }}
+                fi
+                {{- end }}
             {{- if .Values.telegraf.enabled }}
                 pkill -SIGTERM telegraf
             {{- end }}

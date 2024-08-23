@@ -38,6 +38,10 @@ resources:
 #         foo: "bar"
 #     sinks:
 #       - name: console
+postCmd:
+  enabled: false
+  cmd: ""
+
 telegraf:
   enabled: false
   image: telegraf:1.19.3-alpine
