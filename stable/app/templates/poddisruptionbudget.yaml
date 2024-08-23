@@ -5,7 +5,6 @@ metadata:
   name: "{{ template "app.fullname" . }}-pdb"
 spec:
   maxUnavailable: {{ .Values.pdb.maxUnavailable }}
-  minAvailable: {{ .Values.pdb.minAvailable }}
   selector:
     matchLabels:
       {{- include "app.selectorLabels" . | nindent 6 }}
