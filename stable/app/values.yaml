@@ -78,7 +78,7 @@ resources: {}
   # --   cpu: 100m
   # --   memory: 128Mi
 
-maxUnavailable : {}
+maxUnavailable : 0
 
 nodeSelector: {}
 

@@ -8,5 +8,5 @@ spec:
   selector:
     matchLabels:
       {{- include "app.selectorLabels" . | nindent 6 }}
-      app.pixxel.co.in/governed-by: "deployment"
+      app.kubernetes.io/component: "deployment"
 {{- end }}
