@@ -1,10 +1,11 @@
-{{- if .Values.maxUnavailable }}
+{{- if and .Values.pdb.enabled (gt .Values.replicaCount 1) }}
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: "{{ template "app.fullname" . }}-pdb"
 spec:
-  maxUnavailable: {{ .Values.maxUnavailable }}
+  maxUnavailable: {{ .Values.pdb.maxUnavailable }}
+  minAvailable: {{ .Values.pdb.minAvailable }}
   selector:
     matchLabels:
       {{- include "app.selectorLabels" . | nindent 6 }}

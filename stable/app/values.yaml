@@ -78,7 +78,10 @@ resources: {}
   # --   cpu: 100m
   # --   memory: 128Mi
 
-maxUnavailable : 0
+pdb:
+  enabled: false
+  minAvailable: 1
+  maxUnavailable: 1
 
 nodeSelector: {}
 
