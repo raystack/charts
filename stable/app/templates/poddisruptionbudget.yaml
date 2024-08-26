@@ -1,0 +1,12 @@
+{{- if and .Values.pdb.enabled (gt .Values.replicaCount 1) }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: "{{ template "app.fullname" . }}-pdb"
+spec:
+  maxUnavailable: {{ .Values.pdb.maxUnavailable }}
+  selector:
+    matchLabels:
+      {{- include "app.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: "deployment"
+{{- end }}

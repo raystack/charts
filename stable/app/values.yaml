@@ -78,6 +78,10 @@ resources: {}
   # --   cpu: 100m
   # --   memory: 128Mi
 
+pdb:
+  enabled: false
+  maxUnavailable: 1
+
 nodeSelector: {}
 
 tolerations: []
