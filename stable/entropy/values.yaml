@@ -52,3 +52,47 @@ app:
     # NEW_RELIC_APP_NAME: entropy
 
   secretConfig: {}
+
+worker:
+  image:
+    repository: gotocompany/entropy
+    pullPolicy: Always
+    tag: "latest"
+  container:
+    command:
+      - entropy
+    args:
+      - worker
+    livenessProbe:
+      exec:
+        command:
+          - /bin/sh
+          - -c
+          - ps -ef | grep entropy | grep -v grep
+      initialDelaySeconds: 10
+      periodSeconds: 10
+    readinessProbe:
+      exec:
+        command:
+          - /bin/sh
+          - -c
+          - ps -ef | grep entropy | grep -v grep
+      initialDelaySeconds: 10
+      periodSeconds: 10
+  podLabels: {}
+  
+  migration:
+    enabled: false
+
+  ingress:
+    enabled: false
+
+  config:
+    LOG_LEVEL: INFO
+    SYNCER_SYNC_INTERVAL: 1s
+    SYNCER_REFRESH_INTERVAL: 3s
+    SYNCER_EXTEND_LOCK_BY: 5s
+    SYNCER_SYNC_BACKOFF_INTERVAL: 5s
+    SYNCER_MAX_RETRIES: 5
+
+  secretConfig: {}
