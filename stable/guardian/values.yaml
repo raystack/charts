@@ -40,24 +40,24 @@ app:
       - name: "fetch-resources"
         schedule: "0 */2 * * *"
         restartPolicy: Never
-        command: []
-        args:
+        args: []
+        command:
           - job
           - run
           - fetch_resources
       - name: "appeal-expiration-reminder"
         schedule: "0 9 * * *"
         restartPolicy: Never
-        command: []
-        args:
+        args: []
+        command:
           - job
           - run
           - appeal_expiration_reminder
       - name: "appeal-expiration-revocation"
         schedule: "*/20 * * * *"
         restartPolicy: Never
-        command: []
-        args:
+        args: []
+        command:
           - job
           - run
           - appeal_expiration_revocation
