@@ -113,6 +113,10 @@ spec:
               volumeMounts:
                 - name: otelcollector-conf
                   mountPath: /etc/otelcollector/
+              {{- if $.Values.otelcollector.resources }}
+              resources:
+                {{- toYaml $.Values.otelcollector.resources | nindent 16 }}
+              {{- end }}
           shareProcessNamespace: true
           {{- end}}
           restartPolicy: {{ $job.restartPolicy }}
