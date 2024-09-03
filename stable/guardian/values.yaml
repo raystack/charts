@@ -42,6 +42,7 @@ app:
         restartPolicy: Never
         args: []
         command:
+          - guardian
           - job
           - run
           - fetch_resources
@@ -50,6 +51,7 @@ app:
         restartPolicy: Never
         args: []
         command:
+          - guardian
           - job
           - run
           - appeal_expiration_reminder
@@ -58,6 +60,7 @@ app:
         restartPolicy: Never
         args: []
         command:
+          - guardian
           - job
           - run
           - appeal_expiration_revocation
