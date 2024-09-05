@@ -1,4 +1,4 @@
-{{- if and .Values.pdb.enabled (gt (int .Values.replicaCount) 1) }}
+{{- if and .Values.pdb.enabled (or (and .Values.hpa.enabled (gt (int .Values.hpa.minReplicas) 1)) (gt (int .Values.replicaCount) 1)) }}
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
