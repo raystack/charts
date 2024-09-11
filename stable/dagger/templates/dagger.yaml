@@ -1,0 +1,141 @@
+apiVersion: flink.apache.org/v1beta1
+kind: FlinkDeployment
+metadata:
+  name: {{ .Values.deployment_id }}
+spec:
+  image: {{ .Values.image }}
+  flinkVersion: v1_14
+  flinkConfiguration:
+    blob.server.port: "6124"
+    taskmanager.rpc.port: "6122"
+    taskmanager.numberOfTaskSlots: "1"
+    metrics.latency.interval: "0"
+    web.timeout: "60000"
+    akka.ask.timeout: 10 min
+    rest.server.numThreads: "20"
+    slot.request.timeout: "300000"
+    cluster.evenly-spread-out-slots: "false"
+    rest.flamegraph.enabled: "false"
+    taskmanager.memory.managed.fraction: "0.2"
+    taskmanager.memory.managed.consumer-weights: OPERATOR:70,STATE_BACKEND:70,PYTHON:30
+    classloader.resolve-order: parent-first
+
+    #HA CONFIGS
+    state.backend: filesystem
+    state.backend.fs.checkpointdir: {{ .Values.storage_protocol }}://{{ .Values.projectID }}-dagger-checkpoints/flink-checkpoints/{{ .Values.name }}
+    state.savepoints.dir: {{ .Values.storage_protocol }}://{{ .Values.projectID }}-dagger-checkpoints/flink-savepoints/{{ .Values.name }}
+    blob.storage.directory: /tmp/flink-blobs
+    jobmanager.web.tmpdir: /tmp/flink-web
+    web.upload.dir: /tmp/flink-web/flink-uploads
+
+    high-availability: org.apache.flink.kubernetes.highavailability.KubernetesHaServicesFactory
+    high-availability.storageDir: {{ .Values.storage_protocol }}://{{ .Values.projectID }}-dagger-checkpoints/ha
+
+    metrics.reporters: stsd
+    metrics.reporter.stsd.class: com.gojek.de.dagger.metrics.StatsDReporter
+    metrics.reporter.stsd.host: localhost
+    metrics.reporter.stsd.port: "8125"
+    metrics.reporter.stsd.tags: dagger_name={{ .Values.name }},team_name={{ .Values.team }}
+    metrics.reporter.stsd.blacklistedTags: task_name,operator_name,task_attempt_id,metric_type
+    metrics.reporter.stsd.blacklistedMetrics: .*KafkaConsumer_current_offsets_.*,.*KafkaConsumer_committed_offsets.*,.*Shuffle_Netty.*
+    metrics.reporter.stsd.interval: 5 SECONDS
+    akka.framesize: 10485760b
+    client.timeout: 10 min
+    metrics.scope.jm: jobmanager.godata-id-flink-operator
+    metrics.scope.jm.job: jobmanager-job.godata-id-flink-operator.<job_name>.<job_id>
+    metrics.scope.tm: taskmanager.godata-id-flink-operator.<tm_id>
+    metrics.scope.tm.job: taskmanager-job.godata-id-flink-operator.<tm_id>.<job_name>
+    metrics.scope.task: task.godata-id-flink-operator.<tm_id>.<job_name>.<task_name>.<subtask_index>
+    metrics.scope.operator: operator.godata-id-flink-operator.<tm_id>.<job_name>.<subtask_index>
+  serviceAccount: flink
+  podTemplate:
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: common-pod-template
+      labels:
+        application: dagger
+        app-id: 02408523-06e0-4b4a-a3f4-8df6d429e21e
+        instance-id: {{ .Values.deployment_id }}
+        {{- range $key, $value := .Values.extra_labels }}
+        {{ $key }}: '{{ $value }}'
+        {{- end }}
+    spec:
+      serviceAccount: flink
+      containers:
+        - name: flink-main-container
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /var/secrets/google/gcp_key.json
+          volumeMounts:
+            - mountPath: /etc/hadoop/conf
+              name: hadoop-config
+            - mountPath: /var/secrets/google
+              name: google-cloud-key
+        - name: telegrafd
+          image: telegraf:1.18.3-alpine
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: CLUSTER_NAME
+              value: {{ .Values.flink_name }}
+            - name: PROMETHEUS_URL
+              value: {{ .Values.prometheus_url }}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          volumeMounts:
+            - mountPath: /etc/telegraf
+              name: telegraf-config
+      volumes:
+        - name: hadoop-config
+          configMap:
+            defaultMode: 420
+            name: flink-operator-hadoop-config
+        - name: telegraf-config
+          configMap:
+            defaultMode: 420
+            name: flink-operator-telegraf-config
+        - name: google-cloud-key
+          secret:
+            defaultMode: 420
+            secretName: flink-operator-gcp
+  jobManager:
+    resource:
+      cpu: {{ .Values.resources.jobmanager.cpu }}
+      memory: {{ .Values.resources.jobmanager.memory }}
+  taskManager:
+    resource:
+      cpu: {{ .Values.resources.taskmanager.cpu }}
+      memory: {{ .Values.resources.taskmanager.memory }}
+  job:
+    jarURI: {{ .Values.jarURI }}
+    parallelism: {{ .Values.configuration.FLINK_PARALLELISM }}
+    upgradeMode: stateless
+    state: {{ .Values.state }}
+    entryClass: com.gotocompany.dagger.core.KafkaProtoSQLProcessor
+    args:
+      {{  range .Values.programArgs }}
+      - {{ . }}
+      {{ end }}
+  logConfiguration:
+    "log4j-console.properties": |
+      rootLogger.level=INFO
+      rootLogger.appenderRef.console.ref=ConsoleAppender
+      logger.flink.name=org.apache.flink
+      logger.flink.level=INFO
+      logger.akka.name=akka
+      logger.akka.level=INFO
+      logger.kafka.name=org.apache.kafka
+      logger.kafka.level=INFO
+      logger.hadoop.name=org.apache.hadoop
+      logger.hadoop.level=INFO
+      appender.console.name=ConsoleAppender
+      appender.console.type=CONSOLE
+      appender.console.layout.type=PatternLayout
+      appender.console.layout.pattern=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c - %m%n
