@@ -76,3 +76,6 @@ telegraf:
     requests:
       cpu: 50m
       memory: 64Mi
+
+otelcollector:
+  enabled: false
