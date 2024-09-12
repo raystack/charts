@@ -58,6 +58,16 @@ spec:
         - mountPath: /etc/telegraf
           name: telegraf-conf
       {{- end }}
+      {{- if index .Values.otelcollector.enabled }}
+      - name: otelcollector
+        image: "{{ .Values.otelcollector.image.repository }}:{{ .Values.otelcollector.image.tag }}"
+        imagePullPolicy: {{ .Values.otelcollector.image.pullPolicy }}
+        resources:
+          {{- toYaml .Values.otelcollector.resources | nindent 12 }}
+        volumeMounts:
+        - mountPath: /etc/otelcollector
+          name: otelcollector-conf
+      {{- end }}
       {{- if index .Values "init-firehose" "enabled" }}
       initContainers:
       - args:
@@ -80,6 +90,11 @@ spec:
       - configMap:
           name: {{ include "firehose.fullname" . }}-telegraf-config
         name: telegraf-conf
+      {{- end }}
+      {{- if index .Values.otelcollector.enabled }}
+      - configMap:
+          name: {{ include "firehose.fullname" . }}-otelcollector-config
+        name: otelcollector-conf
       {{- end }}
       {{- if index .Values "init-firehose" "enabled" }}
       - emptyDir: {}
