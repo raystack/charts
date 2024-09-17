@@ -2,6 +2,7 @@ apiVersion: flink.apache.org/v1beta1
 kind: FlinkDeployment
 metadata:
   name: {{ .Values.deployment_id }}
+  namespace: {{ .Values.namespace }}
   annotations: 
     meta.helm.sh/release-name: {{ .Values.deployment_id }}
     meta.helm.sh/release-namespace: {{ .Values.namespace }}
