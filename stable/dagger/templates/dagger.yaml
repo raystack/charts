@@ -3,9 +3,6 @@ kind: FlinkDeployment
 metadata:
   name: {{ .Values.deployment_id }}
   namespace: {{ .Values.namespace }}
-  annotations: 
-    meta.helm.sh/release-name: {{ .Values.deployment_id }}
-    meta.helm.sh/release-namespace: {{ .Values.namespace }}
 spec:
   image: {{ .Values.image }}
   flinkVersion: v1_14
