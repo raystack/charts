@@ -117,7 +117,7 @@ spec:
   job:
     jarURI: {{ .Values.jarURI }}
     parallelism: {{ .Values.configuration.FLINK_PARALLELISM }}
-    upgradeMode: savepoint
+    upgradeMode: stateless
     state: {{ .Values.state }}
     entryClass: com.gotocompany.dagger.core.KafkaProtoSQLProcessor
     savepointTriggerNonce: {{ .Values.savepointTriggerNonce }}
