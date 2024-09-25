@@ -120,6 +120,7 @@ spec:
     upgradeMode: stateless
     state: {{ .Values.state }}
     entryClass: com.gotocompany.dagger.core.KafkaProtoSQLProcessor
+    savepointTriggerNonce: {{ .Values.savepointTriggerNonce }}
     args:
       {{  range .Values.programArgs }}
       - {{ . }}
