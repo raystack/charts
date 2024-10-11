@@ -2,12 +2,13 @@
 {{- $fullName := include "app.fullname" . -}}
 {{- $appLabels := include "app.labels" . -}}
 {{- $appSelectorLabels := include "app.selectorLabels" . -}}
+{{- $appNamespace := include "app.namespace" . -}}
 {{- range $i, $job := .Values.cron.jobs }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: "{{ $fullName | trunc 24 }}-{{ $i }}-{{ $job.name | trunc 24}}"
-  namespace: "{{ include "app.namespace" . }}"
+  namespace: "{{ $appNamespace }}"
   labels:
     {{- $appLabels | nindent 4 }}
 spec:
