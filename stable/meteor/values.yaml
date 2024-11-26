@@ -12,6 +12,8 @@ secretConfig: {}
 # pass in secret names to be mounted to cronjob
 ssl_secrets: []
 
+annotations: {}
+
 jobDeadlineSeconds: 14400
 
 resources:
