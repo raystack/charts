@@ -36,7 +36,6 @@ spec:
     metrics.reporter.stsd.class: com.gojek.de.dagger.metrics.StatsDReporter
     metrics.reporter.stsd.host: localhost
     metrics.reporter.stsd.port: "8125"
-    metrics.reporter.stsd.tags: dagger_name={{ .Values.name }},team_name={{ .Values.team }}
     metrics.reporter.stsd.blacklistedTags: task_name,operator_name,task_attempt_id,metric_type
     metrics.reporter.stsd.blacklistedMetrics: .*KafkaConsumer_current_offsets_.*,.*KafkaConsumer_committed_offsets.*,.*Shuffle_Netty.*
     metrics.reporter.stsd.interval: 5 SECONDS
@@ -81,6 +80,10 @@ spec:
               value: {{ .Values.flink_name }}
             - name: PROMETHEUS_URL
               value: {{ .Values.prometheus_url }}
+            - name: DAGGER_URN
+              value: {{ .Values.urn }}
+            - name: TEAM_NAME
+              value: {{.Values.team }}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           resources:
