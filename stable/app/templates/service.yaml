@@ -1,10 +1,13 @@
 {{- if .Values.container.enabled }}
+{{- $fullName := include "app.fullname" . -}}
+{{- $labels := include "app.labels" . -}}
+{{- $selectorLabels := include "app.selectorLabels" . -}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "app.fullname" . }}
+  name: {{ $fullName }}
   labels:
-    {{- include "app.labels" . | nindent 4 }}
+    {{- $labels | nindent 4 }}
   {{- with .Values.service.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -19,5 +22,31 @@ spec:
       name: {{ $port.name }}
     {{- end }}
   selector:
-    {{- include "app.selectorLabels" . | nindent 4 }}
+    {{- $selectorLabels | nindent 4 }}
+{{- if .Values.service.additionalService }}
+  {{- range .Values.service.additionalService }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ printf "%s-%s" $fullName .name }}
+  labels:
+    {{- $labels | nindent 4 }}
+  {{- with .annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .type }}
+  ports:
+    {{- range $port := .ports }}
+    - port: {{ $port.port }}
+      targetPort: {{ $port.targetPort }}
+      protocol: {{ $port.protocol }}
+      name: {{ $port.name }}
+    {{- end }}
+  selector:
+    {{- $selectorLabels | nindent 4 }}
+  {{- end }}
+{{- end }}
 {{- end -}}
