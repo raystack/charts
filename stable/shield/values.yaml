@@ -3,7 +3,7 @@ shield-app:
   image:
     repository: gotocompany/shield
     pullPolicy: Always
-    tag: 0.2.10
+    tag: 0.7.0
   container:
     args:
       - serve
