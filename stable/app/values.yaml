@@ -169,3 +169,5 @@ autoscaling:
   maxReplicas: 2
   targetMemory: 80
   targetCPU: 80
+
+# terminationGracePeriodSeconds: 30
