@@ -170,4 +170,4 @@ autoscaling:
   targetMemory: 80
   targetCPU: 80
 
-terminationGracePeriodSeconds: 30
+# terminationGracePeriodSeconds: 30
