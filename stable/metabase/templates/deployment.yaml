@@ -1,0 +1,174 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "metabase.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- if .Values.labels }}
+{{ toYaml .Values.labels | trim | indent 4 }}
+    {{- end }}
+    run: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      run: {{ .Release.Name }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
+        {{- if .Values.podAnnotations }}
+{{ toYaml .Values.podAnnotations | trim | indent 8 }}
+        {{- end }}
+      labels:
+        {{- if .Values.labels }}
+{{ toYaml .Values.labels | trim | indent 8 }}
+        {{- end }}
+        run: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: metabase
+          image: "{{ .Values.metabase.image.repository }}:{{ .Values.metabase.image.tag }}"
+          imagePullPolicy: {{ .Values.metabase.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.internalPort }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.metabase.livenessProbe.path }}
+              port: {{ .Values.service.internalPort }}
+            initialDelaySeconds: {{ .Values.metabase.livenessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.metabase.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.metabase.livenessProbe.failureThreshold }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.metabase.readinessProbe.path }}
+              port: {{ .Values.service.internalPort }}
+            initialDelaySeconds: {{ .Values.metabase.readinessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.metabase.readinessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.metabase.readinessProbe.periodSeconds }}
+          resources:
+            {{- toYaml .Values.metabase.resources | nindent 12 }}
+          env:
+          - name: MB_JETTY_HOST
+            value: {{ .Values.metabase.listen.host | quote }}
+          - name: MB_JETTY_PORT
+            value: {{ .Values.metabase.listen.port | quote }}
+          {{- if .Values.metabase.ssl.enabled }}
+          - name: MB_JETTY_SSL
+            value: true
+          - name: MB_JETTY_SSL_Port
+            value: {{ .Values.metabase.ssl.port | quote }}
+          - name: MB_JETTY_SSL_Keystore
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "metabase.fullname" . }}-ssl
+                key: keystore
+          - name: MB_JETTY_SSL_Keystore_Password
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "metabase.fullname" . }}-ssl
+                key: password
+          {{- end }}
+          - name: MB_DB_TYPE
+            value: {{ .Values.metabase.database.type | quote }}
+          {{- if ne (.Values.metabase.database.type | lower) "h2" }}
+            {{- if or .Values.metabase.database.existingSecretConnectionURIKey .Values.metabase.database.connectionURI }}
+          - name: MB_DB_CONNECTION_URI
+            valueFrom:
+              secretKeyRef:
+                name: {{ or .Values.metabase.database.existingSecret (printf "%s-database" (include "metabase.fullname" .)) }}
+                key: {{ or .Values.metabase.database.existingSecretConnectionURIKey "connectionURI" }}
+            {{- else }}
+          - name: MB_DB_HOST
+            value: {{ .Values.metabase.database.host | quote }}
+          - name: MB_DB_PORT
+            value: {{ .Values.metabase.database.port | quote }}
+          - name: MB_DB_DBNAME
+            value: {{ .Values.metabase.database.dbname | quote }}
+          - name: MB_DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ or .Values.metabase.database.existingSecret (printf "%s-database" (include "metabase.fullname" .)) }}
+                key: {{ or .Values.metabase.database.existingSecretUsernameKey "username" }}
+          - name: MB_DB_PASS
+            valueFrom:
+              secretKeyRef:
+                name: {{ or .Values.metabase.database.existingSecret (printf "%s-database" (include "metabase.fullname" .)) }}
+                key: {{ or .Values.metabase.database.existingSecretPasswordKey "password" }}
+            {{- end }}
+          {{- end }}
+          - name: MB_PASSWORD_COMPLEXITY
+            value: {{ .Values.metabase.password.complexity }}
+          - name: MB_PASSWORD_LENGTH
+            value: {{ .Values.metabase.password.length | quote }}
+          - name: JAVA_TIMEZONE
+            value: {{ .Values.metabase.timeZone }}
+          {{- if .Values.javaOpts }}
+          - name: JAVA_OPTS
+            value: {{ .Values.metabase.javaOpts | quote }}
+          {{- else }}
+            {{- if .Values.metabase.log4jProperties }}
+          - name: JAVA_OPTS
+            value: "-Dlog4j.configuration=file:/tmp/conf/log4j.properties"
+            {{- end }}
+          {{- end }}
+          {{- if .Values.metabase.pluginsDirectory }}
+          - name: MB_PLUGINS_DIR
+            value: {{ .Values.metabase.pluginsDirectory | quote }}
+          {{- end }}
+          - name: MB_EMOJI_IN_LOGS
+            value: {{ .Values.metabase.emojiLogging | quote }}
+          {{- if .Values.metabase.siteUrl }}
+          - name: MB_SITE_URL
+            value: {{ .Values.metabase.siteUrl | quote }}
+          {{- end }}
+          {{- if .Values.metabase.secretConfig }}
+          - name: NEW_RELIC_APP_NAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ (printf "%s-secret" (include "metabase.fullname" .)) }}
+                key: "newRelicAppName"
+          - name: NEW_RELIC_LICENSE_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ (printf "%s-secret" (include "metabase.fullname" .)) }}
+                key: "newRelicLicenseKey"
+          {{- end }}
+          {{- if .Values.log4jProperties }}
+          volumeMounts:
+            - name: config
+              mountPath: /tmp/conf/
+          {{- end}}
+        - name: telegraf
+          image: "{{ .Values.telegraf.image.repository }}:{{ .Values.telegraf.image.tag }}"
+          imagePullPolicy: {{ .Values.telegraf.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.telegraf.resources | nindent 12 }}
+          volumeMounts:
+          - name: telegraf-volume
+            mountPath: /etc/telegraf
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+      volumes:
+        - name: telegraf-volume
+          configMap:
+            name: {{ template "metabase.fullname" . }}-telegraf-config
+        {{- if .Values.log4jProperties}}
+        - name: config
+          configMap:
+            name: {{ template "metabase.fullname" . }}-config
+            items:
+            - key: log4j.properties
+              path: log4j.properties
+        {{- end }}

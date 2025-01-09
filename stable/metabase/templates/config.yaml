@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "metabase.fullname" . }}-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- if .Values.labels }}
+{{ toYaml .Values.labels | trim | indent 4 }}
+    {{- end }}
+data:
+  {{- if .Values.log4jProperties }}
+  log4j.properties:
+{{ toYaml .Values.log4jProperties | indent 4}}
+  {{- end}}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "metabase.fullname" . }}-telegraf-config
+  namespace: {{ .Release.Namespace }}
+data:
+  telegraf.conf: |-
+    [global_tags]
+      {{- range $key, $value := .Values.labels }}
+      {{ $key }} = {{ $value | quote }}
+      {{- end }}
+{{ if .Values.telegraf.influx }}
+    [[outputs.influxdb]]
+      urls = [{{ .Values.telegraf.influx.address | quote }}]
+      database = {{ .Values.telegraf.influx.databaseName | quote }}
+      retention_policy = ""
+      write_consistency = "any"
+      timeout = "5s"
+{{ end }}
+{{ if .Values.telegraf.prometheusRemoteWrite }}
+    [[outputs.http]]
+      url = {{ .Values.telegraf.prometheusRemoteWrite.url | quote }}
+      data_format = "prometheusremotewrite"
+      [outputs.http.headers]
+        Content-Type= "application/x-protobuf"
+        Content-Encoding = "snappy"
+        X-Prometheus-Remote-Write-Version= "0.1.0"
+{{ end }}
+    [[inputs.statsd]]
+      service_address = ":8125"
+      percentiles = [ 90.0, 95.0, 99.0]
+
+    [[inputs.jolokia2_agent]]
+      urls = ["http://localhost:7777/jolokia"]
+
+      [[inputs.jolokia2_agent.metric]]
+        name  = "java_runtime"
+        mbean = "java.lang:type=Runtime"
+        paths = ["Uptime"]
+
+      [[inputs.jolokia2_agent.metric]]
+        name  = "java_memory"
+        mbean = "java.lang:type=Memory"
+        paths = ["HeapMemoryUsage", "NonHeapMemoryUsage", "ObjectPendingFinalizationCount"]
+
+      [[inputs.jolokia2_agent.metric]]
+        name     = "java_garbage_collector"
+        mbean    = "java.lang:name=*,type=GarbageCollector"
+        paths    = ["CollectionTime", "CollectionCount"]
+        tag_keys = ["name"]
+
+      [[inputs.jolokia2_agent.metric]]
+        name  = "java_last_garbage_collection"
+        mbean = "java.lang:name=G1 Young Generation,type=GarbageCollector"
+        paths = ["LastGcInfo/duration", "LastGcInfo/GcThreadCount", "LastGcInfo/memoryUsageAfterGc"]
+
+      [[inputs.jolokia2_agent.metric]]
+        name  = "java_threading"
+        mbean = "java.lang:type=Threading"
+        paths = ["TotalStartedThreadCount", "ThreadCount", "DaemonThreadCount", "PeakThreadCount"]
+
+      [[inputs.jolokia2_agent.metric]]
+        name  = "java_class_loading"
+        mbean = "java.lang:type=ClassLoading"
+        paths = ["LoadedClassCount", "UnloadedClassCount", "TotalLoadedClassCount"]
+
+      [[inputs.jolokia2_agent.metric]]
+        name     = "java_memory_pool"
+        mbean    = "java.lang:name=*,type=MemoryPool"
+        paths    = ["Usage", "PeakUsage", "CollectionUsage"]
+        tag_keys = ["name"]
+
