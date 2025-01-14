@@ -26,6 +26,11 @@ spec:
         {{- end }}
         run: {{ .Release.Name }}
     spec:
+      initContainers:
+        {{- range $initContainer := .Values.initContainers }}
+        - {{- toYaml $initContainer | nindent 10 }}
+        {{- end }}
+      {{- end }}
       containers:
         - name: metabase
           image: "{{ .Values.metabase.image.repository }}:{{ .Values.metabase.image.tag }}"
@@ -135,8 +140,9 @@ spec:
                 name: {{ (printf "%s-secret" (include "metabase.fullname" .)) }}
                 key: "newRelicLicenseKey"
           {{- end }}
-          {{- if .Values.log4jProperties }}
           volumeMounts:
+            {{- toYaml .Values.metabase.volumeMounts | nindent 12 }}
+          {{- if .Values.log4jProperties }}
             - name: config
               mountPath: /tmp/conf/
           {{- end}}
@@ -161,6 +167,10 @@ spec:
 {{ toYaml . | indent 8 }}
     {{- end }}
       volumes:
+        {{- range $volume := .Values.volumes }}
+        - {{- toYaml $volume | nindent 10 }}
+        {{- engit push origin --delete <old_name>d }}
+        {{- if .Values.telegraf.enabled }}
         - name: telegraf-volume
           configMap:
             name: {{ template "metabase.fullname" . }}-telegraf-config

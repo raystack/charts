@@ -4,6 +4,8 @@ labels: {}
 ## String to fully override metabase.fullname template
 ##
 # fullnameOverride:
+initContainers: {}
+volumes: {}
 
 metabase:
   image:
@@ -39,6 +41,11 @@ metabase:
     # requests:
     #  cpu: 100m
     #  memory: 128Mi
+  
+  # volumeMounts:
+  #   - mountPath: /data/config.yaml
+  #     name: config
+  #     subPath: config.yaml
 
   # Backend database
   database:
