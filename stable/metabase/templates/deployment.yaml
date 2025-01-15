@@ -30,7 +30,6 @@ spec:
         {{- range $initContainer := .Values.initContainers }}
         - {{- toYaml $initContainer | nindent 10 }}
         {{- end }}
-      {{- end }}
       containers:
         - name: metabase
           image: "{{ .Values.metabase.image.repository }}:{{ .Values.metabase.image.tag }}"
@@ -169,8 +168,7 @@ spec:
       volumes:
         {{- range $volume := .Values.volumes }}
         - {{- toYaml $volume | nindent 10 }}
-        {{- engit push origin --delete <old_name>d }}
-        {{- if .Values.telegraf.enabled }}
+        {{- end }}
         - name: telegraf-volume
           configMap:
             name: {{ template "metabase.fullname" . }}-telegraf-config
