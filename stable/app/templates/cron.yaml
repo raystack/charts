@@ -35,6 +35,9 @@ spec:
                 - secretRef:
                     name: {{ $fullName }}
           restartPolicy: {{ $job.restartPolicy }}
+          {{- if $.Values.serviceAccount.enabled }}
+          serviceAccountName: {{ include "app.fullname" $ }}
+          {{- end }}
 ---
 {{- end -}}
 {{- end -}}
