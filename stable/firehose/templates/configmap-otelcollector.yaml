@@ -1,0 +1,14 @@
+{{- if index .Values.otelcollector.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "firehose.fullname" . }}-otelcollector-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    labels: {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
+data:
+  otel-collector-config.yaml: |+
+{{ toYaml .Values.otelcollector.config | indent 4 }}
+{{- end }}
