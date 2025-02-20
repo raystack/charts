@@ -36,10 +36,11 @@ spec:
               - /bin/sh
               - -c
               - |
-                OUTPUT=$(meteor run /opt/recipes;)
+                set -o pipefail
+                meteor run /opt/recipes | tee -a output.txt
                 METEOR_EXIT_CODE=$?
                 {{- if .Values.postCmd.enabled }}
-                NUM_FAILING=$(echo $OUTPUT | grep -o '^[0-9]* failing' | awk '{print $1}')
+                NUM_FAILING=$(cat output.txt | grep -o '^[0-9]* failing' | awk '{print $1}')
                 # if the output does not contains number of failing, then it is failed
                 if [ -z $NUM_FAILING ]; then
                   NUM_FAILING=-1
