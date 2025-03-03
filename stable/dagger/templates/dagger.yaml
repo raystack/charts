@@ -23,14 +23,20 @@ spec:
 
     #HA CONFIGS
     state.backend: filesystem
-    state.backend.fs.checkpointdir: {{ .Values.storage_protocol }}://{{ .Values.projectID }}-dagger-checkpoints/flink-checkpoints/{{ .Values.name }}
-    state.savepoints.dir: {{ .Values.storage_protocol }}://{{ .Values.projectID }}-dagger-checkpoints/flink-savepoints/{{ .Values.name }}
+    state.backend.fs.checkpointdir: {{ .Values.dagger_checkpoint_url }}/{{ .Values.name }}
+    state.savepoints.dir: {{ .Values.dagger_savepoint_url }}/{{ .Values.name }}
     blob.storage.directory: /tmp/flink-blobs
     jobmanager.web.tmpdir: /tmp/flink-web
     web.upload.dir: /tmp/flink-web/flink-uploads
 
     high-availability: org.apache.flink.kubernetes.highavailability.KubernetesHaServicesFactory
-    high-availability.storageDir: {{ .Values.storage_protocol }}://{{ .Values.projectID }}-dagger-checkpoints/ha
+    high-availability.storageDir: {{ .Values.dagger_k8s_ha_url }}
+
+    fs.cosn.credentials.provider: org.apache.hadoop.fs.auth.EnvironmentVariableCredentialProvider
+    fs.cosn.bucket.region: ap-jakarta
+
+    fs.oss.credentials.provider: com.aliyun.oss.common.auth.EnvironmentVariableCredentialsProvider
+    fs.oss.endpoint: oss-ap-southeast-5.aliyuncs.com
 
     metrics.reporters: stsd
     metrics.reporter.stsd.class: com.gojek.de.dagger.metrics.StatsDReporter
@@ -64,14 +70,23 @@ spec:
       serviceAccount: flink
       containers:
         - name: flink-main-container
+          {{- if or (eq .Values.cloud_provider "ali") (eq .Values.cloud_provider "tcc") }}
+          envFrom:
+            - secretRef:
+                name: dagger-user-credential
+          {{- end}}
+          {{- if eq .Values.cloud_provider "gcp" }}
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/google/gcp_key.json
+          {{- end}}
           volumeMounts:
             - mountPath: /etc/hadoop/conf
               name: hadoop-config
+          {{- if eq .Values.cloud_provider "gcp" }}
             - mountPath: /var/secrets/google
               name: google-cloud-key
+          {{- end}}
         - name: telegrafd
           image: telegraf:1.18.3-alpine
           imagePullPolicy: IfNotPresent
@@ -105,10 +120,12 @@ spec:
           configMap:
             defaultMode: 420
             name: flink-operator-telegraf-config
+        {{- if eq .Values.cloud_provider "gcp" }}
         - name: google-cloud-key
           secret:
             defaultMode: 420
             secretName: flink-operator-gcp
+        {{- end}}
   jobManager:
     resource:
       cpu: {{ .Values.resources.jobmanager.cpu }}
