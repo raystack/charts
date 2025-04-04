@@ -111,7 +111,7 @@ spec:
       tolerations: {{- range $_, $toleration := .Values.tolerations }}
         - key: {{ $toleration.key }}
           operator: {{ $toleration.operator }}
-          value: {{ $toleration.value }}
+          value: "{{ $toleration.value }}"
           effect: {{ $toleration.effect }}
         {{- end }}
       {{- end}}
