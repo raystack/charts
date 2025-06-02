@@ -37,6 +37,7 @@ migration:
   args: []
 
 service:
+  enabled: true
   type: ClusterIP
   ports:
     - port: 80
@@ -44,6 +45,9 @@ service:
       protocol: TCP
       name: tcp
   annotations: {}
+
+deployment:
+  enabled: true
 
 ingress:
   enabled: false
