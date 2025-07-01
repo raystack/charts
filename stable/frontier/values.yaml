@@ -75,6 +75,7 @@ frontier-app:
 
 frontier-worker:
   enabled: true
+  replicaCount: 1
   image:
     repository: raystack/frontier
     pullPolicy: IfNotPresent
