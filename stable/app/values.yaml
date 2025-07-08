@@ -94,6 +94,7 @@ affinity: {}
 
 cron:
   enabled: false
+  annotations: {}
   # -- We would recommend to use a small unique job name since it would be used to identify the cronjob in k8s
   # -- and job name would be truncated to 29 characters in the cron job template.
   jobs:

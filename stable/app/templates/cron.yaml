@@ -18,8 +18,13 @@ spec:
       backoffLimit: 4
       template:
         metadata:
+          annotations:
+            checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") $ | sha256sum }}
+            {{- with $.Values.cron.annotations }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
           labels:
-        {{- $appSelectorLabels | nindent 12 }}
+            {{- $appSelectorLabels | nindent 12 }}
         spec:
           containers:
             - name: {{ $job.name }}
