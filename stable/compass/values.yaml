@@ -2,7 +2,7 @@ app:
   image:
     repository: gotocompany/compass
     pullPolicy: Always
-    tag: "0.5.7"
+    tag: "0.9.1"
   container:
     command:
       - compass
@@ -68,3 +68,13 @@ app:
     # COMPASS_DB_USER: ~
     # COMPASS_DB_PASSWORD: ~
     # COMPASS_DB_SSLMODE: disable
+
+cron:
+  enabled: true
+  jobs:
+    - name: cleanup
+      schedule: "0 5 * * *" # Every day at 5 AM
+      command:
+        - compass
+        - cleanup
+        - start
