@@ -42,13 +42,15 @@ spec:
                   - /bin/sh
                   - -c
                   - |
-                    {{ join " " $job.command }}
+                    {{ join " " (concat $job.command $job.args) }}
                     pkill -SIGTERM otelcol-contrib
               {{- else }}
                 {{- toYaml $job.command | nindent 16 }}
               {{- end }}
               args:
-              {{- toYaml $job.args | nindent 16 }}
+                {{- if not $.Values.otelcollector.enabled }}
+                  {{- toYaml $job.args | nindent 16 }}
+                {{- end }}
               envFrom:
                 - configMapRef:
                     name: {{ $fullName }}
