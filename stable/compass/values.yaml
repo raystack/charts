@@ -69,12 +69,14 @@ app:
     # COMPASS_DB_PASSWORD: ~
     # COMPASS_DB_SSLMODE: disable
 
-cron:
-  enabled: true
-  jobs:
-    - name: cleanup
-      schedule: "0 5 * * *" # Every day at 5 AM
-      command:
-        - compass
-        - cleanup
-        - start
+  cron:
+    enabled: true
+    jobs:
+      - name: cleanup
+        schedule: "0 5 * * *" # Every day at 5 AM
+        restartPolicy: Never
+        command:
+          - compass
+        args:
+          - cleanup
+          - start
