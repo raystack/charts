@@ -101,6 +101,7 @@ cron:
     - name: cronJob1
       schedule: "0 0 * * *"
       restartPolicy: Never
+      backoffLimit: 4
       command:
         - app
       args:
