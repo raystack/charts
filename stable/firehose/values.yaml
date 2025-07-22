@@ -82,7 +82,7 @@ telegraf:
       cpu: 600m
       memory: 200Mi
     requests:
-      cpu: 200m
+      cpu: 50m
       memory: 100Mi
 
 envSecrets: {}
