@@ -88,3 +88,11 @@ telegraf:
 envSecrets: {}
 mountSecrets: []
 
+autoscaler:
+  enabled: false
+  type: keda
+  keda:
+    fallback: {}
+    triggers: []
+    annotations: {}
+    hpa: {}
