@@ -95,4 +95,10 @@ autoscaler:
     fallback: {}
     triggers: []
     annotations: {}
-    hpa: {}
+    hpa: 
+      scaleUp: 
+        policies: []
+        stabilizationWindowSeconds: 60
+      scaleDown: 
+        policies: []
+        stabilizationWindowSeconds: 300

@@ -1,4 +1,4 @@
-{{- if and .Values.autoscaler.enabled eq .Values.autoscaler.type "keda"}}
+{{- if and .Values.autoscaler.enabled (eq .Values.autoscaler.type "keda") }}
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
@@ -8,7 +8,7 @@ metadata:
     scaledobject.keda.sh/name: {{ include "firehose.fullname" . }}
   name: {{ include "firehose.fullname" . }}
   namespace: {{ .Release.Namespace }}
-  {{- if gt len .Values.autoscaler.keda.annotations 0 }}
+  {{- if gt (len .Values.autoscaler.keda.annotations) 0 }}
   annotations:
     {{- range $key, $value := .Values.autoscaler.keda.annotations }}
     {{ $key }}: {{ $value }}
