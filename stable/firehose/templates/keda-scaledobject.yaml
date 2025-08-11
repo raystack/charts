@@ -65,12 +65,14 @@ spec:
     - type: {{ $trigger.type }}
       metadata:
         {{- range $key, $value := $trigger.metadata }}
-        {{ $key }}: {{ $value }}
+        {{ $key }}: "{{ $value }}"
         {{- end }}
+      {{- if $trigger.authenticationRef }}
       {{- if not (eq $trigger.authenticationRef.name "") }}
       authenticationRef:
         name: {{ $trigger.authenticationRef.name }}
         kind: {{ $trigger.authenticationRef.kind | default "ScaledObject" }}
+      {{- end }}
       {{- end }}
     {{- end }}
 {{- end -}}
