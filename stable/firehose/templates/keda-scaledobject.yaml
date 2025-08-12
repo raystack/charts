@@ -11,7 +11,7 @@ metadata:
   {{- if gt (len .Values.autoscaler.keda.annotations) 0 }}
   annotations:
     {{- range $key, $value := .Values.autoscaler.keda.annotations }}
-    {{ $key }}: {{ $value }}
+    {{ $key }}: "{{ $value }}"
     {{- end }}
   {{- end }}
 spec:
@@ -68,10 +68,12 @@ spec:
         {{ $key }}: "{{ $value }}"
         {{- end }}
       {{- if $trigger.authenticationRef }}
-      {{- if not (eq $trigger.authenticationRef.name "") }}
+      {{- if $trigger.authenticationRef.name }}
       authenticationRef:
         name: {{ $trigger.authenticationRef.name }}
-        kind: {{ $trigger.authenticationRef.kind | default "ScaledObject" }}
+        {{- if $trigger.authenticationRef.kind }}
+        kind: {{ $trigger.authenticationRef.kind }}
+        {{- end }}
       {{- end }}
       {{- end }}
     {{- end }}
