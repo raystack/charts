@@ -48,8 +48,6 @@ init-firehose:
   args: [wget -O /work-dir/protos.jar http://proto_jar_url.jar]
 
 secretConfig: {}
-  # -- Example: Slack webhook url details can go under secret config
-  # SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
 
 telegraf:
   enabled: false
