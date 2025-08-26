@@ -15,6 +15,7 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap-firehose.yaml") . | sha256sum }}
+        sidecar.istio.io/inject: "{{ .Values.istio.sidecarInject }}"
       labels:
         app: {{ include "firehose.fullname" . }}
         {{- range $key, $value := .Values.labels }}

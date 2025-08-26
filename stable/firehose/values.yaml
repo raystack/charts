@@ -7,6 +7,9 @@ fullnameOverride: ""
 
 labels: { "application": "firehose" }
 
+istio:
+  sidecarInject: false
+
 firehose:
   image:
     repository: gotocompany/firehose
