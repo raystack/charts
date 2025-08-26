@@ -39,9 +39,9 @@ spec:
         envFrom:
           - configMapRef:
               name: {{ include "firehose.fullname" . }}-config
-        {{- if .Values.secretConfig }}      
-            - secretRef:
-                name: "{{ template "app.fullname" . }}"
+      {{- if .Values.secretConfig }}      
+          - secretRef:
+              name: "{{ include "firehose.fullname" . }}"
         env:
         - name: POD_NAME
           valueFrom:
