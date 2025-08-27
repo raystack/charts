@@ -1,0 +1,238 @@
+{{- if .Values.container.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "app.fullname" . }}
+  namespace : {{ .Release.Namespace }}
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "app.selezctorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print .Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- if .Values.telegraf.enabled }}
+        checksum/telegraf-config: {{ include (print $.Template.BasePath "/telegraf-configmap.yaml") . | sha256sum }}
+        {{- end }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "app.selectorLabels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- if .Values.serviceAccountName }}
+      serviceAccountName: {{ .Values.serviceAccountName }}
+      {{- end }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if gt (len .Values.initContainers) 0  }}
+      initContainers:
+        {{- range $initContainer := .Values.initContainers }}
+        - {{- toYaml $initContainer | nindent 10 }}
+        {{- end }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            {{- range $port := .Values.container.ports }}
+            - name: {{ $port.name }}
+              containerPort: {{ $port.containerPort }}
+              protocol: {{ $port.protocol }}
+            {{- end }}
+          livenessProbe:
+            {{- if .Values.container.livenessProbe.exec }}
+            exec:
+              {{- toYaml .Values.container.livenessProbe.exec | nindent 14 }}
+            {{- else }}
+            {{- toYaml .Values.container.livenessProbe | nindent 12 }}
+            {{- end }}
+          readinessProbe:
+            {{- if .Values.container.readinessProbe.exec }}
+            exec:
+              {{- toYaml .Values.container.readinessProbe.exec | nindent 14 }}
+            {{- else }}
+            {{- toYaml .Values.container.readinessProbe | nindent 12 }}
+            {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          command:
+            {{- toYaml .Values.container.command | nindent 12 }}
+          args:
+            {{- toYaml .Values.container.args | nindent 12 }}
+          volumeMounts:
+            {{- toYaml .Values.container.volumeMounts | nindent 12 }}
+          envFrom:
+            - configMapRef:
+                name: "{{ include "app.fullname" . }}"
+         {{- if .Values.secretConfig }}
+            - secretRef:
+                name: "{{ template "app.fullname" . }}-secret"
+         {{- end }}
+        {{- if .Values.otelcollector.enabled }}
+        - name: otel-collector-sidecar
+          image: {{ .Values.otelcollector.image }}
+          imagePullPolicy: IfNotPresent
+          args:
+            - "--config=/etc/otelcollector/config.yaml"
+          ports:
+          - containerPort: 1888
+            name: pprof
+            protocol: TCP
+          - containerPort: 8888
+            name: prometheusself
+            protocol: TCP
+          - containerPort: 8889
+            name: prometheus
+            protocol: TCP
+          - containerPort: 13133
+            name: healthcheck
+            protocol: TCP
+          - containerPort: 4317
+            name: otlpgrpcrecv
+            protocol: TCP
+          - containerPort: 4318
+            name: otlphttprecv
+            protocol: TCP
+          - containerPort: 55679
+            name: zpages
+            protocol: TCP
+          {{- if .Values.otelcollector.useEnvFromConfig }}
+          envFrom:
+            - configMapRef:
+                name: "{{ include "app.fullname" . }}"
+            {{- if .Values.secretConfig }}
+            - secretRef:
+                name: "{{ template "app.fullname" . }}-secret"
+            {{- end }}
+          {{- end }}
+          env:
+            - name: K8S_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: K8S_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: K8S_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: K8S_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: |
+                k8s.deployment.name={{ include "app.fullname" . }},k8s.namespace.name=$(K8S_POD_NAMESPACE),k8s.node.name=$(K8S_NODE_NAME),k8s.pod.name=$(K8S_POD_NAME),k8s.pod.ip=$(K8S_POD_IP)
+          volumeMounts:
+            - name: otelcollector-conf
+              mountPath: /etc/otelcollector/
+          {{- if .Values.otelcollector.resources }}
+          resources:
+            {{- toYaml .Values.otelcollector.resources | nindent 12 }}
+          {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 13133
+            initialDelaySeconds: {{ .Values.otelcollector.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.otelcollector.readinessProbe.periodSeconds }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 13133
+            initialDelaySeconds: {{ .Values.otelcollector.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.otelcollector.livenessProbe.periodSeconds }}
+        {{- end }}
+        {{- if .Values.telegraf.enabled }}
+        - name: telegraf-sidecar
+          image: {{ .Values.telegraf.image }}
+          args:
+            {{- range .Values.telegraf.args }}
+            - {{ . }}
+            {{- end }}
+          command:
+            {{- range .Values.telegraf.command }}
+            - {{ . }}
+            {{- end }}
+          imagePullPolicy: IfNotPresent
+          {{- if .Values.telegraf.resources }}
+          resources:
+            {{- toYaml .Values.telegraf.resources | nindent 12 }}
+          {{- end }}
+          ports:
+            - containerPort: {{ .Values.telegraf.containerPort }}
+              name: http
+              protocol: {{ .Values.telegraf.protocol }}
+          volumeMounts:
+            - name: telegraf-conf
+              mountPath: /etc/telegraf/
+        {{- end }}
+        {{- if .Values.iap.enabled }}
+        - name: iap-sidecar
+          image: {{ .Values.iap.image }}
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: {{ .Values.iap.containerPort }}
+            name: http
+            protocol: TCP
+          readinessProbe:
+            tcpSocket:
+              port: {{ .Values.iap.containerPort }}
+            initialDelaySeconds: {{ .Values.iap.livenessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.iap.livenessProbe.timeoutSeconds }}
+          livenessProbe:
+            tcpSocket:
+              port: {{ .Values.iap.containerPort }}
+            initialDelaySeconds: {{ .Values.iap.livenessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.iap.livenessProbe.timeoutSeconds }}
+          {{- if .Values.iap.resources }}
+          resources:
+            {{- toYaml .Values.iap.resources | nindent 12 }}
+          {{- end }}
+          env:
+          - name: REFRESH_TIME_SECONDS
+            value: {{ .Values.iap.refreshTimeSeconds }}
+          - name: SERVICE_ACCOUNT_CREDENTIALS
+            value: {{ .Values.iap.serviceAccountMountPath }}/{{ .Values.iap.serviceAccountFileName }}
+          - name: IAP_HOST
+            value: {{ .Values.iap.host }}
+          - name: CLIENT_ID
+            value: {{ .Values.iap.clientID }}
+          - name: LOGGER_LEVEL
+            value: {{ .Values.iap.logLevel }}
+          - name: PORT
+            value: "{{ .Values.iap.containerPort }}"
+          volumeMounts:
+          - mountPath: {{ .Values.iap.serviceAccountMountPath }}
+            name: {{ .Values.iap.serviceAccountSecret }}
+        {{- end }}
+      volumes:
+        {{- range $volume := .Values.volumes }}
+        - {{- toYaml $volume | nindent 10 }}
+        {{- end }}
+        {{- if .Values.telegraf.enabled }}
+        - name: telegraf-conf
+          configMap:
+            name: {{ template "app.fullname" . }}-telegraf
+        {{- end }}
+        {{- if .Values.otelcollector.enabled }}
+        - name: otelcollector-conf
+          configMap:
+            name: {{ template "app.fullname" . }}-otelcollector
+        {{- end }}
+{{- end -}}
