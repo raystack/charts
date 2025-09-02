@@ -42,6 +42,7 @@ spec:
       {{- if .Values.secretConfig }}      
           - secretRef:
               name: "{{ include "firehose.fullname" . }}"
+      {{- end }}
         env:
         - name: POD_NAME
           valueFrom:
@@ -88,3 +89,4 @@ spec:
       - emptyDir: {}
         name: workdir
       {{- end }}
+
