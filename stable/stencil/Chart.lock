@@ -2,5 +2,5 @@ dependencies:
 - name: app
   repository: https://raystack.github.io/charts/
   version: 0.2.1
-digest: sha256:7c3f11f696cd963558e25c7c40153c5b895fb0ea892cba55c4902e9f8ad1cc0a
-generated: "2022-03-13T20:20:33.036613-07:00"
+digest: sha256:e02c693097193d0a8f2686c54779c1afd4d3bfba00dec91499e1abae6e785db8
+generated: "2025-09-02T13:32:26.404041+05:30"
