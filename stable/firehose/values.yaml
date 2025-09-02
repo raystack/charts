@@ -47,6 +47,8 @@ init-firehose:
   command: ["/bin/sh", "-c"]
   args: [wget -O /work-dir/protos.jar http://proto_jar_url.jar]
 
+secretConfig: {}
+
 telegraf:
   enabled: false
   image:
