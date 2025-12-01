@@ -15,7 +15,7 @@ spec:
   schedule: {{ $job.schedule | quote }}
   jobTemplate:
     spec:
-      backoffLimit: {{ $job.backoffLimit | default 4 }}
+      backoffLimit: {{ if hasKey $job "backoffLimit" }}{{ $job.backoffLimit }}{{ else }}4{{ end }}
       template:
         metadata:
           annotations:
