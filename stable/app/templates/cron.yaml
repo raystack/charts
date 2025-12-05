@@ -13,6 +13,7 @@ metadata:
     {{- $appLabels | nindent 4 }}
 spec:
   schedule: {{ $job.schedule | quote }}
+  concurrencyPolicy: {{ if hasKey $job "concurrencyPolicy" }}{{ $job.concurrencyPolicy }}{{ else }}Allow{{ end }}
   jobTemplate:
     spec:
       backoffLimit: {{ if hasKey $job "backoffLimit" }}{{ $job.backoffLimit }}{{ else }}4{{ end }}
