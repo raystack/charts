@@ -3,22 +3,16 @@ frontier-app:
   image:
     repository: raystack/frontier
     pullPolicy: IfNotPresent
-    tag: v0.65.0
+    tag: v0.90.0
   container:
     command: ["frontier", "server", "start"]
     livenessProbe:
       grpc:
-        port: 8081
+        port: 8082
     readinessProbe:
       grpc:
-        port: 8081
+        port: 8082
     ports:
-      - name: rest
-        containerPort: 8080
-        protocol: TCP
-      - name: grpc
-        containerPort: 8081
-        protocol: TCP
       - name: admin-ui
         containerPort: 3000
         protocol: TCP
@@ -28,14 +22,6 @@ frontier-app:
   service:
     type: ClusterIP
     ports:
-      - port: 8080
-        targetPort: rest
-        protocol: TCP
-        name: rest
-      - port: 8081
-        targetPort: grpc
-        protocol: TCP
-        name: grpc
       - port: 3000
         targetPort: admin-ui
         protocol: TCP
@@ -56,12 +42,10 @@ frontier-app:
             backend:
               service:
                 port:
-                  number: 8080
+                  number: 8082
   config:
     FRONTIER_SPICEDB_HOST: spicedb.namespace.svc.local
     FRONTIER_SPICEDB_PORT: 50051
-    FRONTIER_APP_PORT: 8080
-    FRONTIER_APP_GRPC_PORT: 8081
     FRONTIER_APP_CONNECT_PORT: 8082
     FRONTIER_LOG_LEVEL: info
     FRONTIER_DB_DRIVER: postgres
@@ -84,17 +68,11 @@ frontier-worker:
     command: ["frontier", "server", "start"]
     livenessProbe:
       grpc:
-        port: 8081
+        port: 8082
     readinessProbe:
       grpc:
-        port: 8081
+        port: 8082
     ports:
-      - name: rest
-        containerPort: 8080
-        protocol: TCP
-      - name: grpc
-        containerPort: 8081
-        protocol: TCP
       - name: admin-ui
         containerPort: 3000
         protocol: TCP
@@ -108,8 +86,6 @@ frontier-worker:
   config:
     FRONTIER_SPICEDB_HOST: spicedb.namespace.svc.local
     FRONTIER_SPICEDB_PORT: 50051
-    FRONTIER_APP_PORT: 8080
-    FRONTIER_APP_GRPC_PORT: 8081
     FRONTIER_APP_CONNECT_PORT: 8082
     FRONTIER_LOG_LEVEL: info
     FRONTIER_DB_DRIVER: postgres
