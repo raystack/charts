@@ -9,9 +9,11 @@ frontier-app:
     livenessProbe:
       grpc:
         port: 8082
+      httpGet: null
     readinessProbe:
       grpc:
         port: 8082
+      httpGet: null
     ports:
       - name: admin-ui
         containerPort: 3000
@@ -69,9 +71,11 @@ frontier-worker:
     livenessProbe:
       grpc:
         port: 8082
+      httpGet: null
     readinessProbe:
       grpc:
         port: 8082
+      httpGet: null
     ports:
       - name: admin-ui
         containerPort: 3000
