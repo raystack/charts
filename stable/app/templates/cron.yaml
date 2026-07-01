@@ -31,6 +31,8 @@ spec:
             - name: {{ $job.name }}
               image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
               imagePullPolicy: {{ $.Values.image.pullPolicy }}
+              resources:
+                {{- toYaml (default $.Values.cron.resources $job.resources) | nindent 16 }}
               command:
               {{- toYaml $job.command | nindent 16 }}
               args:
