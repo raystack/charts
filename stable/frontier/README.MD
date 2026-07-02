@@ -15,10 +15,10 @@ A Helm chart for Kubernetes
 
 | Key                                                                | Type   | Default                         | Description |
 | ------------------------------------------------------------------ | ------ | ------------------------------- | ----------- |
-| frontier-app.config.FRONTIER_APP_BILLING_REFRESH_INTERVAL_CHECKOUT | int    | `0`                             |             |
-| frontier-app.config.FRONTIER_APP_BILLING_REFRESH_INTERVAL_CUSTOMER | int    | `0`                             |             |
-| frontier-app.config.FRONTIER_APP_BILLING_REFRESH_INTERVAL_INVOICE  | int    | `0`                             |             |
-| frontier-app.config.FRONTIER_APP_BILLING_REFRESH_INTERVAL_SUBSCRIPTION | int    | `0`                             |             |
+| frontier-app.config.FRONTIER_APP_BILLING_REFRESH_INTERVAL_CHECKOUT | string | `"1m"`                          |             |
+| frontier-app.config.FRONTIER_APP_BILLING_REFRESH_INTERVAL_CUSTOMER | string | `"1m"`                          |             |
+| frontier-app.config.FRONTIER_APP_BILLING_REFRESH_INTERVAL_INVOICE  | string | `"5m"`                          |             |
+| frontier-app.config.FRONTIER_APP_BILLING_REFRESH_INTERVAL_SUBSCRIPTION | string | `"1m"`                          |             |
 | frontier-app.config.FRONTIER_APP_CONNECT_PORT                      | int    | `8082`                          |             |
 | frontier-app.config.FRONTIER_DB_DRIVER                             | string | `"postgres"`                    |             |
 | frontier-app.config.FRONTIER_LOG_LEVEL                             | string | `"info"`                        |             |
