@@ -51,10 +51,15 @@ frontier-app:
     FRONTIER_APP_CONNECT_PORT: 8082
     FRONTIER_LOG_LEVEL: info
     FRONTIER_DB_DRIVER: postgres
-    FRONTIER_APP_BILLING_REFRESH_INTERVAL_CUSTOMER: 0
-    FRONTIER_APP_BILLING_REFRESH_INTERVAL_SUBSCRIPTION: 0
-    FRONTIER_APP_BILLING_REFRESH_INTERVAL_CHECKOUT: 0
-    FRONTIER_APP_BILLING_REFRESH_INTERVAL_INVOICE: 0
+    # Billing background sync intervals, matching frontier's built-in defaults.
+    # Setting an interval to 0 disables that sync job entirely, including
+    # monthly credit overdraft invoice generation.
+    # Env prefix FRONTIER_SERVICE_ requires frontier >= v0.100.0; older
+    # versions ignore these and fall back to the same built-in defaults.
+    FRONTIER_SERVICE_BILLING_REFRESH_INTERVAL_CUSTOMER: 1m
+    FRONTIER_SERVICE_BILLING_REFRESH_INTERVAL_SUBSCRIPTION: 1m
+    FRONTIER_SERVICE_BILLING_REFRESH_INTERVAL_CHECKOUT: 1m
+    FRONTIER_SERVICE_BILLING_REFRESH_INTERVAL_INVOICE: 5m
   secretConfig:
     FRONTIER_DB_URL:
     FRONTIER_SPICEDB_PRE_SHARED_KEY:
