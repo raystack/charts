@@ -7,11 +7,13 @@ fullnameOverride: ""
 
 labels: { "application": "firehose" }
 
+podAnnotations: {}
+
 firehose:
   image:
     repository: raystack/firehose
     pullPolicy: IfNotPresent
-    tag: 0.8.0
+    tag: 0.8.1
   config:
     SOURCE_KAFKA_BROKERS: 127.0.0.1:6667
     SOURCE_KAFKA_CONSUMER_GROUP_ID: kafka-consumer-group-id
