@@ -116,6 +116,12 @@ The following table lists the configurable parameters of Firehose chart and thei
 | nodeAffinityMatchExpressions.preferredDuringSchedulingIgnoredDuringExecution.preference.key | string | - | Key of the preferred node affinity match expression |
 | nodeAffinityMatchExpressions.preferredDuringSchedulingIgnoredDuringExecution.preference.operator | string | - | Operator of the preferred node affinity match expression |
 | nodeAffinityMatchExpressions.preferredDuringSchedulingIgnoredDuringExecution.preference.values | list | - | List of values of the preferred node affinity match expression |
+| topologySpreadConstraints | list | `[]` | Pod [topology spread constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/). The chart adds `labelSelector` (this release's pods) and `matchLabelKeys: [pod-template-hash]` |
+| topologySpreadConstraints.maxSkew | integer | - | Max allowed difference in pod count between topology domains |
+| topologySpreadConstraints.topologyKey | string | - | Node label that defines the domain, e.g. `topology.kubernetes.io/zone` |
+| topologySpreadConstraints.whenUnsatisfiable | string | - | `DoNotSchedule` or `ScheduleAnyway` |
+| topologySpreadConstraints.nodeTaintsPolicy | string | `"Honor"` | Whether tainted nodes count towards the skew |
+| topologySpreadConstraints.minDomains | integer | - | Optional. Only needed when nodepools can scale to zero |
 
 ---
 

@@ -164,6 +164,23 @@ spec:
       {{- end }}
       {{- end}}
 
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- range . }}
+        - maxSkew: {{ .maxSkew }}
+          topologyKey: {{ .topologyKey | quote }}
+          whenUnsatisfiable: {{ .whenUnsatisfiable }}
+          nodeTaintsPolicy: {{ .nodeTaintsPolicy | default "Honor" }}
+          {{- with .minDomains }}
+          minDomains: {{ . }}
+          {{- end }}
+          labelSelector:
+            matchLabels:
+              app: {{ include "firehose.fullname" $ }}
+          matchLabelKeys:
+            - pod-template-hash
+        {{- end }}
+      {{- end }}
       {{- if (gt (len .Values.tolerations) 0) }}
       tolerations: {{- range $_, $toleration := .Values.tolerations }}
         - key: {{ $toleration.key }}

@@ -1,0 +1,102 @@
+suite: dagger topology spread constraints
+templates:
+  - templates/dagger.yaml
+release:
+  name: test
+tests:
+  - it: renders no topologySpreadConstraints by default
+    asserts:
+      - notExists:
+          path: spec.podTemplate.spec.topologySpreadConstraints
+
+  - it: renders zone and host constraints scoped to this dagger
+    set:
+      deployment_id: my-dagger
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+    asserts:
+      - equal:
+          path: spec.podTemplate.spec.topologySpreadConstraints
+          value:
+            - maxSkew: 1
+              topologyKey: topology.kubernetes.io/zone
+              whenUnsatisfiable: DoNotSchedule
+              nodeTaintsPolicy: Honor
+              labelSelector:
+                matchLabels:
+                  instance-id: my-dagger
+              matchLabelKeys:
+                - component
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: ScheduleAnyway
+              nodeTaintsPolicy: Honor
+              labelSelector:
+                matchLabels:
+                  instance-id: my-dagger
+              matchLabelKeys:
+                - component
+
+  - it: selector matches the pod template label
+    set:
+      deployment_id: my-dagger
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+    asserts:
+      - equal:
+          path: spec.podTemplate.metadata.labels.instance-id
+          value: my-dagger
+
+  - it: passes nodeTaintsPolicy and minDomains through when set
+    set:
+      topologySpreadConstraints:
+        - maxSkew: 2
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          nodeTaintsPolicy: Ignore
+          minDomains: 3
+    asserts:
+      - equal:
+          path: spec.podTemplate.spec.topologySpreadConstraints[0].nodeTaintsPolicy
+          value: Ignore
+      - equal:
+          path: spec.podTemplate.spec.topologySpreadConstraints[0].minDomains
+          value: 3
+      - equal:
+          path: spec.podTemplate.spec.topologySpreadConstraints[0].maxSkew
+          value: 2
+
+  - it: keeps tolerations and node affinity next to the constraints
+    set:
+      tolerations:
+        - key: dagger
+          operator: Equal
+          value: enabled
+          effect: NoSchedule
+      nodeAffinityMatchExpressions:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - key: name
+            operator: In
+            values: [pool-a, pool-b, pool-c]
+        preferredDuringSchedulingIgnoredDuringExecution: []
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+    asserts:
+      - lengthEqual:
+          path: spec.podTemplate.spec.tolerations
+          count: 1
+      - lengthEqual:
+          path: spec.podTemplate.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions
+          count: 1
+      - lengthEqual:
+          path: spec.podTemplate.spec.topologySpreadConstraints
+          count: 1

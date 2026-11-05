@@ -188,6 +188,23 @@ spec:
           {{- end}}
           {{- end}}
       {{- end}}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- range . }}
+        - maxSkew: {{ .maxSkew }}
+          topologyKey: {{ .topologyKey | quote }}
+          whenUnsatisfiable: {{ .whenUnsatisfiable }}
+          nodeTaintsPolicy: {{ .nodeTaintsPolicy | default "Honor" }}
+          {{- with .minDomains }}
+          minDomains: {{ . }}
+          {{- end }}
+          labelSelector:
+            matchLabels:
+              instance-id: {{ $.Values.deployment_id | quote }}
+          matchLabelKeys:
+            - component
+        {{- end }}
+      {{- end }}
   jobManager:
     resource:
       cpu: {{ .Values.resources.jobmanager.cpu }}

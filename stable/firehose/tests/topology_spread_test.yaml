@@ -1,0 +1,107 @@
+suite: firehose topology spread constraints
+templates:
+  - templates/deployment.yaml
+  # deployment.yaml includes the configmap for its checksum annotation
+  - templates/configmap-firehose.yaml
+release:
+  name: test
+tests:
+  - it: renders no topologySpreadConstraints by default
+    template: templates/deployment.yaml
+    asserts:
+      - notExists:
+          path: spec.template.spec.topologySpreadConstraints
+
+  - it: renders zone and host constraints scoped to this firehose
+    set:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+    template: templates/deployment.yaml
+    asserts:
+      - equal:
+          path: spec.template.spec.topologySpreadConstraints
+          value:
+            - maxSkew: 1
+              topologyKey: topology.kubernetes.io/zone
+              whenUnsatisfiable: DoNotSchedule
+              nodeTaintsPolicy: Honor
+              labelSelector:
+                matchLabels:
+                  app: test-firehose
+              matchLabelKeys:
+                - pod-template-hash
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: ScheduleAnyway
+              nodeTaintsPolicy: Honor
+              labelSelector:
+                matchLabels:
+                  app: test-firehose
+              matchLabelKeys:
+                - pod-template-hash
+
+  - it: selector matches the pod template label
+    set:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+    template: templates/deployment.yaml
+    asserts:
+      - equal:
+          path: spec.template.metadata.labels.app
+          value: test-firehose
+      - equal:
+          path: spec.selector.matchLabels.app
+          value: test-firehose
+
+  - it: passes nodeTaintsPolicy and minDomains through when set
+    set:
+      topologySpreadConstraints:
+        - maxSkew: 2
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+          nodeTaintsPolicy: Ignore
+          minDomains: 3
+    template: templates/deployment.yaml
+    asserts:
+      - equal:
+          path: spec.template.spec.topologySpreadConstraints[0].nodeTaintsPolicy
+          value: Ignore
+      - equal:
+          path: spec.template.spec.topologySpreadConstraints[0].minDomains
+          value: 3
+
+  - it: keeps tolerations and node affinity next to the constraints
+    set:
+      tolerations:
+        - key: firehose
+          operator: Equal
+          value: "true"
+          effect: NoSchedule
+      nodeAffinityMatchExpressions:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - key: name
+            operator: In
+            values: [pool-a, pool-b, pool-c]
+        preferredDuringSchedulingIgnoredDuringExecution: []
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+    template: templates/deployment.yaml
+    asserts:
+      - lengthEqual:
+          path: spec.template.spec.tolerations
+          count: 1
+      - lengthEqual:
+          path: spec.template.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions
+          count: 1
+      - lengthEqual:
+          path: spec.template.spec.topologySpreadConstraints
+          count: 1

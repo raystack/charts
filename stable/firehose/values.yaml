@@ -40,6 +40,18 @@ firehose:
       cpu: 200m
       memory: 512Mi
 
+# Pod topology spread constraints, rendered as given. The chart adds the
+# labelSelector (this release's pods) and matchLabelKeys (pod-template-hash, so each ReplicaSet spreads on its own).
+# nodeTaintsPolicy defaults to Honor. Empty keeps the manifest unchanged.
+# Example:
+#   - maxSkew: 1
+#     topologyKey: topology.kubernetes.io/zone
+#     whenUnsatisfiable: DoNotSchedule
+#   - maxSkew: 1
+#     topologyKey: kubernetes.io/hostname
+#     whenUnsatisfiable: ScheduleAnyway
+topologySpreadConstraints: []
+
 tolerations: []
 
 nodeAffinityMatchExpressions:

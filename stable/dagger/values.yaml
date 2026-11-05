@@ -31,6 +31,18 @@ fs_oss_endpoint: "oss-ap-southeast-5-internal.aliyuncs.com"
 acl_mounts: []
 kubernetes_taskmanager_service_account: ""
 
+# Pod topology spread constraints, rendered as given. The chart adds the
+# labelSelector (this release's pods) and matchLabelKeys (component, so the JobManager and TaskManagers spread separately).
+# nodeTaintsPolicy defaults to Honor. Empty keeps the manifest unchanged.
+# Example:
+#   - maxSkew: 1
+#     topologyKey: topology.kubernetes.io/zone
+#     whenUnsatisfiable: DoNotSchedule
+#   - maxSkew: 1
+#     topologyKey: kubernetes.io/hostname
+#     whenUnsatisfiable: ScheduleAnyway
+topologySpreadConstraints: []
+
 tolerations: []
 
 nodeAffinityMatchExpressions:
